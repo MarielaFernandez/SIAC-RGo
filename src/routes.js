@@ -48,6 +48,25 @@ var dashRoutes = [
     layout: "/admin"
   },
   {
+    path: "/user-page",
+    name: "Editar perfil",
+    rtlName: "ملف تعريفي للمستخدم",
+    mini: "UP",
+    rtlMini: "شع",
+    component: UserProfile,
+    layout: "/admin"
+  }
+  ,
+  {
+    path: "/calendar",
+    name: "Mantemiento de cursos",
+    rtlName: "التقويم",
+    icon: DateRange,
+    component: Calendar,
+    layout: "/admin"
+  }
+  ,
+  {
     collapse: true,
     name: "Pages",
     rtlName: "صفحات",
