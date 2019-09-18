@@ -127,15 +127,15 @@ export default function RegularForms() {
                   label="Activar Funcionario"
                 />
               </div>
-              <Button color="blue">Agregar</Button>
+              <Button color="rose">Agregar</Button>
             </form>
           </CardBody>
         </Card>
       </GridItem>
       <GridItem xs={12} sm={12} md={6}>
         <Card>
-          <CardHeader color="blue" icon>
-            <CardIcon color="blue">
+          <CardHeader color="rose" icon>
+            <CardIcon color="rose">
               <Contacts />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>Horizontal Form</h4>
