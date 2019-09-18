@@ -27,6 +27,8 @@ import ValidationForms from "views/Forms/ValidationForms.js";
 import VectorMap from "views/Maps/VectorMap.js";
 import Widgets from "views/Widgets/Widgets.js";
 import Wizard from "views/Forms/Wizard.js";
+import CoursesTables from "views/Tables/CoursesTables.js";
+
 
 // @material-ui/icons
 import Apps from "@material-ui/icons/Apps";
@@ -44,7 +46,6 @@ var dashRoutes = [
     name: "Dashboard",
     rtlName: "لوحة القيادة",
     icon: DashboardIcon,
-    visible: true,
     component: Dashboard,
     layout: "/admin"
   },
@@ -54,7 +55,6 @@ var dashRoutes = [
     rtlName: "ملف تعريفي للمستخدم",
     mini: "UP",
     rtlMini: "شع",
-    visible: true,
     component: UserProfile,
     layout: "/admin"
   }
@@ -64,7 +64,6 @@ var dashRoutes = [
     name: "Mantenimiento de cursos",
     rtlName: "التقويم",
     icon: DateRange,
-    visible: true,
     component: Calendar,
     layout: "/admin"
   }
@@ -74,7 +73,6 @@ var dashRoutes = [
     name: "Registro de Usuarios",
     rtlName: "التقويم",
     icon: DateRange,
-    visible: true,
     component: Calendar,
     layout: "/admin"
   }
@@ -85,7 +83,6 @@ var dashRoutes = [
     name: "Horario",
     rtlName: "التقويم",
     icon: DateRange,
-    visible: true,
     component: Calendar,
     layout: "/admin"
   },
@@ -94,7 +91,6 @@ var dashRoutes = [
     name: "Pages",
     rtlName: "صفحات",
     icon: Image,
-    visible: false,
     state: "pageCollapse",
     views: [
       {
@@ -103,7 +99,6 @@ var dashRoutes = [
         rtlName: "عالتسعير",
         mini: "PP",
         rtlMini: "ع",
-        visible: false,
         component: PricingPage,
         layout: "/auth"
       },
@@ -113,7 +108,6 @@ var dashRoutes = [
         rtlName: "صودعم رتل",
         mini: "RS",
         rtlMini: "صو",
-        visible: false,
         component: RTLSupport,
         layout: "/rtl"
       },
@@ -123,7 +117,6 @@ var dashRoutes = [
         rtlName: "تيالجدول الزمني",
         mini: "T",
         rtlMini: "تي",
-        visible: false,
         component: TimelinePage,
         layout: "/admin"
       },
@@ -133,7 +126,6 @@ var dashRoutes = [
         rtlName: "هعذاتسجيل الدخول",
         mini: "L",
         rtlMini: "هعذا",
-        visible: false,
         component: LoginPage,
         layout: "/auth"
       },
@@ -152,7 +144,6 @@ var dashRoutes = [
         rtlName: "اقفل الشاشة",
         mini: "LS",
         rtlMini: "هذاع",
-        visible: false,
         component: LockScreenPage,
         layout: "/auth"
       },
@@ -162,7 +153,6 @@ var dashRoutes = [
         rtlName: "ملف تعريفي للمستخدم",
         mini: "UP",
         rtlMini: "شع",
-        visible: false,
         component: UserProfile,
         layout: "/admin"
       },
@@ -172,7 +162,6 @@ var dashRoutes = [
         rtlName: "صفحة الخطأ",
         mini: "E",
         rtlMini: "البريد",
-        visible: false,
         component: ErrorPage,
         layout: "/auth"
       }
@@ -183,7 +172,6 @@ var dashRoutes = [
     name: "Components",
     rtlName: "المكونات",
     icon: Apps,
-    visible: false,
     state: "componentsCollapse",
     views: [
       {
@@ -192,7 +180,6 @@ var dashRoutes = [
         rtlName: "انهيار متعدد المستويات",
         mini: "MC",
         rtlMini: "ر",
-        visible: false,
         state: "multiCollapse",
         views: [
           {
@@ -201,7 +188,6 @@ var dashRoutes = [
             rtlName: "وصفت",
             mini: "B",
             rtlMini: "ب",
-            visible: false,
             component: Buttons,
             layout: "/admin"
           }
@@ -213,7 +199,6 @@ var dashRoutes = [
         rtlName: "وصفت",
         mini: "B",
         rtlMini: "ب",
-        visible: false,
         component: Buttons,
         layout: "/admin"
       },
@@ -223,7 +208,6 @@ var dashRoutes = [
         rtlName: "نظام الشبكة",
         mini: "GS",
         rtlMini: "زو",
-        visible: false,
         component: GridSystem,
         layout: "/admin"
       },
@@ -233,7 +217,6 @@ var dashRoutes = [
         rtlName: "لوحات",
         mini: "P",
         rtlMini: "ع",
-        visible: false,
         component: Panels,
         layout: "/admin"
       },
@@ -243,7 +226,6 @@ var dashRoutes = [
         rtlName: "الحلو تنبيه",
         mini: "SA",
         rtlMini: "ومن",
-        visible: false,
         component: SweetAlert,
         layout: "/admin"
       },
@@ -253,7 +235,6 @@ var dashRoutes = [
         rtlName: "إخطارات",
         mini: "N",
         rtlMini: "ن",
-        visible: false,
         component: Notifications,
         layout: "/admin"
       },
@@ -263,7 +244,6 @@ var dashRoutes = [
         rtlName: "الرموز",
         mini: "I",
         rtlMini: "و",
-        visible: false,
         component: Icons,
         layout: "/admin"
       },
@@ -273,7 +253,6 @@ var dashRoutes = [
         rtlName: "طباعة",
         mini: "T",
         rtlMini: "ر",
-        visible: false,
         component: Typography,
         layout: "/admin"
       }
@@ -284,7 +263,6 @@ var dashRoutes = [
     name: "Forms",
     rtlName: "إستمارات",
     icon: "content_paste",
-    visible: false,
     state: "formsCollapse",
     views: [
       {
@@ -293,7 +271,6 @@ var dashRoutes = [
         rtlName: "أشكال عادية",
         mini: "IF",
         rtlMini: "صو",
-        visible: false,
         component: RegularForms,
         layout: "/admin"
       },
@@ -303,7 +280,6 @@ var dashRoutes = [
         rtlName: "نماذج موسعة",
         mini: "EF",
         rtlMini: "هوو",
-        visible: false,
         component: ExtendedForms,
         layout: "/admin"
       },
@@ -313,7 +289,6 @@ var dashRoutes = [
         rtlName: "نماذج التحقق من الصحة",
         mini: "VF",
         rtlMini: "تو",
-        visible: false,
         component: ValidationForms,
         layout: "/admin"
       },
@@ -323,7 +298,6 @@ var dashRoutes = [
         rtlName: "ساحر",
         mini: "W",
         rtlMini: "ث",
-        visible: false,
         component: Wizard,
         layout: "/admin"
       }
@@ -334,7 +308,6 @@ var dashRoutes = [
     name: "Tables",
     rtlName: "الجداول",
     icon: GridOn,
-    visible: false,
     state: "tablesCollapse",
     views: [
       {
@@ -343,7 +316,6 @@ var dashRoutes = [
         rtlName: "طاولات عادية",
         mini: "RT",
         rtlMini: "صر",
-        visible: false,
         component: RegularTables,
         layout: "/admin"
       },
@@ -353,7 +325,6 @@ var dashRoutes = [
         rtlName: "جداول ممتدة",
         mini: "ET",
         rtlMini: "هور",
-        visible: false,
         component: ExtendedTables,
         layout: "/admin"
       },
@@ -363,10 +334,38 @@ var dashRoutes = [
         rtlName: "رد فعل الطاولة",
         mini: "RT",
         rtlMini: "در",
-        visible: false,
         component: ReactTables,
         layout: "/admin"
-      }
+      },
+      {
+              path: "/CoursesTables",
+              name: "Cursos",
+              rtlName: "رد فعل الطاولة",
+              mini: "RT",
+              rtlMini: "در",
+              component: CoursesTables,
+              layout: "/admin"
+            }
+            ,
+            {
+              path: "/GroupsTables",
+              name: "Grupos",
+              rtlName: "رد فعل الطاولة",
+              mini: "RT",
+              rtlMini: "در",
+              component: ReactTables,
+              layout: "/admin"
+            }
+            ,
+            {
+              path: "/SchedulesTables",
+              name: "Horarios",
+              rtlName: "رد فعل الطاولة",
+              mini: "RT",
+              rtlMini: "در",
+              component: ReactTables,
+              layout: "/admin"
+            }
     ]
   },
   {
@@ -374,7 +373,6 @@ var dashRoutes = [
     name: "Maps",
     rtlName: "خرائط",
     icon: Place,
-    visible: false,
     state: "mapsCollapse",
     views: [
       {
@@ -383,7 +381,6 @@ var dashRoutes = [
         rtlName: "خرائط جوجل",
         mini: "GM",
         rtlMini: "زم",
-        visible: false,
         component: GoogleMaps,
         layout: "/admin"
       },
@@ -393,7 +390,6 @@ var dashRoutes = [
         rtlName: "خريطة كاملة الشاشة",
         mini: "FSM",
         rtlMini: "ووم",
-        visible: false,
         component: FullScreenMap,
         layout: "/admin"
       },
@@ -403,7 +399,6 @@ var dashRoutes = [
         rtlName: "خريطة المتجه",
         mini: "VM",
         rtlMini: "تم",
-        visible: false,
         component: VectorMap,
         layout: "/admin"
       }
@@ -414,7 +409,6 @@ var dashRoutes = [
     name: "Widgets",
     rtlName: "الحاجيات",
     icon: WidgetsIcon,
-    visible: false,
     component: Widgets,
     layout: "/admin"
   },
@@ -423,7 +417,6 @@ var dashRoutes = [
     name: "Charts",
     rtlName: "الرسوم البيانية",
     icon: Timeline,
-    visible: false,
     component: Charts,
     layout: "/admin"
   }
