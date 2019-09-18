@@ -35,6 +35,8 @@ export default function UserProfile() {
   const [number, setnumber] = React.useState("");
   const [numberState, setnumberState] = React.useState("");
   const [simpleSelect, setSimpleSelect] = React.useState("");
+  const [simpleSelect1, setSimpleSelect1] = React.useState("");
+  const [simpleSelect2, setSimpleSelect2] = React.useState("");
   const [typeEmail, settypeEmail] = React.useState("");
   const [typeEmailState, settypeEmailState] = React.useState("");
   const [multipleSelect, setMultipleSelect] = React.useState([]);
@@ -54,6 +56,12 @@ export default function UserProfile() {
   };
   const handleSimple = event => {
     setSimpleSelect(event.target.value);
+  };
+  const handleSimple1 = event => {
+    setSimpleSelect1(event.target.value);
+  };
+  const handleSimple2 = event => {
+    setSimpleSelect2(event.target.value);
   };
   return (
     <div>
@@ -139,7 +147,7 @@ export default function UserProfile() {
                       root: classes.selectMenuItem,
                       selected: classes.selectMenuItemSelected
                     }}
-                    value="2"
+                    value="1"
                   >
                     Puntarenas
                   </MenuItem>
@@ -148,7 +156,7 @@ export default function UserProfile() {
                       root: classes.selectMenuItem,
                       selected: classes.selectMenuItemSelected
                     }}
-                    value="3"
+                    value="2"
                   >
                     San Jose
                   </MenuItem>
@@ -157,7 +165,7 @@ export default function UserProfile() {
                       root: classes.selectMenuItem,
                       selected: classes.selectMenuItemSelected
                     }}
-                    value="4"
+                    value="3"
                   >
                     Cartago
                   </MenuItem>
@@ -166,7 +174,7 @@ export default function UserProfile() {
                       root: classes.selectMenuItem,
                       selected: classes.selectMenuItemSelected
                     }}
-                    value="5"
+                    value="4"
                   >
                     Limon
                   </MenuItem>
@@ -175,7 +183,7 @@ export default function UserProfile() {
                       root: classes.selectMenuItem,
                       selected: classes.selectMenuItemSelected
                     }}
-                    value="6"
+                    value="5"
                   >
                     Guanacaste
                   </MenuItem>
@@ -184,7 +192,7 @@ export default function UserProfile() {
                       root: classes.selectMenuItem,
                       selected: classes.selectMenuItemSelected
                     }}
-                    value="7"
+                    value="6"
                   >
                     Alajuela
                   </MenuItem>
@@ -193,7 +201,7 @@ export default function UserProfile() {
                       root: classes.selectMenuItem,
                       selected: classes.selectMenuItemSelected
                     }}
-                    value="8"
+                    value="7"
                   >
                     Heredia
                   </MenuItem>
@@ -219,11 +227,11 @@ export default function UserProfile() {
                   classes={{
                     select: classes.select
                   }}
-                  value={simpleSelect}
-                  onChange={handleSimple}
+                  value={simpleSelect1}
+                  onChange={handleSimple1}
                   inputProps={{
-                    name: "simpleSelect",
-                    id: "simple-select"
+                    name: "simpleSelect1",
+                    id: "simple-select1"
                   }}
                 >
                   <MenuItem
@@ -366,11 +374,11 @@ export default function UserProfile() {
                   classes={{
                     select: classes.select
                   }}
-                  value={simpleSelect}
-                  onChange={handleSimple}
+                  value={simpleSelect2}
+                  onChange={handleSimple2}
                   inputProps={{
-                    name: "simpleSelect",
-                    id: "simple-select"
+                    name: "simpleSelect2",
+                    id: "simple-select2"
                   }}
                   labelText="Jornada de trabajo"
                 >
@@ -387,7 +395,7 @@ export default function UserProfile() {
                       root: classes.selectMenuItem,
                       selected: classes.selectMenuItemSelected
                     }}
-                    value="2"
+                    value="1"
                   >
                     Bachillerato
                   </MenuItem>
@@ -396,7 +404,7 @@ export default function UserProfile() {
                       root: classes.selectMenuItem,
                       selected: classes.selectMenuItemSelected
                     }}
-                    value="3"
+                    value="2"
                   >
                     Licenciatura
                   </MenuItem>
@@ -416,7 +424,7 @@ export default function UserProfile() {
                       root: classes.selectMenuItem,
                       selected: classes.selectMenuItemSelected
                     }}
-                    value="3"
+                    value="4"
                   >
                     Doctoradoo
                   </MenuItem>
