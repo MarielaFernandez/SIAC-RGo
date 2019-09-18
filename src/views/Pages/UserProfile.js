@@ -86,7 +86,7 @@ export default function UserProfile() {
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={6}>
                       <CustomInput
-                      labelText="Cedula"
+                      labelText="Cédula"
                         success={numberState === "success"}
                         error={numberState === "error"}
                         id="number"
@@ -148,7 +148,7 @@ export default function UserProfile() {
                       root: classes.selectMenuItem
                     }}
                   >
-                    Elija la provincia X
+                    Elija la provincia
                   </MenuItem>
                   <MenuItem
                     classes={{
@@ -166,7 +166,7 @@ export default function UserProfile() {
                     }}
                     value="2"
                   >
-                    San Jose
+                    San José
                   </MenuItem>
                   <MenuItem
                     classes={{
@@ -184,7 +184,7 @@ export default function UserProfile() {
                     }}
                     value="4"
                   >
-                    Limon
+                    Limón
                   </MenuItem>
                   <MenuItem
                     classes={{
@@ -257,7 +257,7 @@ export default function UserProfile() {
                     }}
                     value="2"
                   >
-                    Puntarenas
+                    Coto brus
                   </MenuItem>
                   <MenuItem
                     classes={{
@@ -266,7 +266,7 @@ export default function UserProfile() {
                     }}
                     value="3"
                   >
-                    San Jose
+                    Corredores
                   </MenuItem>
 
                 </Select>
@@ -294,7 +294,7 @@ export default function UserProfile() {
               <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
                 <CustomInput
-                labelText="Correo Electronico"
+                labelText="Correo Electrónico"
                   success={typeEmailState === "success"}
                   error={typeEmailState === "error"}
                   id="typeemail"
@@ -324,7 +324,7 @@ export default function UserProfile() {
               </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                  labelText="Total de Kilometros"
+                  labelText="Total de Kilómetros"
                     success={numberState1 === "success"}
                     error={numberState1 === "error"}
                     id="number1"
@@ -364,7 +364,7 @@ export default function UserProfile() {
                   htmlFor="simple-select"
                   className={classes.selectLabel}
                 >
-                  NC
+                  Tipo de nombramiento
                 </InputLabel>
                 <Select
                   MenuProps={{
@@ -387,7 +387,7 @@ export default function UserProfile() {
                       root: classes.selectMenuItem
                     }}
                   >
-                    NC
+                    Tipo de nombramiento
                   </MenuItem>
                   <MenuItem
                     classes={{
@@ -437,7 +437,6 @@ export default function UserProfile() {
                     name: "simpleSelect2",
                     id: "simple-select2"
                   }}
-                  labelText="Jornada de trabajo"
                 >
                   <MenuItem
                     disabled
@@ -492,7 +491,7 @@ export default function UserProfile() {
 
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                  labelText="Telefono"
+                  labelText="Teléfono"
                     success={numberState2 === "success"}
                     error={numberState2 === "error"}
                     id="number2"
