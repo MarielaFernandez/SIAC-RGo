@@ -59,7 +59,7 @@ export default function RegularForms() {
             <CardIcon color="rose">
               <MailOutline />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Stacked Form</h4>
+            <h4 className={classes.cardIconTitle}>Registro de funcionarios</h4>
           </CardHeader>
           <CardBody>
             <form>
