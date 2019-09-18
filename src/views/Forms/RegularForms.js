@@ -64,8 +64,8 @@ export default function RegularForms() {
           <CardBody>
             <form>
               <CustomInput
-                labelText="Email adress"
-                id="email_adress"
+                labelText="Nombre"
+                id="name_Employee"
                 formControlProps={{
                   fullWidth: true
                 }}
@@ -74,8 +74,8 @@ export default function RegularForms() {
                 }}
               />
               <CustomInput
-                labelText="Password"
-                id="password"
+                labelText="Apellido"
+                id="lastName_Employee"
                 formControlProps={{
                   fullWidth: true
                 }}
