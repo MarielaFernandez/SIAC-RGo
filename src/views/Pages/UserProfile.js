@@ -33,10 +33,15 @@ const useStyles = makeStyles(styles);
 export default function UserProfile() {
   const classes = useStyles();
   const [number, setnumber] = React.useState("");
+  const [number1, setnumber1] = React.useState("");
+  const [number2, setnumber2] = React.useState("");
   const [numberState, setnumberState] = React.useState("");
+  const [numberState1, setnumberState1] = React.useState("");
+  const [numberState2, setnumberState2] = React.useState("");
   const [simpleSelect, setSimpleSelect] = React.useState("");
   const [simpleSelect1, setSimpleSelect1] = React.useState("");
   const [simpleSelect2, setSimpleSelect2] = React.useState("");
+  const [simpleSelect3, setSimpleSelect3] = React.useState("");
   const [typeEmail, settypeEmail] = React.useState("");
   const [typeEmailState, settypeEmailState] = React.useState("");
   const [multipleSelect, setMultipleSelect] = React.useState([]);
@@ -62,6 +67,9 @@ export default function UserProfile() {
   };
   const handleSimple2 = event => {
     setSimpleSelect2(event.target.value);
+  };
+  const handleSimple3 = event => {
+    setSimpleSelect3(event.target.value);
   };
   return (
     <div>
@@ -317,24 +325,24 @@ export default function UserProfile() {
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                   labelText="Total de Kilometros"
-                    success={numberState === "success"}
-                    error={numberState === "error"}
-                    id="number"
+                    success={numberState1 === "success"}
+                    error={numberState1 === "error"}
+                    id="number1"
                     formControlProps={{
                       fullWidth: true
                     }}
                     inputProps={{
                       onChange: event => {
                         if (verifyNumber(event.target.value)) {
-                          setnumberState("success");
+                          setnumberState1("success");
                         } else {
-                          setnumberState("error");
+                          setnumberState1("error");
                         }
-                        setnumber(event.target.value);
+                        setnumber1(event.target.value);
                       },
                       type: "number",
                       endAdornment:
-                        numberState === "error" ? (
+                        numberState1 === "error" ? (
                           <InputAdornment position="end">
                             <Close className={classes.danger} />
                           </InputAdornment>
@@ -348,14 +356,63 @@ export default function UserProfile() {
                 <GridContainer>
 
                 <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="Jornada de trabajo"
-                    id="Jornada"
-                    formControlProps={{
-                      fullWidth: true
+                <FormControl
+                  fullWidth
+                  className={classes.selectFormControl}
+                >
+                <InputLabel
+                  htmlFor="simple-select"
+                  className={classes.selectLabel}
+                >
+                  NC
+                </InputLabel>
+                <Select
+                  MenuProps={{
+                    className: classes.selectMenu
+                  }}
+                  classes={{
+                    select: classes.select
+                  }}
+                  value={simpleSelect3}
+                  onChange={handleSimple3}
+                  inputProps={{
+                    name: "simpleSelect3",
+                    id: "simple-select3"
+                  }}
+                  labelText="Jornada de trabajo"
+                >
+                  <MenuItem
+                    disabled
+                    classes={{
+                      root: classes.selectMenuItem
                     }}
-                  />
+                  >
+                    NC
+                  </MenuItem>
+                  <MenuItem
+                    classes={{
+                      root: classes.selectMenuItem,
+                      selected: classes.selectMenuItemSelected
+                    }}
+                    value="1"
+                  >
+                    Interino
+                  </MenuItem>
+                  <MenuItem
+                    classes={{
+                      root: classes.selectMenuItem,
+                      selected: classes.selectMenuItemSelected
+                    }}
+                    value="2"
+                  >
+                    Propiedad
+                  </MenuItem>
+
+                </Select>
+                </FormControl>
                 </GridItem>
+
+
                 <GridItem xs={12} sm={12} md={6}>
                 <FormControl
                   fullWidth
@@ -426,7 +483,7 @@ export default function UserProfile() {
                     }}
                     value="4"
                   >
-                    Doctoradoo
+                    Doctorado
                   </MenuItem>
 
                 </Select>
@@ -436,20 +493,20 @@ export default function UserProfile() {
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                   labelText="Telefono"
-                    success={numberState === "success"}
-                    error={numberState === "error"}
-                    id="number"
+                    success={numberState2 === "success"}
+                    error={numberState2 === "error"}
+                    id="number2"
                     formControlProps={{
                       fullWidth: true
                     }}
                     inputProps={{
                       onChange: event => {
                         if (verifyNumber(event.target.value)) {
-                          setnumberState("success");
+                          setnumberState2("success");
                         } else {
-                          setnumberState("error");
+                          setnumberState2("error");
                         }
-                        setnumber(event.target.value);
+                        setnumber2(event.target.value);
                       }
                     }}
                   />
