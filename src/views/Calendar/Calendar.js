@@ -21,6 +21,7 @@ import Switch from '@material-ui/core/Switch';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
+require('moment/locale/es.js');
 // core components
 import Heading from "components/Heading/Heading.js";
 import GridContainer from "components/Grid/GridContainer.js";
