@@ -310,7 +310,7 @@ var dashRoutes = [
     views: [
       {
         path: "/regular-tables",
-        name: "Regular Tables",
+        name: "Listas de Funcionarios",
         rtlName: "طاولات عادية",
         mini: "RT",
         rtlMini: "صر",
