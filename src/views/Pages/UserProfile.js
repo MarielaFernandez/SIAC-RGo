@@ -418,7 +418,7 @@ export default function UserProfile() {
                     }}
                     value="3"
                   >
-                    Doctorado
+                    Doctoradoo
                   </MenuItem>
 
                 </Select>
