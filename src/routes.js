@@ -49,7 +49,7 @@ var dashRoutes = [
   },
   {
     path: "/user-page",
-    name: "Editar perfil",
+    name: "Perfil usuario",
     rtlName: "ملف تعريفي للمستخدم",
     mini: "UP",
     rtlMini: "شع",
@@ -66,6 +66,24 @@ var dashRoutes = [
     layout: "/admin"
   }
   ,
+  {
+    path: "/calendar",
+    name: "Registro de Usuarios",
+    rtlName: "التقويم",
+    icon: DateRange,
+    component: Calendar,
+    layout: "/admin"
+  }
+  ,
+
+  {
+    path: "/calendar",
+    name: "Horario",
+    rtlName: "التقويم",
+    icon: DateRange,
+    component: Calendar,
+    layout: "/admin"
+  },
   {
     collapse: true,
     name: "Pages",
@@ -369,14 +387,6 @@ var dashRoutes = [
     rtlName: "الرسوم البيانية",
     icon: Timeline,
     component: Charts,
-    layout: "/admin"
-  },
-  {
-    path: "/calendar",
-    name: "Calendar",
-    rtlName: "التقويم",
-    icon: DateRange,
-    component: Calendar,
     layout: "/admin"
   }
 ];

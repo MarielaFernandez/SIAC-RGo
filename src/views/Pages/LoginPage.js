@@ -41,24 +41,6 @@ export default function LoginPage() {
                 color="rose"
               >
                 <h4 className={classes.cardTitle}>Log in</h4>
-                <div className={classes.socialLine}>
-                  {[
-                    "fab fa-facebook-square",
-                    "fab fa-twitter",
-                    "fab fa-google-plus"
-                  ].map((prop, key) => {
-                    return (
-                      <Button
-                        color="transparent"
-                        justIcon
-                        key={key}
-                        className={classes.customButtonClass}
-                      >
-                        <i className={prop} />
-                      </Button>
-                    );
-                  })}
-                </div>
               </CardHeader>
               <CardBody>
                 <CustomInput
