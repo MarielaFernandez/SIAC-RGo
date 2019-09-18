@@ -63,6 +63,17 @@ export default function RegularForms() {
           </CardHeader>
           <CardBody>
             <form>
+            <CustomInput
+                labelText="Cédula"
+                id="id_Employee"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  type: "password",
+                  autoComplete: "off"
+                }}
+              />
               <CustomInput
                 labelText="Nombre"
                 id="name_Employee"
@@ -75,6 +86,17 @@ export default function RegularForms() {
               />
               <CustomInput
                 labelText="Apellido"
+                id="lastName_Employee"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  type: "password",
+                  autoComplete: "off"
+                }}
+              />
+               <CustomInput
+                labelText=""
                 id="lastName_Employee"
                 formControlProps={{
                   fullWidth: true
