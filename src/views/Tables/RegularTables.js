@@ -13,6 +13,8 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
+import Button from "components/CustomButtons/Button.js";
+
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 
@@ -49,9 +51,12 @@ export default function RegularTables() {
             <h4 className={classes.cardIconTitle}>Lista de Funcionarios</h4>
           </CardHeader>
           <CardBody className={classes.customCardContentClass}>
+          
             <Table
               hover
               tableHead={[" Cédula", "Nombre", "Apellido", "E-mail", "Estado"]}
+  
+            
               tableData={[
                 {
                   color: "success",
@@ -61,8 +66,13 @@ export default function RegularTables() {
                     "Leitón",
                     "lajefa@ucr.ac.cr",
                     "Activo"
+                   
+                    
                   ]
-                },
+
+                
+                  
+                } ,
                 ["2", "Juan", "Gamboa", "juan.gamboa@ucr.ac.cr", "Activo"],
                 {
                   color: "info",
@@ -103,9 +113,12 @@ export default function RegularTables() {
                   ]
                 }
               ]}
+              
             />
           </CardBody>
+          <Button color="rose">Agregar</Button>
         </Card>
+       
       </GridItem>
     </GridContainer>
   );
