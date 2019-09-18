@@ -117,6 +117,9 @@ export default function RegularTables() {
             />
           </CardBody>
           <Button color="rose">Agregar</Button>
+
+          estará programado para que cuando se seleccione un lugar de la tabla, salga una ventana emergente 
+          con las opciones editar e inactivar.
         </Card>
        
       </GridItem>
