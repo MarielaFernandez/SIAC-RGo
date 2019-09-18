@@ -59,7 +59,7 @@ var dashRoutes = [
   ,
   {
     path: "/calendar",
-    name: "Mantemiento de cursos",
+    name: "Mantenimiento de cursos",
     rtlName: "التقويم",
     icon: DateRange,
     component: Calendar,
@@ -247,9 +247,9 @@ var dashRoutes = [
     views: [
       {
         path: "/regular-forms",
-        name: "Regular Forms",
+        name: "Ingreso de Funcionarios",
         rtlName: "أشكال عادية",
-        mini: "RF",
+        mini: "IF",
         rtlMini: "صو",
         component: RegularForms,
         layout: "/admin"
