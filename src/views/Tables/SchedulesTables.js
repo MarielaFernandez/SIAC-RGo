@@ -52,7 +52,7 @@ export default function ReactTables() {
               onClick={() => {
                 let obj = data.find(o => o.id === key);
                 alert(
-                  "You've clicked LIKE button on estee \n{ \nName: " +
+                  "You've clicked LIKE button on \n{ \nName: " +
                     obj.name +
                     ", \nposition: " +
                     obj.position +

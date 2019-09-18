@@ -27,6 +27,8 @@ import ValidationForms from "views/Forms/ValidationForms.js";
 import VectorMap from "views/Maps/VectorMap.js";
 import Widgets from "views/Widgets/Widgets.js";
 import Wizard from "views/Forms/Wizard.js";
+import CoursesTables from "views/Tables/CoursesTables.js";
+
 
 // @material-ui/icons
 import Apps from "@material-ui/icons/Apps";
@@ -335,6 +337,34 @@ var dashRoutes = [
         component: ReactTables,
         layout: "/admin"
       }
+              path: "/CoursesTables",
+              name: "Cursos",
+              rtlName: "رد فعل الطاولة",
+              mini: "RT",
+              rtlMini: "در",
+              component: CoursesTables,
+              layout: "/admin"
+            }
+            ,
+            {
+              path: "/GroupsTables",
+              name: "Grupos",
+              rtlName: "رد فعل الطاولة",
+              mini: "RT",
+              rtlMini: "در",
+              component: ReactTables,
+              layout: "/admin"
+            }
+            ,
+            {
+              path: "/SchedulesTables",
+              name: "Horarios",
+              rtlName: "رد فعل الطاولة",
+              mini: "RT",
+              rtlMini: "در",
+              component: ReactTables,
+              layout: "/admin"
+            }
     ]
   },
   {
