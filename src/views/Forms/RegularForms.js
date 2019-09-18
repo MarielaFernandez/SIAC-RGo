@@ -124,7 +124,7 @@ export default function RegularForms() {
                     label: classes.label,
                     root: classes.labelRoot
                   }}
-                  label="Subscribe to newsletter"
+                  label="Activar Funcionario"
                 />
               </div>
               <Button color="rose">Submit</Button>
