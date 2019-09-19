@@ -27,6 +27,8 @@ import ValidationForms from "views/Forms/ValidationForms.js";
 import VectorMap from "views/Maps/VectorMap.js";
 import Widgets from "views/Widgets/Widgets.js";
 import Wizard from "views/Forms/Wizard.js";
+import CoursesTables from "views/Tables/CoursesTables.js";
+
 
 // @material-ui/icons
 import Apps from "@material-ui/icons/Apps";
@@ -49,7 +51,7 @@ var dashRoutes = [
   },
   {
     path: "/user-page",
-    name: "Editar perfil",
+    name: "Perfil usuario",
     rtlName: "ملف تعريفي للمستخدم",
     mini: "UP",
     rtlMini: "شع",
@@ -59,13 +61,31 @@ var dashRoutes = [
   ,
   {
     path: "/calendar",
-    name: "Mantemiento de cursos",
+    name: "Mantenimiento de cursos",
     rtlName: "التقويم",
     icon: DateRange,
     component: Calendar,
     layout: "/admin"
   }
   ,
+  {
+    path: "/calendar",
+    name: "Registro de Usuarios",
+    rtlName: "التقويم",
+    icon: DateRange,
+    component: Calendar,
+    layout: "/admin"
+  }
+  ,
+
+  {
+    path: "/calendar",
+    name: "Horario",
+    rtlName: "التقويم",
+    icon: DateRange,
+    component: Calendar,
+    layout: "/admin"
+  },
   {
     collapse: true,
     name: "Pages",
@@ -247,9 +267,9 @@ var dashRoutes = [
     views: [
       {
         path: "/regular-forms",
-        name: "Regular Forms",
+        name: "Ingreso de Funcionarios",
         rtlName: "أشكال عادية",
-        mini: "RF",
+        mini: "IF",
         rtlMini: "صو",
         component: RegularForms,
         layout: "/admin"
@@ -292,7 +312,7 @@ var dashRoutes = [
     views: [
       {
         path: "/regular-tables",
-        name: "Regular Tables",
+        name: "Listas de Funcionarios",
         rtlName: "طاولات عادية",
         mini: "RT",
         rtlMini: "صر",
@@ -316,7 +336,36 @@ var dashRoutes = [
         rtlMini: "در",
         component: ReactTables,
         layout: "/admin"
-      }
+      },
+      {
+              path: "/CoursesTables",
+              name: "Cursos",
+              rtlName: "رد فعل الطاولة",
+              mini: "RT",
+              rtlMini: "در",
+              component: CoursesTables,
+              layout: "/admin"
+            }
+            ,
+            {
+              path: "/GroupsTables",
+              name: "Grupos",
+              rtlName: "رد فعل الطاولة",
+              mini: "RT",
+              rtlMini: "در",
+              component: ReactTables,
+              layout: "/admin"
+            }
+            ,
+            {
+              path: "/SchedulesTables",
+              name: "Horarios",
+              rtlName: "رد فعل الطاولة",
+              mini: "RT",
+              rtlMini: "در",
+              component: ReactTables,
+              layout: "/admin"
+            }
     ]
   },
   {
@@ -369,14 +418,6 @@ var dashRoutes = [
     rtlName: "الرسوم البيانية",
     icon: Timeline,
     component: Charts,
-    layout: "/admin"
-  },
-  {
-    path: "/calendar",
-    name: "Calendar",
-    rtlName: "التقويم",
-    icon: DateRange,
-    component: Calendar,
     layout: "/admin"
   }
 ];
