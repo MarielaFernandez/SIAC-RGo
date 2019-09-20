@@ -77,6 +77,35 @@ var dashRoutes = [
     layout: "/admin"
   }
   ,
+  
+  {
+    collapse: true,
+    name: "Funcionarios",
+    rtlName: "صفحات",
+    icon: Image,
+    state: "pageCollapse",
+    views: [
+  
+  {
+    path: "/regular-forms",
+    name: "Ingreso de Funcionarios",
+    rtlName: "أشكال عادية",
+    mini: "IF",
+    rtlMini: "صو",
+    component: RegularForms,
+    layout: "/admin"
+  },
+  {
+    path: "/regular-tables",
+    name: "Listas de Funcionarios",
+    rtlName: "طاولات عادية",
+    mini: "LF",
+    rtlMini: "صر",
+    component: RegularTables,
+    layout: "/admin"
+  },
+    ]
+  },
 
   {
     path: "/calendar",
@@ -86,6 +115,9 @@ var dashRoutes = [
     component: Calendar,
     layout: "/admin"
   },
+
+
+
   {
     collapse: true,
     name: "Pages",
