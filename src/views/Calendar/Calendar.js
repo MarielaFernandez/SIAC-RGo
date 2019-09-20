@@ -18,6 +18,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
 import Switch from '@material-ui/core/Switch';
 
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -37,10 +38,13 @@ import styles from "assets/jss/material-dashboard-pro-react/components/buttonSty
 
 import { events as calendarEvents } from "variables/general.js";
 
+import Accordion from "components/Accordion/Accordion.js";
 
 const localizer = momentLocalizer(moment);
 
 const useStyles = makeStyles(styles);
+
+
 
 export default function Calendar() {
   const [selectedEnabled, setSelectedEnabled] = React.useState("a");
@@ -56,7 +60,7 @@ export default function Calendar() {
   const selectedEvent = event => {
     window.alert(event.title);
   };  
-
+  
   const PurpleSwitch = withStyles({
     switchBase: {
       color: purple[300],
@@ -189,6 +193,7 @@ export default function Calendar() {
       className: backgroundColor
     };
   };
+  
   return (   
       <div>
        {alert}
@@ -196,26 +201,48 @@ export default function Calendar() {
       <GridContainer justify="center">
         <GridItem xs={2} sm={2} md={2}>
               <FormControl component="fieldset">
-                <FormLabel component="legend">Seleccione Actividad</FormLabel>
-                <FormGroup>
-                  <FormControlLabel
+                <FormLabel component="legend">Seleccione una Actividad</FormLabel>
+                
+                
+    <Accordion
+    active={0}
+    collapses={[
+    {
+      title: "Docente Curso",
+      content:
+      <FormControlLabel
                     control={<PurpleSwitch color = "primary" checked={state.opcion ==="red"} onChange={handleChange()} value="red" />}
-                    label="HC"
-                  />
-                  <FormControlLabel
+                    label="Horas Contacto"
+      />
+                  
+    },
+    {
+      title: "Docente Administrativo",
+      content:
+      <FormControlLabel
                     control={<RedSwitch color = "secondary" checked={state.opcion ==="green"} onChange={handleChange()} value="green" />}
-                    label="HA"
-                  />
-                  <FormControlLabel
+                    label="Horas Atención"
+      />
+    },
+    {
+      title: "Docente Proyecto",
+      content:
+      <FormControlLabel
                     control={
                       <GreenSwitch color = "default" checked={state.opcion ==="yellow"} onChange={handleChange()} value="yellow" />
                     }
-                    label="HP"
-                  />
-                </FormGroup>      
+                    label="Horas Preparación"
+                    
+      />
+    }
+  ]}
+/>
+
+
+                      
               </FormControl>
         </GridItem>
-        <GridItem xs={10} sm={10} md={10}>
+        <GridItem xs={10} sm={10} md={9}>
           <Card>
             <CardBody calendar>
               <BigCalendar
