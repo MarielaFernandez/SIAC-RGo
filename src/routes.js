@@ -82,7 +82,7 @@ var dashRoutes = [
     collapse: true,
     name: "Funcionarios",
     rtlName: "صفحات",
-    icon: Image,
+    icon: GridOn,
     state: "pageCollapse",
     views: [
   
