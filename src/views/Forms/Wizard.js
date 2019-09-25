@@ -8,6 +8,9 @@ import GridItem from "components/Grid/GridItem.js";
 import Step1 from "./WizardSteps/Step1.js";
 import Step2 from "./WizardSteps/Step2.js";
 import Step3 from "./WizardSteps/Step3.js";
+import Cursos from "./CoursesTables.js";
+import Grupos from "./CoursesTables.js";
+import Horarios from "./CoursesTables.js";
 
 export default function WizardView() {
   return (
@@ -16,9 +19,9 @@ export default function WizardView() {
         <Wizard
           validate
           steps={[
-            { stepName: "About", stepComponent: Step1, stepId: "about" },
-            { stepName: "Account", stepComponent: Step2, stepId: "account" },
-            { stepName: "Address", stepComponent: Step3, stepId: "address" }
+            { stepName: "Cursos", stepComponent: Cursos, stepId: "Cursos" },
+            { stepName: "Grupos", stepComponent: Grupos, stepId: "Grupos" },
+            { stepName: "Horarios", stepComponent: Horarios, stepId: "Horarios" }
           ]}
           title="Build Your Profile"
           subtitle="This information will let us know more about you."
