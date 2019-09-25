@@ -46,6 +46,8 @@ const useStyles = makeStyles(styles);
 
 
 
+
+
 export default function Calendar() {
   const [selectedEnabled, setSelectedEnabled] = React.useState("a");
   const classes = useStyles();
@@ -210,18 +212,32 @@ export default function Calendar() {
     {
       title: "Docente Curso",
       content:
+      <div>
       <FormControlLabel
                     control={<PurpleSwitch color = "primary" checked={state.opcion ==="red"} onChange={handleChange()} value="red" />}
                     label="Horas Contacto"
       />
-                  
+
+      <FormControlLabel
+                    control={<RedSwitch color = "secondary" checked={state.opcion ==="green"} onChange={handleChange()} value="green" />}
+                    label="Horas Atención"
+      />
+
+      <FormControlLabel
+                    control={
+                      <GreenSwitch color = "default" checked={state.opcion ==="yellow"} onChange={handleChange()} value="yellow" />
+                    }
+                    label="Horas Preparación"
+                    
+      />
+      </div>           
     },
     {
       title: "Docente Administrativo",
       content:
       <FormControlLabel
-                    control={<RedSwitch color = "secondary" checked={state.opcion ==="green"} onChange={handleChange()} value="green" />}
-                    label="Horas Atención"
+                    control={<PurpleSwitch color = "primary" checked={state.opcion ==="red"} onChange={handleChange()} value="red" />}
+                    label="Horas Contacto"
       />
     },
     {
@@ -241,7 +257,7 @@ export default function Calendar() {
 
                       
               </FormControl>
-        </GridItem>
+      </GridItem>
         <GridItem xs={10} sm={10} md={9}>
           <Card>
             <CardBody calendar>
