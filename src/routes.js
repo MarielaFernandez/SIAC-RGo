@@ -27,7 +27,6 @@ import ValidationForms from "views/Forms/ValidationForms.js";
 import VectorMap from "views/Maps/VectorMap.js";
 import Widgets from "views/Widgets/Widgets.js";
 import Wizard from "views/Forms/Wizard.js";
-import CoursesTables from "views/Tables/CoursesTables.js";
 
 
 
@@ -78,7 +77,7 @@ var dashRoutes = [
     layout: "/admin"
   }
   ,
-  
+
   {
     collapse: true,
     name: "Funcionarios",
@@ -86,7 +85,7 @@ var dashRoutes = [
     icon: GridOn,
     state: "pageCollapse",
     views: [
-  
+
   {
     path: "/regular-forms",
     name: "Ingreso de Funcionarios",
@@ -371,16 +370,7 @@ var dashRoutes = [
         layout: "/admin"
       },
       {
-              path: "/CoursesTables",
-              name: "Cursos",
-              rtlName: "رد فعل الطاولة",
-              mini: "RT",
-              rtlMini: "در",
-              component: CoursesTables,
-              layout: "/admin"
-            }
-            ,
-            {
+            
               path: "/GroupsTables",
               name: "Grupos",
               rtlName: "رد فعل الطاولة",

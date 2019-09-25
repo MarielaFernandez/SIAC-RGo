@@ -32,7 +32,7 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function ReactTables() {
+export default function Groups() {
 
   const [alert, setAlert] = React.useState(null);
   const [inputValue, setInputValue] = React.useState(null);
@@ -154,7 +154,7 @@ export default function ReactTables() {
     {alert}
     <GridContainer>
     <Card>
-      
+
       <CardBody>
             <ReactTable
               data={data}

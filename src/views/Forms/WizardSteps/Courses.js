@@ -17,7 +17,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardHeader from "components/Card/CardHeader.js";
-
+import SweetAlert from "react-bootstrap-sweetalert";
 import { dataTable } from "variables/general.js";
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
@@ -32,7 +32,48 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function ReactTables() {
+export default function Courses() {
+
+  const [alert, setAlert] = React.useState(null);
+  const [inputValue, setInputValue] = React.useState(null);
+  const inputAlert = () => {
+    setAlert(
+      <SweetAlert
+        input
+        showCancel
+        style={{ display: "block", marginTop: "-100px" }}
+        title="Input something"
+        onConfirm={e => {
+          inputConfirmAlertNext(e);
+        }}
+        onCancel={() => hideAlert()}
+        confirmBtnCssClass={classes.button + " " + classes.info}
+        cancelBtnCssClass={classes.button + " " + classes.danger}
+      />
+    );
+  };
+  const inputConfirmAlertNext = e => {
+    setAlert(e);
+    setTimeout(() => {
+      setAlert(
+        <SweetAlert
+          style={{ display: "block", marginTop: "-100px" }}
+          onConfirm={() => hideAlert()}
+          onCancel={() => hideAlert()}
+          confirmBtnCssClass={classes.button + " " + classes.info}
+          title={
+            <p>
+              You entered: <b>{e}</b>
+            </p>
+          }
+        />
+      );
+    }, 200);
+  };
+  const hideAlert = () => {
+    setAlert(null);
+  };
+
   const [data, setData] = React.useState(
     dataTable.dataRows.map((prop, key) => {
       return {
@@ -49,20 +90,7 @@ export default function ReactTables() {
               justIcon
               round
               simple
-              onClick={() => {
-                let obj = data.find(o => o.id === key);
-                alert(
-                  "You've clicked LIKE button on estee \n{ \nName: " +
-                    obj.name +
-                    ", \nposition: " +
-                    obj.position +
-                    ", \noffice: " +
-                    obj.office +
-                    ", \nage: " +
-                    obj.age +
-                    "\n}."
-                );
-              }}
+              onClick={inputAlert}
               color="info"
               className="like"
             >
@@ -122,16 +150,12 @@ export default function ReactTables() {
   );
   const classes = useStyles();
   return (
+    <div>
+    {alert}
     <GridContainer>
-      <GridItem xs={12}>
-        <Card>
-          <CardHeader color="primary" icon>
-            <CardIcon color="primary">
-              <Assignment />
-            </CardIcon>
-            <h4 className={classes.cardIconTitle}>React Table</h4>
-          </CardHeader>
-          <CardBody>
+    <Card>
+
+      <CardBody>
             <ReactTable
               data={data}
               filterable
@@ -164,9 +188,11 @@ export default function ReactTables() {
               showPaginationBottom={false}
               className="-striped -highlight"
             />
-          </CardBody>
-        </Card>
-      </GridItem>
-    </GridContainer>
+            </CardBody>
+            </Card>
+
+              </GridContainer>
+              </div>
+
   );
 }

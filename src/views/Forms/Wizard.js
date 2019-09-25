@@ -8,9 +8,8 @@ import GridItem from "components/Grid/GridItem.js";
 import Step1 from "./WizardSteps/Step1.js";
 import Step2 from "./WizardSteps/Step2.js";
 import Step3 from "./WizardSteps/Step3.js";
-import Cursos from "./CoursesTables.js";
-import Grupos from "./CoursesTables.js";
-import Horarios from "./CoursesTables.js";
+import Cursos from "./WizardSteps/Courses.js";
+import Grupos from "./WizardSteps/Groups.js";
 
 export default function WizardView() {
   return (
@@ -21,9 +20,9 @@ export default function WizardView() {
           steps={[
             { stepName: "Cursos", stepComponent: Cursos, stepId: "Cursos" },
             { stepName: "Grupos", stepComponent: Grupos, stepId: "Grupos" },
-            { stepName: "Horarios", stepComponent: Horarios, stepId: "Horarios" }
+            { stepName: "Horarios", stepComponent: Cursos, stepId: "Horarios" }
           ]}
-          title="Build Your Profile"
+          title="Administración"
           subtitle="This information will let us know more about you."
           finishButtonClick={e => alert(e)}
         />
