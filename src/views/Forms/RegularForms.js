@@ -7,6 +7,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Radio from "@material-ui/core/Radio";
 import Checkbox from "@material-ui/core/Checkbox";
 
+
 // @material-ui/icons
 import MailOutline from "@material-ui/icons/MailOutline";
 import Check from "@material-ui/icons/Check";
@@ -70,7 +71,7 @@ export default function RegularForms() {
                   fullWidth: true
                 }}
                 inputProps={{
-                  type: "password",
+                  
                   autoComplete: "off"
                 }}
               />
@@ -81,7 +82,7 @@ export default function RegularForms() {
                   fullWidth: true
                 }}
                 inputProps={{
-                  type: "password",
+                 
                   autoComplete: "off"
                 }}
               />
@@ -102,7 +103,7 @@ export default function RegularForms() {
                   fullWidth: true
                 }}
                 inputProps={{
-                  type: "password",
+                
                   autoComplete: "off"
                 }}
               />

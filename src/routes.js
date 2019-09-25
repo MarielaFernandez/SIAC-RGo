@@ -30,6 +30,7 @@ import Wizard from "views/Forms/Wizard.js";
 import CoursesTables from "views/Tables/CoursesTables.js";
 
 
+
 // @material-ui/icons
 import Apps from "@material-ui/icons/Apps";
 import DashboardIcon from "@material-ui/icons/Dashboard";
