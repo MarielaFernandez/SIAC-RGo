@@ -106,7 +106,7 @@ export default function RegularForms() {
                <CustomInput
                 labelText="e-mail"
                 id="mail_Employee"
-                value = {post.lastname1}
+                
                 formControlProps={{
                   fullWidth: true
                 }}
@@ -116,9 +116,9 @@ export default function RegularForms() {
                 }}
               />
               <CustomInput
-                labelText="nombre"
+                labelText="Nombre"
                 id="name_Employee"
-                value = {post.lastname1}
+                value = {post.firstname}
                 formControlProps={{
                   fullWidth: true
                 }}
@@ -127,8 +127,9 @@ export default function RegularForms() {
                 }}
               />
               <CustomInput
-                labelText={post.lastName1}
+                labelText="Apellido"
                 id="lastName_Employee"
+                value = {post.lastname}
                 formControlProps={{
                   fullWidth: true
                 }}
@@ -160,7 +161,7 @@ export default function RegularForms() {
                 />
               </div>
               
-              <Button color="rose" onClick={() => getPosts(cedula)}>Agregar</Button>
+              <Button color="rose" onClick={() => getPosts('110990099')}>Agregar</Button>
             </form>
           </CardBody>
         </Card>
