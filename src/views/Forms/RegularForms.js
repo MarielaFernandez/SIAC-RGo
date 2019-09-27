@@ -35,9 +35,11 @@ const useStyles = makeStyles(styles);
 
 
 export default function RegularForms() {
+  const [post, setPost] = React.useState([]);
+  const [cedula, setCedula] = React.useState([]);
   const [checked, setChecked] = React.useState([24, 22]);
   const [selectedEnabled, setSelectedEnabled] = React.useState("b");
-  const [selectedValue, setSelectedValue] = React.useState(null);
+  const [selectedValue, setSelectedValue] = React.useState(null);  
   const handleChange = event => {
     setSelectedValue(event.target.value);
   };
@@ -45,11 +47,20 @@ export default function RegularForms() {
     setSelectedEnabled(event.target.value);
   };
 
+
+  const loadPost = (post) => {
+    setPost( post     
+    );
+  };    
+
+
   const getPosts= (cedula) => {
-    axios.get('https://apis.gometa.org/cedulas/115420618'
+    axios.get('https://apis.gometa.org/cedulas/' + cedula
     ).then(response=>{
         console.log(response.data.results);
-      this.setState({ posts: response.data.results});
+        loadPost(response.data.results);
+        
+      //this.setState({ posts: response.data.results});
   
       
   });
@@ -87,6 +98,7 @@ export default function RegularForms() {
                 formControlProps={{
                   fullWidth: true
                 }}
+                value = {cedula}
                 inputProps={{                  
                   autoComplete: "off"
                 }}
@@ -94,6 +106,7 @@ export default function RegularForms() {
                <CustomInput
                 labelText="e-mail"
                 id="mail_Employee"
+                value = {post.lastname1}
                 formControlProps={{
                   fullWidth: true
                 }}
@@ -105,6 +118,7 @@ export default function RegularForms() {
               <CustomInput
                 labelText="nombre"
                 id="name_Employee"
+                value = {post.lastname1}
                 formControlProps={{
                   fullWidth: true
                 }}
@@ -113,7 +127,7 @@ export default function RegularForms() {
                 }}
               />
               <CustomInput
-                labelText="Apellido"
+                labelText={post.lastName1}
                 id="lastName_Employee"
                 formControlProps={{
                   fullWidth: true
@@ -146,7 +160,7 @@ export default function RegularForms() {
                 />
               </div>
               
-              <Button color="rose" onClick={() => getPosts('110990099')}>Agregar</Button>
+              <Button color="rose" onClick={() => getPosts(cedula)}>Agregar</Button>
             </form>
           </CardBody>
         </Card>
