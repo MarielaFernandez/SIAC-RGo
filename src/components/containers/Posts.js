@@ -14,8 +14,10 @@ class Posts extends Component{
     getPosts(ced){
       axios.get('https://apis.gometa.org/cedulas/115420618'
       ).then(response=>{
-          console.log(response);
-        this.setState({ posts: response.data});
+          console.log(response.data.results);
+        this.setState({ posts: response.data.results});
+    
+        
     });
     }
     render(){
@@ -26,6 +28,7 @@ class Posts extends Component{
                         <li>{post.lastname1}</li>
 
                      )}
+                     
             </ul>
            
         </div>

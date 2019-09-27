@@ -93,7 +93,7 @@ export default function RegularForms() {
                 }}
               />
               <CustomInput
-                labelText="Nombre"
+                labelText={<Posts/>}
                 id="name_Employee"
                 formControlProps={{
                   fullWidth: true
