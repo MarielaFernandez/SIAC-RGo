@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import FormLabel from "@material-ui/core/FormLabel";
@@ -25,10 +25,14 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardText from "components/Card/CardText.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
+import axios from 'axios';
+import Posts from 'components/containers/Posts.js';
 
 import styles from "assets/jss/material-dashboard-pro-react/views/regularFormsStyle";
 
 const useStyles = makeStyles(styles);
+
+
 
 export default function RegularForms() {
   const [checked, setChecked] = React.useState([24, 22]);
@@ -51,6 +55,8 @@ export default function RegularForms() {
     }
     setChecked(newChecked);
   };
+
+  
   const classes = useStyles();
   return (
     <GridContainer>
@@ -129,6 +135,7 @@ export default function RegularForms() {
                   label="Activar Funcionario"
                 />
               </div>
+              <Posts/> 
               <Button color="rose">Agregar</Button>
             </form>
           </CardBody>

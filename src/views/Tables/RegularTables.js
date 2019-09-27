@@ -140,7 +140,7 @@ export default function RegularTables() {
               
             />
           </CardBody>
-          <Button color="rose">Agregar</Button>
+          <Button color="info">Agregar</Button>
 
         </Card>
        
