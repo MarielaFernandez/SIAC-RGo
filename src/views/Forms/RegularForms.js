@@ -26,7 +26,7 @@ import CardText from "components/Card/CardText.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
 import axios from 'axios';
-import Posts from 'components/containers/Posts.js';
+//import Posts from 'components/containers/Posts.js';
 
 import styles from "assets/jss/material-dashboard-pro-react/views/regularFormsStyle";
 
@@ -44,6 +44,17 @@ export default function RegularForms() {
   const handleChangeEnabled = event => {
     setSelectedEnabled(event.target.value);
   };
+
+  const getPosts= (cedula) => {
+    axios.get('https://apis.gometa.org/cedulas/115420618'
+    ).then(response=>{
+        console.log(response.data.results);
+      this.setState({ posts: response.data.results});
+  
+      
+  });
+  }
+
   const handleToggle = value => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -76,8 +87,7 @@ export default function RegularForms() {
                 formControlProps={{
                   fullWidth: true
                 }}
-                inputProps={{
-                  
+                inputProps={{                  
                   autoComplete: "off"
                 }}
               />
@@ -93,7 +103,7 @@ export default function RegularForms() {
                 }}
               />
               <CustomInput
-                labelText={<Posts/>}
+                labelText="nombre"
                 id="name_Employee"
                 formControlProps={{
                   fullWidth: true
@@ -118,8 +128,8 @@ export default function RegularForms() {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      tabIndex={-1}
-                      onClick={() => handleToggle(2)}
+                      tabIndex={-1}   
+                      onClick={() => handleChange()}
                       checkedIcon={<Check className={classes.checkedIcon} />}
                       icon={<Check className={classes.uncheckedIcon} />}
                       classes={{
@@ -135,8 +145,8 @@ export default function RegularForms() {
                   label="Activar Funcionario"
                 />
               </div>
-              <Posts/> 
-              <Button color="rose">Agregar</Button>
+              
+              <Button color="rose" onClick={() => getPosts('110990099')}>Agregar</Button>
             </form>
           </CardBody>
         </Card>
