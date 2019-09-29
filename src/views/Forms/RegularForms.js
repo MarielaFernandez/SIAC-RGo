@@ -36,7 +36,9 @@ const useStyles = makeStyles(styles);
 
 export default function RegularForms() {
   const [post, setPost] = React.useState([]);
-  const [cedula, setCedula] = React.useState([]);
+  const [cedula, setCedula] = React.useState("");
+  const [nombre, setNombre] = React.useState("");
+  const [apellido, setApellido] = React.useState("");
   const [checked, setChecked] = React.useState([24, 22]);
   const [selectedEnabled, setSelectedEnabled] = React.useState("b");
   const [selectedValue, setSelectedValue] = React.useState(null);  
@@ -53,12 +55,18 @@ export default function RegularForms() {
     );
   };    
 
+  const modificarCedula = event   => { 
+      console.log('Acá')   
+      setCedula(event.target.value);    
+  } 
 
   const getPosts= (cedula) => {
+    console.log(cedula);
     axios.get('https://apis.gometa.org/cedulas/' + cedula
     ).then(response=>{
-        console.log(response.data.results);
-        loadPost(response.data.results);
+        console.log(response.data.results[0]);        
+        setNombre(response.data.results[0].firstname);        
+        setApellido(response.data.results[0].lastname);                
         
       //this.setState({ posts: response.data.results});
   
@@ -97,45 +105,48 @@ export default function RegularForms() {
                 id="id_Employee"
                 formControlProps={{
                   fullWidth: true
-                }}
-                value = {cedula}
-                inputProps={{                  
-                  autoComplete: "off"
+                }}                
+                value={cedula}                
+                inputProps={{ 
+                  onChange: modificarCedula,
+                  name: "cedula",                 
+                  autoComplete: "off",
+                  value: cedula
+
                 }}
               />
                <CustomInput
                 labelText="e-mail"
-                id="mail_Employee"
-                
+                id="mail_Employee"                
                 formControlProps={{
                   fullWidth: true
                 }}
                 inputProps={{
-                 
+                  defaultValue: post.firstname,                 
                   autoComplete: "off"
                 }}
               />
               <CustomInput
-                labelText="Nombre"
-                id="name_Employee"
-                value = {post.firstname}
+                labelText="nombre"
+                id="name_Employee"                
                 formControlProps={{
                   fullWidth: true
                 }}
                 inputProps={{
-                  type: "email"
+                  type: "email",
+                  value: nombre
                 }}
               />
               <CustomInput
-                labelText="Apellido"
+                labelText={"apellido"}
                 id="lastName_Employee"
-                value = {post.lastname}
                 formControlProps={{
                   fullWidth: true
                 }}
                 inputProps={{
                 
-                  autoComplete: "off"
+                  autoComplete: "off",
+                  value: apellido                  
                 }}
               />
               
@@ -161,7 +172,7 @@ export default function RegularForms() {
                 />
               </div>
               
-              <Button color="rose" onClick={() => getPosts('110990099')}>Agregar</Button>
+              <Button color="rose" onClick={() => getPosts(cedula)}>Agregar</Button>
             </form>
           </CardBody>
         </Card>
