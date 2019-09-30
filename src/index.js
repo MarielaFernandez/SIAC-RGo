@@ -25,9 +25,17 @@ import AdminLayout from "layouts/Admin.js";
 
 import "assets/scss/material-dashboard-pro-react.scss?v=1.8.0";
 
+import { ApolloProvider} from "react-apollo";
+import ApolloClient, { gql } from "apollo-boost";
+
 const hist = createBrowserHistory();
 
+const client = new ApolloClient({
+  uri: "https://rickandmortyapi.com/graphql"
+});
+
 ReactDOM.render(
+  <ApolloProvider client = {client} >
   <Router history={hist}>
     <Switch>
       <Route path="/rtl" component={RtlLayout} />
@@ -35,6 +43,7 @@ ReactDOM.render(
       <Route path="/admin" component={AdminLayout} />
       <Redirect from="/" to="/admin/dashboard" />
     </Switch>
-  </Router>,
+  </Router>
+  </ApolloProvider>,
   document.getElementById("root")
 );

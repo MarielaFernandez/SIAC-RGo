@@ -8,6 +8,9 @@ import Person from "@material-ui/icons/Person";
 import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
+import { Query} from "react-apollo";
+import { gql } from "apollo-boost";
+
 
 
 
@@ -42,6 +45,33 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 
+
+const CharactersQuery = () => {
+  return (
+    <Query
+      query={gql`
+        {
+          characters {
+            results {
+              id
+              name
+            }
+          }
+        }
+      `}
+    >
+      {({ loading, error, data }) => {
+        if (loading) return <p>Loading...</p>;
+        if (error) return <p>Error!</p>;
+
+        return data.characters.results.map(character => {
+          return <p key={character.id}>{character.name}</p>;
+        });
+      }}
+    </Query>
+  );
+};
+
 export default function RegularTables() {
   const classes = useStyles();
   const buttons = [
@@ -56,6 +86,8 @@ export default function RegularTables() {
     );
   });
   return (
+    <div> 
+    <CharactersQuery />   
     <GridContainer>
       <GridItem xs={12}>
        
@@ -146,5 +178,6 @@ export default function RegularTables() {
        
       </GridItem>
     </GridContainer>
+    </div>
   );
 }
