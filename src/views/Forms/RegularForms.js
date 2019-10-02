@@ -56,7 +56,7 @@ export default function RegularForms() {
   };    
 
   const modificarCedula = event   => { 
-      console.log('Acá')   
+  
       setCedula(event.target.value);    
   } 
 
@@ -105,16 +105,26 @@ export default function RegularForms() {
                 id="id_Employee"
                 formControlProps={{
                   fullWidth: true
-                }}                
-                value={cedula}                
+                }}   
+                             
+                value={cedula}  
+
                 inputProps={{ 
+                  
                   onChange: modificarCedula,
                   name: "cedula",                 
                   autoComplete: "off",
                   value: cedula
-
-                }}
+                  
+                  }
+                }
+                
               />
+              
+              
+               <Button color="info" onClick={() => getPosts(cedula)}>Buscar</Button>
+              
+
                <CustomInput
                 labelText="e-mail"
                 id="mail_Employee"                
@@ -149,8 +159,61 @@ export default function RegularForms() {
                   value: apellido                  
                 }}
               />
-              
+              <div>
+              Selección de sexo
+               <div className={classes.checkboxAndRadio}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      tabIndex={-1}   
+                      onClick={() => handleChange()}
+                      checkedIcon={<Check className={classes.checkedIcon} />}
+                      icon={<Check className={classes.uncheckedIcon} />}
+                      classes={{
+                        checked: classes.checked,
+                        root: classes.checkRoot
+                      }}
+                    />
+                  }
+                  classes={{
+                    label: classes.label,
+                    root: classes.labelRoot
+                  }}
+                  label="Femenino"
+                />
+              </div>
+
+           
               <div className={classes.checkboxAndRadio}>
+               
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      tabIndex={-1}   
+                      onClick={() => handleChange()}
+                      checkedIcon={<Check className={classes.checkedIcon} />}
+                      icon={<Check className={classes.uncheckedIcon} />}
+                      classes={{
+                        checked: classes.checked,
+                        root: classes.checkRoot
+                      }}
+                    />
+                  }
+                  classes={{
+                    label: classes.label,
+                    root: classes.labelRoot
+                  }}
+                  label="Masculino"
+                />
+              </div>
+             </div> 
+              
+
+
+             Activación
+
+              <div className={classes.checkboxAndRadio}>
+               
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -172,7 +235,7 @@ export default function RegularForms() {
                 />
               </div>
               
-              <Button color="rose" onClick={() => getPosts(cedula)}>Agregar</Button>
+              <Button color="info" >Agregar</Button>
             </form>
           </CardBody>
         </Card>
