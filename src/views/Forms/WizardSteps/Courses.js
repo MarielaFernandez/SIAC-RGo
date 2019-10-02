@@ -64,8 +64,8 @@ export default function Courses() {
       <SweetAlert
         input
         showCancel
-        style={{ display: "block", marginTop: "-100px" }}
-        title="Input something"
+        style={{ display: "block", marginTop: "-280px" }}
+        title="Editar Funcionario"
         onConfirm={e => {
           inputConfirmAlertNext(e);
         }}
@@ -77,7 +77,7 @@ export default function Courses() {
 
 >
 <GridContainer>
-  <GridItem xs={12} sm={12} md={6}>
+  <GridItem xs={12} sm={12} md={12}>
 
         <form>
         <CustomInput
@@ -152,9 +152,9 @@ export default function Courses() {
             />
           </div>
 
-          <Button color="rose" onClick={() => getPosts(cedula)}>Agregar</Button>
+
         </form>
-  
+
   </GridItem>
   <GridItem xs={12} sm={12} md={6}>
 
