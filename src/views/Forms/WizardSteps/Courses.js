@@ -78,14 +78,7 @@ export default function Courses() {
 >
 <GridContainer>
   <GridItem xs={12} sm={12} md={6}>
-    <Card>
-      <CardHeader color="rose" icon>
-        <CardIcon color="rose">
-          <MailOutline />
-        </CardIcon>
-        <h4 className={classes.cardIconTitle}>Registro de Funcionarios</h4>
-      </CardHeader>
-      <CardBody>
+
         <form>
         <CustomInput
             labelText="Cédula"
@@ -161,8 +154,7 @@ export default function Courses() {
 
           <Button color="rose" onClick={() => getPosts(cedula)}>Agregar</Button>
         </form>
-      </CardBody>
-    </Card>
+  
   </GridItem>
   <GridItem xs={12} sm={12} md={6}>
 
