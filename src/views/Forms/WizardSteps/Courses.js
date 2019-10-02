@@ -13,6 +13,7 @@ import Close from "@material-ui/icons/Close";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
+import CustomInput from "components/CustomInput/CustomInput.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardIcon from "components/Card/CardIcon.js";
@@ -156,6 +157,13 @@ export default function Courses() {
     <Card>
 
       <CardBody>
+      <CustomInput
+        labelText="Buscar"
+        id="Buscar"
+        formControlProps={{
+          fullWidth: true
+        }}
+      />
             <ReactTable
               data={data}
               filterable

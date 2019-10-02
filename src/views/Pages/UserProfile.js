@@ -28,6 +28,43 @@ import Close from "@material-ui/icons/Close";
 
 import avatar from "assets/img/faces/marc.jpg";
 
+
+import ReactDOM from "react-dom";
+import ApolloClient, { gql } from "apollo-boost";
+import { ApolloProvider, Query } from "react-apollo";
+
+
+const client = new ApolloClient({
+  uri: "https://rickandmortyapi.com/graphql"
+});
+
+const CharactersQuery = () => {
+  return (
+    <Query
+      query={gql`
+        {
+          characters {
+            results {
+              id
+              name
+            }
+          }
+        }
+      `}
+    >
+      {({ loading, error, data }) => {
+        if (loading) return <p>Loading...</p>;
+        if (error) return <p>Error!</p>;
+
+        return data.characters.results.map(character => {
+          return <p key={character.id}>{character.name}</p>;
+        });
+      }}
+    </Query>
+  );
+};
+
+
 const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
@@ -74,7 +111,10 @@ export default function UserProfile() {
   return (
     <div>
 
+          <CharactersQuery />   
+
               <GridContainer>
+
 
               <GridItem xs={12} sm={12} md={8}>
                 <Card>
