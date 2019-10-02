@@ -38,36 +38,7 @@ const client = new ApolloClient({
   uri: "https://rickandmortyapi.com/graphql"
 });
 
-const CharactersQuery = () => {
-  return (
-    <Query
-      query={gql`
-        {
-          characters {
-            results {
-              id
-              name
-            }
-          }
-        }
-      `}
-    >
-      {({ loading, error, data }) => {
-        if (loading) return <p>Loading...</p>;
-        if (error) return <p>Error!</p>;
 
-        return data.characters.results.map(character => {
-          return <MenuItem
-
-            key={character.id}
-            
-            value="1"
-          > { character.name } </MenuItem>
-        });
-      }}
-    </Query>
-  );
-};
 
 const numbers = [1, 2, 3, 4, 5];
 const listItems = numbers.map((numbers) =>
@@ -78,7 +49,45 @@ const listItems = numbers.map((numbers) =>
 const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
+
+
   const classes = useStyles();
+
+
+  const CharactersQuery = () => {
+    return (
+      <Query
+        query={gql`
+          {
+            characters {
+              results {
+                id
+                name
+              }
+            }
+          }
+        `}
+      >
+        {({ loading, error, data }) => {
+          if (loading) return <p>Loading...</p>;
+          if (error) return <p>Error!</p>;
+
+          return data.characters.results.map(character => {
+            return <MenuItem
+
+              key={character.id}
+              classes={{
+                root: classes.selectMenuItem,
+                selected: classes.selectMenuItemSelected
+              }}
+              value="1"
+            > { character.name } </MenuItem>
+          });
+        }}
+      </Query>
+    );
+  };
+
   const [number, setnumber] = React.useState("");
   const [number1, setnumber1] = React.useState("");
   const [number2, setnumber2] = React.useState("");

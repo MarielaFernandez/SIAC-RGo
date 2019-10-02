@@ -14,7 +14,7 @@ import Grupos from "./WizardSteps/Groups.js";
 export default function WizardView() {
   return (
     <GridContainer justify="center">
-      <GridItem xs={12} sm={8}>
+      <GridItem xs={12} sm={12}>
         <Wizard
           validate
           steps={[
