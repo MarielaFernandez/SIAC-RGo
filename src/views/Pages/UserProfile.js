@@ -60,10 +60,7 @@ const CharactersQuery = () => {
           return <MenuItem
 
             key={character.id}
-            classes={{
-              root: classes.selectMenuItem,
-              selected: classes.selectMenuItemSelected
-            }}
+            
             value="1"
           > { character.name } </MenuItem>
         });

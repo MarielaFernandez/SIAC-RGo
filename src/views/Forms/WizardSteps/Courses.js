@@ -73,106 +73,108 @@ export default function Courses() {
         confirmBtnCssClass={classes.button + " " + classes.info}
         cancelBtnCssClass={classes.button + " " + classes.danger}
 
-          // <GridContainer>
-          //   <GridItem xs={12} sm={12} md={6}>
-          //     <Card>
-          //       <CardHeader color="rose" icon>
-          //         <CardIcon color="rose">
-          //           <MailOutline />
-          //         </CardIcon>
-          //         <h4 className={classes.cardIconTitle}>Registro de Funcionarios</h4>
-          //       </CardHeader>
-          //       <CardBody>
-          //         <form>
-          //         <CustomInput
-          //             labelText="Cédula"
-          //             id="id_Employee"
-          //             formControlProps={{
-          //               fullWidth: true
-          //             }}
-          //             value={cedula}
-          //             inputProps={{
-          //               onChange: modificarCedula,
-          //               name: "cedula",
-          //               autoComplete: "off",
-          //               value: cedula
-          //
-          //             }}
-          //           />
-          //            <CustomInput
-          //             labelText="e-mail"
-          //             id="mail_Employee"
-          //             formControlProps={{
-          //               fullWidth: true
-          //             }}
-          //             inputProps={{
-          //               defaultValue: post.firstname,
-          //               autoComplete: "off"
-          //             }}
-          //           />
-          //           <CustomInput
-          //             labelText="nombre"
-          //             id="name_Employee"
-          //             formControlProps={{
-          //               fullWidth: true
-          //             }}
-          //             inputProps={{
-          //               type: "email",
-          //               value: nombre
-          //             }}
-          //           />
-          //           <CustomInput
-          //             labelText={"apellido"}
-          //             id="lastName_Employee"
-          //             formControlProps={{
-          //               fullWidth: true
-          //             }}
-          //             inputProps={{
-          //
-          //               autoComplete: "off",
-          //               value: apellido
-          //             }}
-          //           />
-          //
-          //           <div className={classes.checkboxAndRadio}>
-          //             <FormControlLabel
-          //               control={
-          //                 <Checkbox
-          //                   tabIndex={-1}
-          //                   onClick={() => handleChange()}
-          //                   checkedIcon={<Check className={classes.checkedIcon} />}
-          //                   icon={<Check className={classes.uncheckedIcon} />}
-          //                   classes={{
-          //                     checked: classes.checked,
-          //                     root: classes.checkRoot
-          //                   }}
-          //                 />
-          //               }
-          //               classes={{
-          //                 label: classes.label,
-          //                 root: classes.labelRoot
-          //               }}
-          //               label="Activar Funcionario"
-          //             />
-          //           </div>
-          //
-          //           <Button color="rose" onClick={() => getPosts(cedula)}>Agregar</Button>
-          //         </form>
-          //       </CardBody>
-          //     </Card>
-          //   </GridItem>
-          //   <GridItem xs={12} sm={12} md={6}>
-          //
-          //   </GridItem>
-          //   <GridItem xs={12} sm={12} md={12}>
-          //
-          //   </GridItem>
-          //   <GridItem xs={12} sm={12} md={12}>
-          //
-          //   </GridItem>
-          // </GridContainer>
 
-/>
+
+>
+<GridContainer>
+  <GridItem xs={12} sm={12} md={6}>
+    <Card>
+      <CardHeader color="rose" icon>
+        <CardIcon color="rose">
+          <MailOutline />
+        </CardIcon>
+        <h4 className={classes.cardIconTitle}>Registro de Funcionarios</h4>
+      </CardHeader>
+      <CardBody>
+        <form>
+        <CustomInput
+            labelText="Cédula"
+            id="id_Employee"
+            formControlProps={{
+              fullWidth: true
+            }}
+            value={cedula}
+            inputProps={{
+              onChange: modificarCedula,
+              name: "cedula",
+              autoComplete: "off",
+              value: cedula
+
+            }}
+          />
+           <CustomInput
+            labelText="e-mail"
+            id="mail_Employee"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              defaultValue: post.firstname,
+              autoComplete: "off"
+            }}
+          />
+          <CustomInput
+            labelText="nombre"
+            id="name_Employee"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              type: "email",
+              value: nombre
+            }}
+          />
+          <CustomInput
+            labelText={"apellido"}
+            id="lastName_Employee"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+
+              autoComplete: "off",
+              value: apellido
+            }}
+          />
+
+          <div className={classes.checkboxAndRadio}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  tabIndex={-1}
+                  onClick={() => handleChange()}
+                  checkedIcon={<Check className={classes.checkedIcon} />}
+                  icon={<Check className={classes.uncheckedIcon} />}
+                  classes={{
+                    checked: classes.checked,
+                    root: classes.checkRoot
+                  }}
+                />
+              }
+              classes={{
+                label: classes.label,
+                root: classes.labelRoot
+              }}
+              label="Activar Funcionario"
+            />
+          </div>
+
+          <Button color="rose" onClick={() => getPosts(cedula)}>Agregar</Button>
+        </form>
+      </CardBody>
+    </Card>
+  </GridItem>
+  <GridItem xs={12} sm={12} md={6}>
+
+  </GridItem>
+  <GridItem xs={12} sm={12} md={12}>
+
+  </GridItem>
+  <GridItem xs={12} sm={12} md={12}>
+
+  </GridItem>
+</GridContainer>
+</SweetAlert>
     );
   };
   const modificarCedula = event   => {
