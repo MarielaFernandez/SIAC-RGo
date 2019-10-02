@@ -57,12 +57,25 @@ const CharactersQuery = () => {
         if (error) return <p>Error!</p>;
 
         return data.characters.results.map(character => {
-          return <p key={character.id}>{character.name}</p>;
+          return <MenuItem
+
+            key={character.id}
+            classes={{
+              root: classes.selectMenuItem,
+              selected: classes.selectMenuItemSelected
+            }}
+            value="1"
+          > { character.name } </MenuItem>
         });
       }}
     </Query>
   );
 };
+
+const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map((numbers) =>
+  <li>{numbers}</li>
+);
 
 
 const useStyles = makeStyles(styles);
@@ -110,8 +123,9 @@ export default function UserProfile() {
   };
   return (
     <div>
+     <ul>{listItems}</ul>
 
-          <CharactersQuery />   
+
 
               <GridContainer>
 
@@ -182,14 +196,7 @@ export default function UserProfile() {
                     id: "simple-select"
                   }}
                 >
-                  <MenuItem
-                    disabled
-                    classes={{
-                      root: classes.selectMenuItem
-                    }}
-                  >
-                    Elija la provincia
-                  </MenuItem>
+                  <CharactersQuery />
                   <MenuItem
                     classes={{
                       root: classes.selectMenuItem,
