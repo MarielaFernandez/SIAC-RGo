@@ -64,8 +64,8 @@ export default function Courses() {
       <SweetAlert
         input
         showCancel
-        style={{ display: "block", marginTop: "-100px" }}
-        title="Input something"
+        style={{ display: "block", marginTop: "-280px" }}
+        title="Editar Funcionario"
         onConfirm={e => {
           inputConfirmAlertNext(e);
         }}
