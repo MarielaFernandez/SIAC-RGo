@@ -4,29 +4,15 @@ import ReactTable from "react-table";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-
-import axios from 'axios';
-
 // @material-ui/icons
 import Assignment from "@material-ui/icons/Assignment";
 import Dvr from "@material-ui/icons/Dvr";
 import Favorite from "@material-ui/icons/Favorite";
 import Close from "@material-ui/icons/Close";
-
-import MailOutline from "@material-ui/icons/MailOutline";
-import Check from "@material-ui/icons/Check";
-import Clear from "@material-ui/icons/Clear";
-import Contacts from "@material-ui/icons/Contacts";
-import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
-
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardIcon from "components/Card/CardIcon.js";
@@ -50,15 +36,6 @@ export default function Courses() {
 
   const [alert, setAlert] = React.useState(null);
   const [inputValue, setInputValue] = React.useState(null);
-
-  const [post, setPost] = React.useState([]);
-  const [cedula, setCedula] = React.useState("");
-  const [nombre, setNombre] = React.useState("");
-  const [apellido, setApellido] = React.useState("");
-  const [checked, setChecked] = React.useState([24, 22]);
-  const [selectedEnabled, setSelectedEnabled] = React.useState("b");
-  const [selectedValue, setSelectedValue] = React.useState(null);
-
   const inputAlert = () => {
     setAlert(
       <SweetAlert
@@ -185,20 +162,6 @@ export default function Courses() {
     setPost( post
     );
   };
-  const getPosts= (cedula) => {
-    console.log(cedula);
-    axios.get('https://apis.gometa.org/cedulas/' + cedula
-    ).then(response=>{
-        console.log(response.data.results[0]);
-        setNombre(response.data.results[0].firstname);
-        setApellido(response.data.results[0].lastname);
-
-      //this.setState({ posts: response.data.results});
-
-
-  });
-  }
-
   const inputConfirmAlertNext = e => {
     setAlert(e);
     setTimeout(() => {
@@ -303,13 +266,6 @@ export default function Courses() {
     <Card>
 
       <CardBody>
-      <CustomInput
-        labelText="Buscar"
-        id="Buscar"
-        formControlProps={{
-          fullWidth: true
-        }}
-      />
             <ReactTable
               data={data}
               filterable
