@@ -41,7 +41,7 @@ export default function RegularForms() {
   const [apellido, setApellido] = React.useState("");
   const [checked, setChecked] = React.useState([24, 22]);
   const [selectedEnabled, setSelectedEnabled] = React.useState("b");
-  const [selectedValue, setSelectedValue] = React.useState(null);  
+  const [selectedValue, setSelectedValue] = React.useState(null);
   const handleChange = event => {
     setSelectedValue(event.target.value);
   };
@@ -51,9 +51,9 @@ export default function RegularForms() {
 
 
   const loadPost = (post) => {
-    setPost( post     
+    setPost( post
     );
-  };    
+  };
 
   const modificarCedula = event   => { 
   
@@ -64,13 +64,13 @@ export default function RegularForms() {
     console.log(cedula);
     axios.get('https://apis.gometa.org/cedulas/' + cedula
     ).then(response=>{
-        console.log(response.data.results[0]);        
-        setNombre(response.data.results[0].firstname);        
-        setApellido(response.data.results[0].lastname);                
-        
+        console.log(response.data.results[0]);
+        setNombre(response.data.results[0].firstname);
+        setApellido(response.data.results[0].lastname);
+
       //this.setState({ posts: response.data.results});
-  
-      
+
+
   });
   }
 
@@ -86,9 +86,10 @@ export default function RegularForms() {
     setChecked(newChecked);
   };
 
-  
+
   const classes = useStyles();
   return (
+    
     <GridContainer>
       <GridItem xs={12} sm={12} md={6}>
         <Card>
@@ -112,7 +113,7 @@ export default function RegularForms() {
                 inputProps={{ 
                   
                   onChange: modificarCedula,
-                  name: "cedula",                 
+                  name: "cedula",
                   autoComplete: "off",
                   value: cedula
                   
@@ -127,18 +128,18 @@ export default function RegularForms() {
 
                <CustomInput
                 labelText="e-mail"
-                id="mail_Employee"                
+                id="mail_Employee"
                 formControlProps={{
                   fullWidth: true
                 }}
                 inputProps={{
-                  defaultValue: post.firstname,                 
+                  defaultValue: post.firstname,
                   autoComplete: "off"
                 }}
               />
               <CustomInput
                 labelText="nombre"
-                id="name_Employee"                
+                id="name_Employee"
                 formControlProps={{
                   fullWidth: true
                 }}
@@ -154,9 +155,9 @@ export default function RegularForms() {
                   fullWidth: true
                 }}
                 inputProps={{
-                
+
                   autoComplete: "off",
-                  value: apellido                  
+                  value: apellido
                 }}
               />
               <div>
@@ -217,7 +218,7 @@ export default function RegularForms() {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      tabIndex={-1}   
+                      tabIndex={-1}
                       onClick={() => handleChange()}
                       checkedIcon={<Check className={classes.checkedIcon} />}
                       icon={<Check className={classes.uncheckedIcon} />}
@@ -241,13 +242,13 @@ export default function RegularForms() {
         </Card>
       </GridItem>
       <GridItem xs={12} sm={12} md={6}>
-        
+
       </GridItem>
       <GridItem xs={12} sm={12} md={12}>
-        
+
       </GridItem>
       <GridItem xs={12} sm={12} md={12}>
-        
+
       </GridItem>
     </GridContainer>
   );
