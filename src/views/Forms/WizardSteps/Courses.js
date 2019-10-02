@@ -4,11 +4,24 @@ import ReactTable from "react-table";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+
+import axios from 'axios';
+
 // @material-ui/icons
 import Assignment from "@material-ui/icons/Assignment";
 import Dvr from "@material-ui/icons/Dvr";
 import Favorite from "@material-ui/icons/Favorite";
 import Close from "@material-ui/icons/Close";
+
+import MailOutline from "@material-ui/icons/MailOutline";
+import Check from "@material-ui/icons/Check";
+import Clear from "@material-ui/icons/Clear";
+import Contacts from "@material-ui/icons/Contacts";
+import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
+
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -37,6 +50,15 @@ export default function Courses() {
 
   const [alert, setAlert] = React.useState(null);
   const [inputValue, setInputValue] = React.useState(null);
+
+  const [post, setPost] = React.useState([]);
+  const [cedula, setCedula] = React.useState("");
+  const [nombre, setNombre] = React.useState("");
+  const [apellido, setApellido] = React.useState("");
+  const [checked, setChecked] = React.useState([24, 22]);
+  const [selectedEnabled, setSelectedEnabled] = React.useState("b");
+  const [selectedValue, setSelectedValue] = React.useState(null);
+
   const inputAlert = () => {
     setAlert(
       <SweetAlert
@@ -50,9 +72,139 @@ export default function Courses() {
         onCancel={() => hideAlert()}
         confirmBtnCssClass={classes.button + " " + classes.info}
         cancelBtnCssClass={classes.button + " " + classes.danger}
-      />
+
+          // <GridContainer>
+          //   <GridItem xs={12} sm={12} md={6}>
+          //     <Card>
+          //       <CardHeader color="rose" icon>
+          //         <CardIcon color="rose">
+          //           <MailOutline />
+          //         </CardIcon>
+          //         <h4 className={classes.cardIconTitle}>Registro de Funcionarios</h4>
+          //       </CardHeader>
+          //       <CardBody>
+          //         <form>
+          //         <CustomInput
+          //             labelText="Cédula"
+          //             id="id_Employee"
+          //             formControlProps={{
+          //               fullWidth: true
+          //             }}
+          //             value={cedula}
+          //             inputProps={{
+          //               onChange: modificarCedula,
+          //               name: "cedula",
+          //               autoComplete: "off",
+          //               value: cedula
+          //
+          //             }}
+          //           />
+          //            <CustomInput
+          //             labelText="e-mail"
+          //             id="mail_Employee"
+          //             formControlProps={{
+          //               fullWidth: true
+          //             }}
+          //             inputProps={{
+          //               defaultValue: post.firstname,
+          //               autoComplete: "off"
+          //             }}
+          //           />
+          //           <CustomInput
+          //             labelText="nombre"
+          //             id="name_Employee"
+          //             formControlProps={{
+          //               fullWidth: true
+          //             }}
+          //             inputProps={{
+          //               type: "email",
+          //               value: nombre
+          //             }}
+          //           />
+          //           <CustomInput
+          //             labelText={"apellido"}
+          //             id="lastName_Employee"
+          //             formControlProps={{
+          //               fullWidth: true
+          //             }}
+          //             inputProps={{
+          //
+          //               autoComplete: "off",
+          //               value: apellido
+          //             }}
+          //           />
+          //
+          //           <div className={classes.checkboxAndRadio}>
+          //             <FormControlLabel
+          //               control={
+          //                 <Checkbox
+          //                   tabIndex={-1}
+          //                   onClick={() => handleChange()}
+          //                   checkedIcon={<Check className={classes.checkedIcon} />}
+          //                   icon={<Check className={classes.uncheckedIcon} />}
+          //                   classes={{
+          //                     checked: classes.checked,
+          //                     root: classes.checkRoot
+          //                   }}
+          //                 />
+          //               }
+          //               classes={{
+          //                 label: classes.label,
+          //                 root: classes.labelRoot
+          //               }}
+          //               label="Activar Funcionario"
+          //             />
+          //           </div>
+          //
+          //           <Button color="rose" onClick={() => getPosts(cedula)}>Agregar</Button>
+          //         </form>
+          //       </CardBody>
+          //     </Card>
+          //   </GridItem>
+          //   <GridItem xs={12} sm={12} md={6}>
+          //
+          //   </GridItem>
+          //   <GridItem xs={12} sm={12} md={12}>
+          //
+          //   </GridItem>
+          //   <GridItem xs={12} sm={12} md={12}>
+          //
+          //   </GridItem>
+          // </GridContainer>
+
+/>
     );
   };
+  const modificarCedula = event   => {
+      console.log('Acá')
+      setCedula(event.target.value);
+  }
+  const handleChange = event => {
+    setSelectedValue(event.target.value);
+  };
+  const handleChangeEnabled = event => {
+    setSelectedEnabled(event.target.value);
+  };
+
+
+  const loadPost = (post) => {
+    setPost( post
+    );
+  };
+  const getPosts= (cedula) => {
+    console.log(cedula);
+    axios.get('https://apis.gometa.org/cedulas/' + cedula
+    ).then(response=>{
+        console.log(response.data.results[0]);
+        setNombre(response.data.results[0].firstname);
+        setApellido(response.data.results[0].lastname);
+
+      //this.setState({ posts: response.data.results});
+
+
+  });
+  }
+
   const inputConfirmAlertNext = e => {
     setAlert(e);
     setTimeout(() => {
