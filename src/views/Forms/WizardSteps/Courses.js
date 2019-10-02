@@ -58,11 +58,11 @@ export default function Courses() {
   const [checked, setChecked] = React.useState([24, 22]);
   const [selectedEnabled, setSelectedEnabled] = React.useState("b");
   const [selectedValue, setSelectedValue] = React.useState(null);
-    
+
   const inputAlert = () => {
     setAlert(
       <SweetAlert
-        input
+  
         showCancel
         style={{ display: "block", marginTop: "-280px" }}
         title="Editar Funcionario"
