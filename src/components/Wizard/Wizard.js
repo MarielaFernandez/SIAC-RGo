@@ -97,7 +97,30 @@ class Wizard extends React.Component {
     }
   }
   nextButtonClick() {
-    //hacer validaciones con if de los nexts y previos en el siguiente
+    if (
+      (this.props.validate &&
+        ((this[this.props.steps[this.state.currentStep].stepId].isValidated !==
+          undefined &&
+          this[
+            this.props.steps[this.state.currentStep].stepId
+          ].isValidated()) ||
+          this[this.props.steps[this.state.currentStep].stepId].isValidated ===
+            undefined)) ||
+      this.props.validate === undefined
+    ) {
+      if (
+        this[this.props.steps[this.state.currentStep].stepId].sendState !==
+        undefined
+      ) {
+        this.setState({
+          allStates: {
+            ...this.state.allStates,
+            [this.props.steps[this.state.currentStep].stepId]: this[
+              this.props.steps[this.state.currentStep].stepId
+            ].sendState()
+          }
+        });
+      }
       var key = this.state.currentStep + 1;
       this.setState({
         currentStep: key,
@@ -106,9 +129,22 @@ class Wizard extends React.Component {
         finishButton: this.props.steps.length === key + 1 ? true : false
       });
       this.refreshAnimation(key);
-
+    }
   }
   previousButtonClick() {
+    if (
+      this[this.props.steps[this.state.currentStep].stepId].sendState !==
+      undefined
+    ) {
+      this.setState({
+        allStates: {
+          ...this.state.allStates,
+          [this.props.steps[this.state.currentStep].stepId]: this[
+            this.props.steps[this.state.currentStep].stepId
+          ].sendState()
+        }
+      });
+    }
     var key = this.state.currentStep - 1;
     if (key >= 0) {
       this.setState({
