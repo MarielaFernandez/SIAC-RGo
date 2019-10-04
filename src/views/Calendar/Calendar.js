@@ -1,7 +1,8 @@
 /*eslint-disable*/
+
 import React from "react";
 // react components used to create a calendar with events on it
-import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
+import { Calendar as BigCalendar, momentLocalizer  } from "react-big-calendar";
 // dependency plugin for react-big-calendar
 import moment from "moment";
 import * as dates from 'date-arithmetic'
@@ -18,8 +19,11 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
 import Switch from '@material-ui/core/Switch';
 import Button from "components/CustomButtons/Button.js";
-
 import Slide from "@material-ui/core/Slide";
+import InputLabel from "@material-ui/core/InputLabel";
+import { KeyboardDatePicker } from "@material-ui/pickers";
+
+
 
 // @material-ui/icons
 import Close from "@material-ui/icons/Close";
@@ -44,8 +48,8 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
+import Grid from '@material-ui/core/Grid';
 
-import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
@@ -62,7 +66,6 @@ const useStyles = makeStyles(styles);
 
 
 
-
 export default function Calendar() {
   const [selectedEnabled, setSelectedEnabled] = React.useState("a");
   const classes = useStyles();
@@ -71,10 +74,28 @@ export default function Calendar() {
     opcion : "red"
   });
 
+  
+
   const [events, setEvents] = React.useState(calendarEvents);
   const [alert, setAlert] = React.useState(null);
   const [modal, setModal] = React.useState(false);
   const [simpleSelect, setSimpleSelect] = React.useState("");
+  const [selectedDate, handleDateChange] = useState(new Date());
+  const style = {
+    label: {
+      color: "rgba(0, 0, 0, 0.26)",
+      cursor: "pointer",
+      display: "inline-flex",
+      fontSize: "14px",
+      transition: "0.3s ease all",
+      lineHeight: "1.428571429",
+      fontWeight: "100",
+      paddingLeft: "0"
+    }
+  };
+
+  //const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+
   const selectedEvent = event => {
     window.alert(event.title);
   };  
@@ -212,6 +233,8 @@ export default function Calendar() {
     };
   };
   
+  
+
   return (   
       <div>
        {alert}
@@ -221,10 +244,10 @@ export default function Calendar() {
               <FormControl component="fieldset">
                 <FormLabel component="legend">Seleccione una Actividad</FormLabel>
                 
-                <Button color="rose" round onClick={() => setModal(true)}>
-      Modal
+      <Button color="rose" round onClick={() => setModal(true)}>
+      Fecha Contrato
     </Button>
-    <Dialog
+      <Dialog
       classes={{
         root: classes.center,
         paper: classes.modal
@@ -251,20 +274,34 @@ export default function Calendar() {
         >
           <Close className={classes.modalClose} />
         </Button>
-        <h4 className={classes.modalTitle}>Modal title</h4>
+        <h4 className={classes.modalTitle}>Seleccione la fecha de inicio y fecha final de su contrato</h4>
       </DialogTitle>
       <DialogContent
         id="modal-slide-description"
         className={classes.modalBody}
       >
-        <h5>Are you sure you want to do this?</h5>
+        <InputLabel className={classes.label}></InputLabel>
+     
+        <KeyboardDatePicker
+        clearable
+        value={selectedDate}
+        placeholder="10/10/2018"
+        onChange={date => handleDateChange(date)}
+        minDate={new Date()}
+        format="MM/dd/yyyy"
+        />
+      
+     
+  
+        <h5>¿aquí va el PickerTime?</h5>
       </DialogContent>
+
       <DialogActions
         className={classes.modalFooter + " " + classes.modalFooterCenter}
       >
-        <Button onClick={() => setModal(false)}>Never Mind</Button>
+        <Button onClick={() => setModal(false)}>Cancelar</Button>
         <Button onClick={() => setModal(false)} color="success">
-          Yes
+         Aceptar
         </Button>
       </DialogActions>
     </Dialog>
