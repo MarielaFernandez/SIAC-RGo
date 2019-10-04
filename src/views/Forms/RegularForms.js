@@ -55,36 +55,30 @@ export default function RegularForms() {
     setSelectedEnabled(event.target.value);
   };
    const hideAlert = () => {
+     console.log("Acá");
     setAlert(null);
   }
 
   
-
+  const autoCloseAlert = () => {
+    setAlert(
+      <SweetAlert
+        style={{ display: "block", marginTop: "-100px" }}
+        title="Auto close alert!"
+        onConfirm={() => hideAlert()}
+        showConfirm={false}
+      >
+        I will close in 2 seconds.
+      </SweetAlert>
+    );
+    setTimeout(hideAlert, 2000);
+  };
 
   const loadPost = (post) => {
     setPost( post
     );
   };
-
-
-
-
-  const successAlert = () => {
-    setAlert(
-      <SweetAlert
-        success
-        style={{ display: "block", marginTop: "-100px" }}
-        title="Good job!"
-        onConfirm={() => this.hideAlert()}
-        onCancel={() => this.hideAlert()}
-        confirmBtnCssClass={
-          classes.button + " " + classes.success
-        }
-      >
-        You clicked the button!
-      </SweetAlert>
-    );
-  }
+  
 
   const modificarCedula = event   => { 
   
@@ -99,9 +93,8 @@ export default function RegularForms() {
   if(cedula.length===9){
               axios.get('https://apis.gometa.org/cedulas/' + cedula
               ).then(response=>{
-                if(response.data.resultcount===0){
-                  this.successAlert();
-                   console.log("Mal el numero");
+                if(response.data.resultcount===0){                  
+                   console.log("Mal sel numero");
 
 
 
@@ -118,7 +111,7 @@ export default function RegularForms() {
             );
         }else{
                   
-
+          autoCloseAlert();
           console.log("Mal el numero");
          
       
