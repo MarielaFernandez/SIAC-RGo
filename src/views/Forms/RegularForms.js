@@ -26,6 +26,8 @@ import CardText from "components/Card/CardText.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
 import axios from 'axios';
+import SweetAlert from "react-bootstrap-sweetalert"
+//import SweetAlert from 'sweetalert-react';
 
 //import Posts from 'components/containers/Posts.js';
 
@@ -44,12 +46,17 @@ export default function RegularForms() {
   const [checked, setChecked] = React.useState([24, 22]);
   const [selectedEnabled, setSelectedEnabled] = React.useState("b");
   const [selectedValue, setSelectedValue] = React.useState(null);
+  const [alert,setAlert] = React.useState(null);
   const handleChange = event => {
     setSelectedValue(event.target.value);
+     
   };
   const handleChangeEnabled = event => {
     setSelectedEnabled(event.target.value);
   };
+   const hideAlert = () => {
+    setAlert(null);
+  }
 
   
 
@@ -58,6 +65,26 @@ export default function RegularForms() {
     setPost( post
     );
   };
+
+
+
+
+  const successAlert = () => {
+    setAlert(
+      <SweetAlert
+        success
+        style={{ display: "block", marginTop: "-100px" }}
+        title="Good job!"
+        onConfirm={() => this.hideAlert()}
+        onCancel={() => this.hideAlert()}
+        confirmBtnCssClass={
+          classes.button + " " + classes.success
+        }
+      >
+        You clicked the button!
+      </SweetAlert>
+    );
+  }
 
   const modificarCedula = event   => { 
   
@@ -72,6 +99,13 @@ export default function RegularForms() {
   if(cedula.length===9){
               axios.get('https://apis.gometa.org/cedulas/' + cedula
               ).then(response=>{
+                if(response.data.resultcount===0){
+                  this.successAlert();
+                   console.log("Mal el numero");
+
+
+
+                }else{
                 
                   console.log(response.data.results[0]);
                   setNombre(response.data.results[0].firstname);
@@ -79,9 +113,12 @@ export default function RegularForms() {
 
                 //this.setState({ posts: response.data.results});
                 }
+                }
 
             );
         }else{
+                  
+
           console.log("Mal el numero");
          
       
@@ -104,7 +141,8 @@ export default function RegularForms() {
 
   const classes = useStyles();
   return (
-    
+    <div>
+    {alert}
     <GridContainer>
       <GridItem xs={12} sm={12} md={6}>
         <Card>
@@ -267,5 +305,6 @@ export default function RegularForms() {
 
       </GridItem>
     </GridContainer>
+    </div>
   );
 }
