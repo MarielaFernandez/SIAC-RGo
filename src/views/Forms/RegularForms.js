@@ -41,6 +41,7 @@ export default function RegularForms() {
   
   const [post, setPost] = React.useState([]);
   const [cedula, setCedula] = React.useState("");
+  const [mails, setMails] = React.useState("");
   const [nombre, setNombre] = React.useState("");
   const [apellido, setApellido] = React.useState("");
   const [checked, setChecked] = React.useState([24, 22]);
@@ -64,11 +65,11 @@ export default function RegularForms() {
     setAlert(
       <SweetAlert
         style={{ display: "block", marginTop: "-100px" }}
-        title="Auto close alert!"
+        title="¡Número de cédula incorrecto!"
         onConfirm={() => hideAlert()}
         showConfirm={false}
       >
-        I will close in 2 seconds.
+        Verifique el formato del número ingresado.
       </SweetAlert>
     );
     setTimeout(hideAlert, 2000);
@@ -78,7 +79,24 @@ export default function RegularForms() {
     setPost( post
     );
   };
-  
+
+  const validMail = event => {
+    console.log(event.target.value);
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+
+      if(reg.test(event.target.value) === false)
+      {
+        console.log("Email is Not Correct");
+        setMails(event.target.value)
+        return false;
+      }
+      else {
+        setMails(event.target.value)
+        console.log("Email is Correct");
+      }
+
+  }
+
 
   const modificarCedula = event   => { 
   
@@ -93,7 +111,8 @@ export default function RegularForms() {
   if(cedula.length===9){
               axios.get('https://apis.gometa.org/cedulas/' + cedula
               ).then(response=>{
-                if(response.data.resultcount===0){                  
+                if(response.data.resultcount===0){  
+                  autoCloseAlert();                
                    console.log("Mal sel numero");
 
 
@@ -179,9 +198,14 @@ export default function RegularForms() {
                 formControlProps={{
                   fullWidth: true
                 }}
+
+                
                 inputProps={{
-                  defaultValue: post.firstname,
-                  autoComplete: "off"
+                  onChange: validMail,
+                  name: "mails",
+                  autoComplete: "off",
+                  value: mails 
+                 
                 }}
               />
               <CustomInput
@@ -202,6 +226,7 @@ export default function RegularForms() {
                   fullWidth: true
                 }}
                 inputProps={{
+                  
 
                   autoComplete: "off",
                   value: apellido
