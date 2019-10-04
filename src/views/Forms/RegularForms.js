@@ -26,6 +26,7 @@ import CardText from "components/Card/CardText.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
 import axios from 'axios';
+
 //import Posts from 'components/containers/Posts.js';
 
 import styles from "assets/jss/material-dashboard-pro-react/views/regularFormsStyle";
@@ -35,6 +36,7 @@ const useStyles = makeStyles(styles);
 
 
 export default function RegularForms() {
+  
   const [post, setPost] = React.useState([]);
   const [cedula, setCedula] = React.useState("");
   const [nombre, setNombre] = React.useState("");
@@ -49,6 +51,8 @@ export default function RegularForms() {
     setSelectedEnabled(event.target.value);
   };
 
+  
+
 
   const loadPost = (post) => {
     setPost( post
@@ -62,16 +66,27 @@ export default function RegularForms() {
 
   const getPosts= (cedula) => {
     console.log(cedula);
-    axios.get('https://apis.gometa.org/cedulas/' + cedula
-    ).then(response=>{
-        console.log(response.data.results[0]);
-        setNombre(response.data.results[0].firstname);
-        setApellido(response.data.results[0].lastname);
+    
+   
+    
+  if(cedula.length===9){
+              axios.get('https://apis.gometa.org/cedulas/' + cedula
+              ).then(response=>{
+                
+                  console.log(response.data.results[0]);
+                  setNombre(response.data.results[0].firstname);
+                  setApellido(response.data.results[0].lastname);
 
-      //this.setState({ posts: response.data.results});
+                //this.setState({ posts: response.data.results});
+                }
 
-
-  });
+            );
+        }else{
+          console.log("Mal el numero");
+         
+      
+        }
+    
   }
 
   const handleToggle = value => {
@@ -107,11 +122,12 @@ export default function RegularForms() {
                 formControlProps={{
                   fullWidth: true
                 }}   
-                             
-                value={cedula}  
+                            
+                value={cedula} 
+               
 
                 inputProps={{ 
-                  
+                
                   onChange: modificarCedula,
                   name: "cedula",
                   autoComplete: "off",
