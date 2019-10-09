@@ -4,6 +4,15 @@ import { makeStyles } from "@material-ui/core/styles";
 
 // material-ui icons
 import Assignment from "@material-ui/icons/Assignment";
+import Person from "@material-ui/icons/Person";
+import Edit from "@material-ui/icons/Edit";
+import Close from "@material-ui/icons/Close";
+import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
+import { Query} from "react-apollo";
+import { gql } from "apollo-boost";
+
+
+
 
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
@@ -18,6 +27,8 @@ import Button from "components/CustomButtons/Button.js";
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 
+
+
 const styles = {
   customCardContentClass: {
     paddingLeft: "0",
@@ -28,13 +39,55 @@ const styles = {
     marginTop: "15px",
     marginBottom: "0px"
   }
+  
 };
 
 const useStyles = makeStyles(styles);
 
+
+
+const CharactersQuery = () => {
+  return (
+    <Query
+      query={gql`
+        {
+          characters {
+            results {
+              id
+              name
+            }
+          }
+        }
+      `}
+    >
+      {({ loading, error, data }) => {
+        if (loading) return <p>Loading...</p>;
+        if (error) return <p>Error!</p>;
+
+        return data.characters.results.map(character => {
+          return <p key={character.id}>{character.name}</p>;
+        });
+      }}
+    </Query>
+  );
+};
+
 export default function RegularTables() {
   const classes = useStyles();
+  const buttons = [
+    { color: "info", icon: Person },
+    { color: "success", icon: Edit },
+    { color: "danger", icon: Close }
+  ].map((prop, key) => {
+    return (
+      <Button color={prop.color} className={classes.actionButton} key={key}>
+        <prop.icon className={classes.icon} />
+      </Button>
+    );
+  });
   return (
+    <div> 
+    <CharactersQuery />   
     <GridContainer>
       <GridItem xs={12}>
        
@@ -54,7 +107,7 @@ export default function RegularTables() {
           
             <Table
               hover
-              tableHead={[" Cédula", "Nombre", "Apellido", "E-mail", "Estado"]}
+              tableHead={[" Cédula", "Nombre", "Apellido", "E-mail", "Estado", "Acciones"]}
   
             
               tableData={[
@@ -65,7 +118,7 @@ export default function RegularTables() {
                     "Nury",
                     "Leitón",
                     "lajefa@ucr.ac.cr",
-                    "Activo"
+                    "Activo",buttons
                    
                     
                   ]
@@ -73,7 +126,8 @@ export default function RegularTables() {
                 
                   
                 } ,
-                ["2", "Juan", "Gamboa", "juan.gamboa@ucr.ac.cr", "Activo"],
+               
+                ["2", "Juan", "Gamboa", "juan.gamboa@ucr.ac.cr", "Activo",buttons],
                 {
                   color: "info",
                   data: [
@@ -81,7 +135,7 @@ export default function RegularTables() {
                     "Yendry",
                     "Lezcano",
                     "yen.dry@ucr.ac.cr",
-                    "Activo"
+                    "Activo",buttons
                   ]
                 },
                 [
@@ -89,7 +143,7 @@ export default function RegularTables() {
                   "Rolando",
                   "Vargas",
                   "rolo.varg@ucr.ac.cr",
-                  "Activo"
+                  "Activo",buttons
                 ],
                 {
                   color: "danger",
@@ -98,10 +152,10 @@ export default function RegularTables() {
                     "Gabriela",
                     "Loaiza",
                     "gaby.loai@ucr.ac.cr",
-                    "Activo"
+                    "Activo",buttons
                   ]
                 },
-                ["6", "Jorge", "Segura", "george@ucr.ac.cr", "Activo"],
+                ["6", "Jorge", "Segura", "george@ucr.ac.cr", "Activo",buttons],
                 {
                   color: "warning",
                   data: [
@@ -109,20 +163,21 @@ export default function RegularTables() {
                     "Randall",
                     "Jiménez",
                     "rajim@ucr.ac.cr",
-                    "Activo"
+                    "Activo",buttons
                   ]
                 }
               ]}
+            
+              
               
             />
           </CardBody>
-          <Button color="rose">Agregar</Button>
+          <Button color="info">Agregar</Button>
 
-          estará programado para que cuando se seleccione un lugar de la tabla, salga una ventana emergente 
-          con las opciones editar e inactivar.
         </Card>
        
       </GridItem>
     </GridContainer>
+    </div>
   );
 }

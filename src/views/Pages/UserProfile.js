@@ -28,10 +28,86 @@ import Close from "@material-ui/icons/Close";
 
 import avatar from "assets/img/faces/marc.jpg";
 
+
+import ReactDOM from "react-dom";
+import ApolloClient, { gql } from "apollo-boost";
+import { ApolloProvider, Query } from "react-apollo";
+
+
+const client = new ApolloClient({
+  uri: "https://rickandmortyapi.com/graphql"
+});
+
+
+
 const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
+
+
   const classes = useStyles();
+
+
+  const CharactersQuery = () => {
+    return (
+      <Query
+        query={gql`
+          {
+            characters {
+              results {
+                id
+                name
+              }
+            }
+          }
+        `}
+      >
+        {({ loading, error, data }) => {
+          if (loading) return <p>Loading...</p>;
+          if (error) return <p>Error!</p>;
+
+          return <FormControl
+            fullWidth
+            className={classes.selectFormControl}
+          >
+          <InputLabel
+            htmlFor="simple-select"
+            className={classes.selectLabel}
+          >
+            Elija la provincia
+          </InputLabel>
+          <Select
+            MenuProps={{
+              className: classes.selectMenu
+            }}
+            classes={{
+              select: classes.select
+            }}
+            value={simpleSelect}
+            onChange={handleSimple}
+            inputProps={{
+              name: "simpleSelect",
+              id: "simple-select"
+            }}
+          > {data.characters.results.map(character => {
+            return <MenuItem
+
+              key={character.id}
+              classes={{
+
+                  root: classes.selectMenuItem,
+                  selected: classes.selectMenuItemSelected
+              }}
+              value={character.id}
+            > { character.name } </MenuItem>
+          })}
+          </Select>
+          </FormControl>
+        }}
+      </Query>
+    );
+  };
+
   const [number, setnumber] = React.useState("");
   const [number1, setnumber1] = React.useState("");
   const [number2, setnumber2] = React.useState("");
@@ -76,6 +152,7 @@ export default function UserProfile() {
 
               <GridContainer>
 
+
               <GridItem xs={12} sm={12} md={8}>
                 <Card>
                   <CardHeader color="primary">
@@ -118,104 +195,11 @@ export default function UserProfile() {
               </GridContainer>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
-                <FormControl
-                  fullWidth
-                  className={classes.selectFormControl}
-                >
-                <InputLabel
-                  htmlFor="simple-select"
-                  className={classes.selectLabel}
-                >
-                  Elija la provincia
-                </InputLabel>
-                <Select
-                  MenuProps={{
-                    className: classes.selectMenu
-                  }}
-                  classes={{
-                    select: classes.select
-                  }}
-                  value={simpleSelect}
-                  onChange={handleSimple}
-                  inputProps={{
-                    name: "simpleSelect",
-                    id: "simple-select"
-                  }}
-                >
-                  <MenuItem
-                    disabled
-                    classes={{
-                      root: classes.selectMenuItem
-                    }}
-                  >
-                    Elija la provincia
-                  </MenuItem>
-                  <MenuItem
-                    classes={{
-                      root: classes.selectMenuItem,
-                      selected: classes.selectMenuItemSelected
-                    }}
-                    value="1"
-                  >
-                    Puntarenas
-                  </MenuItem>
-                  <MenuItem
-                    classes={{
-                      root: classes.selectMenuItem,
-                      selected: classes.selectMenuItemSelected
-                    }}
-                    value="2"
-                  >
-                    San José
-                  </MenuItem>
-                  <MenuItem
-                    classes={{
-                      root: classes.selectMenuItem,
-                      selected: classes.selectMenuItemSelected
-                    }}
-                    value="3"
-                  >
-                    Cartago
-                  </MenuItem>
-                  <MenuItem
-                    classes={{
-                      root: classes.selectMenuItem,
-                      selected: classes.selectMenuItemSelected
-                    }}
-                    value="4"
-                  >
-                    Limón
-                  </MenuItem>
-                  <MenuItem
-                    classes={{
-                      root: classes.selectMenuItem,
-                      selected: classes.selectMenuItemSelected
-                    }}
-                    value="5"
-                  >
-                    Guanacaste
-                  </MenuItem>
-                  <MenuItem
-                    classes={{
-                      root: classes.selectMenuItem,
-                      selected: classes.selectMenuItemSelected
-                    }}
-                    value="6"
-                  >
-                    Alajuela
-                  </MenuItem>
-                  <MenuItem
-                    classes={{
-                      root: classes.selectMenuItem,
-                      selected: classes.selectMenuItemSelected
-                    }}
-                    value="7"
-                  >
-                    Heredia
-                  </MenuItem>
 
-                </Select>
-                </FormControl>
+                  <CharactersQuery />
+
+
+
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                 <FormControl

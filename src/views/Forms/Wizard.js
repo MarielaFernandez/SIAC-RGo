@@ -8,19 +8,21 @@ import GridItem from "components/Grid/GridItem.js";
 import Step1 from "./WizardSteps/Step1.js";
 import Step2 from "./WizardSteps/Step2.js";
 import Step3 from "./WizardSteps/Step3.js";
+import Cursos from "./WizardSteps/Courses.js";
+import Grupos from "./WizardSteps/Groups.js";
 
 export default function WizardView() {
   return (
     <GridContainer justify="center">
-      <GridItem xs={12} sm={8}>
+      <GridItem xs={12} sm={12}>
         <Wizard
           validate
           steps={[
-            { stepName: "About", stepComponent: Step1, stepId: "about" },
-            { stepName: "Account", stepComponent: Step2, stepId: "account" },
-            { stepName: "Address", stepComponent: Step3, stepId: "address" }
+            { stepName: "Cursos", stepComponent: Cursos, stepId: "Cursos" },
+            { stepName: "Grupos", stepComponent: Grupos, stepId: "Grupos" },
+            { stepName: "Horarios", stepComponent: Cursos, stepId: "Horarios" }
           ]}
-          title="Build Your Profile"
+          title="Administración"
           subtitle="This information will let us know more about you."
           finishButtonClick={e => alert(e)}
         />
