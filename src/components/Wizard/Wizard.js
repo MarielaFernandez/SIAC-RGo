@@ -122,33 +122,33 @@ class Wizard extends React.Component {
     }
   }
   finishButtonClick() {
-    if (
-      (this.props.validate === false &&
-        this.props.finishButtonClick !== undefined) ||
-      (this.props.validate &&
-        ((this[this.props.steps[this.state.currentStep].stepId].isValidated !==
-          undefined &&
-          this[
-            this.props.steps[this.state.currentStep].stepId
-          ].isValidated()) ||
-          this[this.props.steps[this.state.currentStep].stepId].isValidated ===
-            undefined) &&
-        this.props.finishButtonClick !== undefined)
-    ) {
-      this.setState(
-        {
-          allStates: {
-            ...this.state.allStates,
-            [this.props.steps[this.state.currentStep].stepId]: this[
-              this.props.steps[this.state.currentStep].stepId
-            ].sendState()
-          }
-        },
-        () => {
-          this.props.finishButtonClick(this.state.allStates);
-        }
-      );
-    }
+    // if (
+    //   (this.props.validate === false &&
+    //     this.props.finishButtonClick !== undefined) ||
+    //   (this.props.validate &&
+    //     ((this[this.props.steps[this.state.currentStep].stepId].isValidated !==
+    //       undefined &&
+    //       this[
+    //         this.props.steps[this.state.currentStep].stepId
+    //       ].isValidated()) ||
+    //       this[this.props.steps[this.state.currentStep].stepId].isValidated ===
+    //         undefined) &&
+    //     this.props.finishButtonClick !== undefined)
+    // ) {
+    //   this.setState(
+    //     {
+    //       allStates: {
+    //         ...this.state.allStates,
+    //         [this.props.steps[this.state.currentStep].stepId]: this[
+    //           this.props.steps[this.state.currentStep].stepId
+    //         ].sendState()
+    //       }
+    //     },
+    //     () => {
+    //       this.props.finishButtonClick(this.state.allStates);
+    //     }
+    //   );
+    // }
   }
   refreshAnimation(index) {
     var total = this.props.steps.length;
