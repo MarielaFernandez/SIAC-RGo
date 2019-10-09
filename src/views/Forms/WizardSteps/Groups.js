@@ -9,6 +9,16 @@ import Assignment from "@material-ui/icons/Assignment";
 import Dvr from "@material-ui/icons/Dvr";
 import Favorite from "@material-ui/icons/Favorite";
 import Close from "@material-ui/icons/Close";
+
+import Wizard from "components/Wizard/Wizard.js";
+import Cursos from "./Courses.js";
+import Grupos from "./Groups.js";
+// import Step2 from "./WizardSteps/Step2.js";
+// import Step3 from "./WizardSteps/Step3.js";
+import { withStyles } from '@material-ui/core/styles';
+
+import Switch from '@material-ui/core/Switch';
+
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -27,6 +37,7 @@ const styles = {
     ...cardTitle,
     marginTop: "15px",
     marginBottom: "0px"
+
   }
 };
 
@@ -36,22 +47,68 @@ export default function Groups() {
 
   const [alert, setAlert] = React.useState(null);
   const [inputValue, setInputValue] = React.useState(null);
+
+  const Scroll = withStyles({
+    switchBase: {
+        overflow: "auto"
+      },
+  })(Switch);
+
+
+  // Swal.fire({
+  //   imageUrl: 'https://placeholder.pics/svg/300x1500',
+  //   imageHeight: 1500,
+  //   imageAlt: 'A tall image'
+  // });
+
+//overflow: "scroll"
+
   const inputAlert = () => {
+
+
     setAlert(
+
+
       <SweetAlert
-        input
+
+
+
         showCancel
-        style={{ display: "block", marginTop: "-100px" }}
-        title="Input something"
+        style={{ display: "block", marginTop: "-400px", width:900 }}
+        control
+        control={
+          <Scroll color = "default"  />
+        }
+        //title="Input something"
         onConfirm={e => {
           inputConfirmAlertNext(e);
         }}
         onCancel={() => hideAlert()}
         confirmBtnCssClass={classes.button + " " + classes.info}
         cancelBtnCssClass={classes.button + " " + classes.danger}
-      />
+        >
+
+
+        <GridContainer justify="center">
+          <GridItem xs={12} sm={12}>
+
+              <Wizard
+                validate
+                steps={[
+                  { stepName: "Cursos", stepComponent: Cursos, stepId: "Cursos" },
+                  { stepName: "Grupos", stepComponent: Grupos, stepId: "Grupos" },
+                  { stepName: "Horarios", stepComponent: Cursos, stepId: "Horarios" }
+                ]}
+                title="Administración"
+                subtitle="This information will let us know more about you."
+                finishButtonClick={e => alert(e)}
+              />
+              </GridItem>
+            </GridContainer>
+      </SweetAlert>
     );
   };
+
   const inputConfirmAlertNext = e => {
     setAlert(e);
     setTimeout(() => {

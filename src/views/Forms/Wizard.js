@@ -8,6 +8,7 @@ import GridItem from "components/Grid/GridItem.js";
 import Step1 from "./WizardSteps/Step1.js";
 import Step2 from "./WizardSteps/Step2.js";
 import Step3 from "./WizardSteps/Step3.js";
+
 import Cursos from "./WizardSteps/Courses.js";
 import Grupos from "./WizardSteps/Groups.js";
 
