@@ -13,15 +13,13 @@ import { withStyles } from '@material-ui/core/styles';
 import SweetAlert from "react-bootstrap-sweetalert";
 import Radio from "@material-ui/core/Radio";
 import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
 import Switch from '@material-ui/core/Switch';
 import Button from "components/CustomButtons/Button.js";
 import Slide from "@material-ui/core/Slide";
-import InputLabel from "@material-ui/core/InputLabel";
-import { KeyboardDatePicker } from "@material-ui/pickers";
+import Datetime from "react-datetime";
 
 
 
@@ -36,6 +34,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -69,7 +69,7 @@ const useStyles = makeStyles(styles);
 export default function Calendar() {
   const [selectedEnabled, setSelectedEnabled] = React.useState("a");
   const classes = useStyles();
-
+  
   const [state, setState] = React.useState({
     opcion : "red"
   });
@@ -80,7 +80,7 @@ export default function Calendar() {
   const [alert, setAlert] = React.useState(null);
   const [modal, setModal] = React.useState(false);
   const [simpleSelect, setSimpleSelect] = React.useState("");
-  const [selectedDate, handleDateChange] = useState(new Date());
+  
   const style = {
     label: {
       color: "rgba(0, 0, 0, 0.26)",
@@ -94,8 +94,8 @@ export default function Calendar() {
     }
   };
 
-  //const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
-
+  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+  //const [selectedDate, handleDateChange] = useState(new Date());Date TIme Picker con error
   const selectedEvent = event => {
     window.alert(event.title);
   };  
@@ -274,7 +274,8 @@ export default function Calendar() {
         >
           <Close className={classes.modalClose} />
         </Button>
-        <h4 className={classes.modalTitle}>Seleccione la fecha de inicio y fecha final de su contrato</h4>
+        <h4 className={classes.modalTitle}
+        >Seleccione la fecha de inicio y fecha final de su contrato</h4>
       </DialogTitle>
       <DialogContent
         id="modal-slide-description"
@@ -282,20 +283,19 @@ export default function Calendar() {
       >
         <InputLabel className={classes.label}></InputLabel>
      
-        <KeyboardDatePicker
-        clearable
-        value={selectedDate}
-        placeholder="10/10/2018"
-        onChange={date => handleDateChange(date)}
-        minDate={new Date()}
-        format="MM/dd/yyyy"
+        
+      <InputLabel className={classes.label}>
+      </InputLabel>
+      <br />
+      <FormControl fullWidth>
+        <Datetime
+          timeFormat={false}
+          inputProps={{ placeholder: "Fecha Inicio Contrato" }}
         />
-      
-     
+      </FormControl>
   
-        <h5>¿aquí va el PickerTime?</h5>
       </DialogContent>
-
+     
       <DialogActions
         className={classes.modalFooter + " " + classes.modalFooterCenter}
       >
@@ -352,7 +352,7 @@ export default function Calendar() {
       />
     }
   ]}
-/>
+  />
 
 
                       
