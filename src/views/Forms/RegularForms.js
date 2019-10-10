@@ -15,6 +15,18 @@ import Clear from "@material-ui/icons/Clear";
 import Contacts from "@material-ui/icons/Contacts";
 import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
 
+import PropTypes from 'prop-types';
+import clsx from 'clsx';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import ErrorIcon from '@material-ui/icons/Error';
+import InfoIcon from '@material-ui/icons/Info';
+import CloseIcon from '@material-ui/icons/Close';
+import { amber, green } from '@material-ui/core/colors';
+import IconButton from '@material-ui/core/IconButton';
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+import WarningIcon from '@material-ui/icons/Warning';
+
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -48,6 +60,7 @@ export default function RegularForms() {
   const [selectedEnabled, setSelectedEnabled] = React.useState("b");
   const [selectedValue, setSelectedValue] = React.useState(null);
   const [alert,setAlert] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
   const handleChange = event => {
     setSelectedValue(event.target.value);
      
@@ -59,6 +72,81 @@ export default function RegularForms() {
      console.log("Acá");
     setAlert(null);
   }
+
+  const variantIcon = {
+    success: CheckCircleIcon,
+    warning: WarningIcon,
+    error: ErrorIcon,
+    info: InfoIcon,
+  };
+
+  const useStyles1 = makeStyles(theme => ({
+    success: {
+      backgroundColor: green[600],
+    },
+    error: {
+      backgroundColor: theme.palette.error.dark,
+    },
+    info: {
+      backgroundColor: theme.palette.primary.main,
+    },
+    warning: {
+      backgroundColor: amber[700],
+    },
+    icon: {
+      fontSize: 20,
+    },
+    iconVariant: {
+      opacity: 0.9,
+      marginRight: theme.spacing(1),
+    },
+    message: {
+      display: 'flex',
+      alignItems: 'center',
+    },
+  }));
+
+  function MySnackbarContentWrapper(props) {
+    const classes = useStyles1();
+    const { className, message, onClose, variant, ...other } = props;
+    const Icon = variantIcon[variant];
+  
+    return (
+      <div>
+      <SnackbarContent
+        className={clsx(classes[variant], className)}
+        aria-describedby="client-snackbar"
+        message={
+          <span id="client-snackbar" className={classes.message}>
+            <Icon className={clsx(classes.icon, classes.iconVariant)} />
+            {message}
+          </span>
+        }
+        action={[
+          <IconButton key="close" aria-label="close" color="inherit" onClick={onClose}>
+            <CloseIcon className={classes.icon} />
+          </IconButton>,
+        ]}
+        {...other}
+      />
+      </div>
+    );
+  }
+  
+MySnackbarContentWrapper.propTypes = {
+  className: PropTypes.string,
+  message: PropTypes.string,
+  onClose: PropTypes.func,
+  variant: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
+};
+
+const useStyles2 = makeStyles(theme => ({
+  margin: {
+    margin: theme.spacing(1),
+  },
+}));
+
+
 
   
   const autoCloseAlert = () => {
@@ -87,11 +175,13 @@ export default function RegularForms() {
       if(reg.test(event.target.value) === false)
       {
         console.log("Email is Not Correct");
+        handleClick();
         setMails(event.target.value)
         return false;
       }
       else {
         setMails(event.target.value)
+        handleClose();
         console.log("Email is Correct");
       }
 
@@ -137,6 +227,7 @@ export default function RegularForms() {
         }
     
   }
+  
 
   const handleToggle = value => {
     const currentIndex = checked.indexOf(value);
@@ -149,12 +240,38 @@ export default function RegularForms() {
     }
     setChecked(newChecked);
   };
+  
+  const handleClick = () => {
+    setOpen(true);
+  };
 
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const classes = useStyles();
   return (
     <div>
     {alert}
+    <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <MySnackbarContentWrapper
+          onClose={handleClose}
+          variant="error"
+          message="¡Correo Incorrecto!"
+        />
+      </Snackbar>
     <GridContainer>
       <GridItem xs={12} sm={12} md={6}>
         <Card>
