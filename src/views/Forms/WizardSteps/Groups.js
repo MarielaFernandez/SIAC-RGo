@@ -74,7 +74,7 @@ export default function Groups() {
 
 
         showCancel
-        style={{ display: "block", marginTop: "-400px", width:900 }}
+        style={{ marginTop: "-400px", width:"60%", height:"60%" }}
         control
         control={
           <Scroll color = "default"  />
@@ -87,9 +87,8 @@ export default function Groups() {
         confirmBtnCssClass={classes.button + " " + classes.info}
         cancelBtnCssClass={classes.button + " " + classes.danger}
         >
-
-
-        <GridContainer justify="center">
+        
+        <GridContainer justify="center" spacing={5}>
           <GridItem xs={12} sm={12}>
 
               <Wizard

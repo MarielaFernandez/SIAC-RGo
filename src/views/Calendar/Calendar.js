@@ -93,6 +93,8 @@ export default function Calendar() {
       paddingLeft: "0"
     }
   };
+  
+  
 
   const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
   //const [selectedDate, handleDateChange] = useState(new Date());Date TIme Picker con error
@@ -247,7 +249,7 @@ export default function Calendar() {
       <Button color="rose" round onClick={() => setModal(true)}>
       Fecha Contrato
     </Button>
-      <Dialog
+      <Dialog 
       classes={{
         root: classes.center,
         paper: classes.modal
