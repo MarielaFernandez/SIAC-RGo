@@ -36,6 +36,14 @@ import styles from "assets/jss/material-dashboard-pro-react/components/buttonSty
 import { events as calendarEvents } from "variables/general.js";
 import Accordion from "components/Accordion/Accordion.js";
 
+import Wizard from "components/Wizard/Wizard.js";
+
+import Step1 from "./WizardSteps/Step1.js";
+import Step2 from "./WizardSteps/Step2.js";
+import Step3 from "./WizardSteps/Step3.js";
+
+
+
 
 
 const localizer = momentLocalizer(moment);
@@ -222,8 +230,8 @@ export default function Calendar() {
     setAlert(
       <SweetAlert
         //success
-        style={{ display: "block", marginTop: "-100px" }}
-        //title="Guardado!"
+        style={{ display: "block", marginTop: "-315px" }}
+        title="Fechas contrato"
         onConfirm={() => hideAlert()}
         onCancel={() => hideAlert()}
         confirmBtnCssClass={
@@ -233,9 +241,9 @@ export default function Calendar() {
 
       <div>
       <InputLabel className={classes.label}>
-        Seleccione su fecha de inicio de contrato
+      Fecha inicio de contrato
       </InputLabel>
-      <br />
+      
       <FormControl fullWidth>
         <Datetime
           timeFormat={false}
@@ -243,9 +251,9 @@ export default function Calendar() {
         />
       </FormControl>
       <InputLabel className={classes.label}>
-      Seleccione su fecha de fin de contrato
+      Fecha fin de contrato
       </InputLabel>
-      <br />
+      
       <FormControl fullWidth>
         <Datetime
           timeFormat={false}
@@ -259,22 +267,19 @@ export default function Calendar() {
   }
 
 
+  
 
 
   return (   
       <div>
-    
-    {alert}
-      
-    <GridContainer justify="center">
-        <GridItem xs={2} sm={2} md={2}>
-              <FormControl component="fieldset">
-              <FormLabel component="legend">Seleccione una Actividad</FormLabel>
+  <GridContainer justify="center">
 
-      
-      <Button color="rose" onClick={successAlert}>
-        Fecha Contrato
-      </Button>
+    <GridItem xs={2} sm={2} md={2}>
+          <FormControl component="fieldset">
+
+
+    {alert}
+   
 
     <Accordion
     active={0}
@@ -321,12 +326,30 @@ export default function Calendar() {
                     
       />
     }
-  ]}
-  />
+   ]}
+   />
+    
 
-    </FormControl>
+    </FormControl> 
+    </GridItem>
+
+    <GridItem xs={10} sm={10} md={9}>
+    <GridContainer justify="center">
+      <GridItem xs={12} sm={12}>
+        <Wizard
+          validate
+          steps={[
+            { stepName: "Docente Curso", stepComponent: Step1, stepId: "Cursos" },
+            { stepName: "Docente Administrativo", stepComponent: Step2, stepId: "Grupos" },
+            { stepName: "Docente Proyecto", stepComponent: Step3, stepId: "Horarios" }
+          ]}
+          title="Administración"
+          subtitle="Seleccione una opción acorde a su designación."
+          finishButtonClick={e => alert(e)}
+        />
       </GridItem>
-        <GridItem xs={10} sm={10} md={9}>
+    </GridContainer>
+
           <Card>
             <CardBody calendar>
               <BigCalendar
