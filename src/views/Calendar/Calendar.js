@@ -33,6 +33,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 
 
 // @material-ui/core components
+import { events as calendarEvents } from "variables/general.js";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -252,8 +253,10 @@ export default function Calendar() {
         onCancel={() => hideAlert()}
         confirmBtnCssClass={
           classes.button + " " + classes.success
-        }
+        }              
       >
+        </SweetAlert>)}
+
 
   return (   
       <div>
@@ -324,11 +327,14 @@ export default function Calendar() {
           inputProps={{ placeholder: "Fecha Inicio Contrato" }}
         />
       </FormControl>
+      </DialogContent>
+      </Dialog>
+      </FormControl>
+      </GridItem>
+      </GridContainer>
       </div>
-        
-      </SweetAlert>
-    );
-  }
+  );  
+
 
 
   
@@ -445,5 +451,4 @@ export default function Calendar() {
       </GridContainer>
         
       </div> 
-  );
-}
+  )};

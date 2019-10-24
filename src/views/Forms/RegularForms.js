@@ -47,8 +47,6 @@ import styles from "assets/jss/material-dashboard-pro-react/views/regularFormsSt
 
 const useStyles = makeStyles(styles);
 
-
-
 export default function RegularForms() {
   
   const [post, setPost] = React.useState([]);
