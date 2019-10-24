@@ -1,41 +1,67 @@
 {
-  "name": "back",
-  "description": "Backend for GraphQL Angular Tutorial",
-  "version": "0.0.1",
-  "author": "Gustavo Garzaki",
-  "license": "MIT",
+  "name": "graphql-mongodb-server",
+  "version": "1.0.0",
+  "description": "A GraphQL MongoDB server.",
+  "main": "index.js",
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "start": "ts-node -r tsconfig-paths/register src/main.ts",
-    "start:dev": "nodemon",
-    "start:debug": "nodemon --config nodemon-debug.json",
-    "prestart:prod": "rimraf dist && npm run build",
-    "start:prod": "node dist/main.js",
-    "lint": "tslint -p tsconfig.json -c tslint.json"
+    "start": "npm run server",
+    "server": "nodemon --exec babel-node server/index.js"
+  },
+  "keywords": [
+    "graphql",
+    "mongodb",
+    "boilerplate",
+    "server"
+  ],
+  "author": "Leonardo Maldonado <leonardomso11@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/node": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-decorators": "^7.0.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-proposal-function-sent": "^7.0.0",
+    "@babel/plugin-proposal-json-strings": "^7.0.0",
+    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-syntax-import-meta": "^7.0.0",
+    "@babel/plugin-transform-async-to-generator": "^7.1.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "@babel/runtime": "^7.1.2",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "jest": "^23.6.0",
+    "jest-cli": "^23.6.0",
+    "jest-dom": "^2.1.1",
+    "react-testing-library": "^5.2.3"
   },
   "dependencies": {
-    "@types/bcryptjs": "^2.4.2",
-    "@types/graphql": "^14.0.5",
-    "@types/lokijs": "^1.5.2",
-    "@types/pino": "^5.8.3",
-    "apollo-server": "^2.3.1",
-    "bcryptjs": "^2.4.3",
-    "class-validator": "^0.9.1",
-    "graphql": "^14.1.1",
-    "lokijs": "^1.5.6",
-    "pino": "^5.11.0",
-    "pino-pretty": "^2.5.0",
-    "reflect-metadata": "^0.1.13",
-    "rimraf": "^2.6.3",
-    "type-graphql": "^0.16.0",
-    "typedi": "^0.8.0"
+    "concurrently": "^4.1.0",
+    "dotenv": "^6.1.0",
+    "graphql": "^14.0.2",
+    "graphql-subscriptions": "^1.0.0",
+    "graphql-tools": "^4.0.3",
+    "graphql-yoga": "^1.16.7",
+    "merge-graphql-schemas": "^1.5.7",
+    "mongoose": "^5.3.13",
+    "nodemon": "^1.18.10",
+    "uuid": "^3.3.2"
   },
-  "devDependencies": {
-    "@types/node": "^10.12.18",
-    "nodemon": "^1.18.9",
-    "ts-node": "^8.0.1",
-    "tsconfig-paths": "^3.7.0",
-    "tslint": "^5.12.1",
-    "typescript": "^3.2.4"
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/config/tests/jest.config"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
   }
 }
