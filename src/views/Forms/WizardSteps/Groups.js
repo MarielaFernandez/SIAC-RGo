@@ -11,14 +11,10 @@ import Favorite from "@material-ui/icons/Favorite";
 import Close from "@material-ui/icons/Close";
 
 import Wizard from "components/Wizard/Wizard.js";
-
 import Cursos from "./Courses.js";
 import Grupos from "./Groups.js";
-
- import Step1 from "./Step1.js";
- import Step2 from "./Step2.js";
- import Step3 from "./Step3.js";
-
+// import Step2 from "./WizardSteps/Step2.js";
+// import Step3 from "./WizardSteps/Step3.js";
 import { withStyles } from '@material-ui/core/styles';
 
 import Switch from '@material-ui/core/Switch';
@@ -75,11 +71,13 @@ export default function Groups() {
 
       <SweetAlert
 
+
+
         showCancel
-        style={{ display: "inline", marginTop: "-400px", width:900, scrollbarPadding:"true" }}
+        style={{ marginTop: "-400px", width:"60%", height:"60%" }}
         control
         control={
-          <Scroll color = "default"/>
+          <Scroll color = "default"  />
         }
         //title="Input something"
         onConfirm={e => {
@@ -89,17 +87,16 @@ export default function Groups() {
         confirmBtnCssClass={classes.button + " " + classes.info}
         cancelBtnCssClass={classes.button + " " + classes.danger}
         >
-
-
-        <GridContainer justify="center">
+        
+        <GridContainer justify="center" spacing={5}>
           <GridItem xs={12} sm={12}>
 
               <Wizard
                 validate
                 steps={[
-                  { stepName: "Step1", stepComponent: Step1, stepId: "Step1" },
-                  { stepName: "Step2", stepComponent: Step2, stepId: "Step2" },
-                  { stepName: "Step3", stepComponent: Step3, stepId: "Step3" }
+                  { stepName: "Cursos", stepComponent: Cursos, stepId: "Cursos" },
+                  { stepName: "Grupos", stepComponent: Grupos, stepId: "Grupos" },
+                  { stepName: "Horarios", stepComponent: Cursos, stepId: "Horarios" }
                 ]}
                 title="Administración"
                 subtitle="This information will let us know more about you."

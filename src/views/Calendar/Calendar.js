@@ -11,30 +11,49 @@ import { purple, red, green } from '@material-ui/core/colors';
 // react component used to create alerts
 import { withStyles } from '@material-ui/core/styles';
 import SweetAlert from "react-bootstrap-sweetalert";
+import Radio from "@material-ui/core/Radio";
 import FormLabel from '@material-ui/core/FormLabel';
+import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
 import Switch from '@material-ui/core/Switch';
+import Button from "components/CustomButtons/Button.js";
 import Slide from "@material-ui/core/Slide";
 import Datetime from "react-datetime";
-import InputLabel from "@material-ui/core/InputLabel";
+
+
 
 // @material-ui/icons
+import Close from "@material-ui/icons/Close";
+
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
 
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
 
 require('moment/locale/es.js');
 // core components
+import Heading from "components/Heading/Heading.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import Button from "components/CustomButtons/Button.js";
+import Grid from '@material-ui/core/Grid';
+
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+
 import styles from "assets/jss/material-dashboard-pro-react/components/buttonStyle.js";
-import { events as calendarEvents } from "variables/general.js";
-import Accordion from "components/Accordion/Accordion.js";
 
 import Wizard from "components/Wizard/Wizard.js";
 
@@ -45,23 +64,12 @@ import Step3 from "./WizardSteps/Step3.js";
 
 
 
+import Accordion from "components/Accordion/Accordion.js";
 
 const localizer = momentLocalizer(moment);
 
-const useStyles = makeStyles(styles); //datetimepickers
+const useStyles = makeStyles(styles);
 
-const style = { //datetimepickers
-  label: {
-    color: "rgba(0, 0, 0, 0.26)",
-    cursor: "pointer",
-    display: "inline-flex",
-    fontSize: "14px",
-    transition: "0.3s ease all",
-    lineHeight: "1.428571429",
-    fontWeight: "400",
-    paddingLeft: "0"
-  }
-};
 
 
 
@@ -75,16 +83,28 @@ export default function Calendar() {
 
   
 
-
   const [events, setEvents] = React.useState(calendarEvents);
   const [alert, setAlert] = React.useState(null);
   const [modal, setModal] = React.useState(false);
-
+  const [simpleSelect, setSimpleSelect] = React.useState("");
+  
+  const style = {
+    label: {
+      color: "rgba(0, 0, 0, 0.26)",
+      cursor: "pointer",
+      display: "inline-flex",
+      fontSize: "14px",
+      transition: "0.3s ease all",
+      lineHeight: "1.428571429",
+      fontWeight: "100",
+      paddingLeft: "0"
+    }
+  };
   
   
 
   const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
-  
+  //const [selectedDate, handleDateChange] = useState(new Date());Date TIme Picker con error
   const selectedEvent = event => {
     window.alert(event.title);
   };  
@@ -104,7 +124,7 @@ export default function Calendar() {
   })(Switch);
 
   const minTime = new Date();
-  minTime.setHours(7,0,0);
+  minTime.setHours(8,0,0);
   const maxTime = new Date();
   maxTime.setHours(20,0,0);  
 
@@ -168,13 +188,9 @@ export default function Calendar() {
     setAlert(null);
     setEvents(newEvents);
   };
-
-
   const hideAlert = () => {
     setAlert(null);
   };
-
-
   class MyWeek extends React.Component {
     render() {      
       let { date } = this.props
@@ -239,7 +255,55 @@ export default function Calendar() {
         }
       >
 
+  return (   
       <div>
+       {alert}
+      
+      <GridContainer justify="center">
+        <GridItem xs={2} sm={2} md={2}>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">Seleccione una Actividad</FormLabel>
+                
+      <Button color="rose" round onClick={() => setModal(true)}>
+      Fecha Contrato
+    </Button>
+      <Dialog 
+      classes={{
+        root: classes.center,
+        paper: classes.modal
+      }}
+      open={modal}
+      transition={Transition}
+      keepMounted
+      onClose={() => setModal(false)}
+      aria-labelledby="modal-slide-title"
+      aria-describedby="modal-slide-description"
+    >
+      <DialogTitle
+        id="classic-modal-slide-title"
+        disableTypography
+        className={classes.modalHeader}
+      >
+        <Button
+          justIcon
+          className={classes.modalCloseButton}
+          key="close"
+          aria-label="Close"
+          color="transparent"
+          onClick={() => setModal(false)}
+        >
+          <Close className={classes.modalClose} />
+        </Button>
+        <h4 className={classes.modalTitle}
+        >Seleccione la fecha de inicio y fecha final de su contrato</h4>
+      </DialogTitle>
+      <DialogContent
+        id="modal-slide-description"
+        className={classes.modalBody}
+      >
+        <InputLabel className={classes.label}></InputLabel>
+     
+        
       <InputLabel className={classes.label}>
       Fecha inicio de contrato
       </InputLabel>
@@ -257,7 +321,7 @@ export default function Calendar() {
       <FormControl fullWidth>
         <Datetime
           timeFormat={false}
-          inputProps={{ placeholder: "Fecha contrato" }}
+          inputProps={{ placeholder: "Fecha Inicio Contrato" }}
         />
       </FormControl>
       </div>

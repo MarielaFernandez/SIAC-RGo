@@ -18,8 +18,7 @@ const style = {
   infoText: {
     fontWeight: "300",
     margin: "10px 0 30px",
-    textAlign: "center",
-    scrollbarPadding:"true"
+    textAlign: "center"
   },
   ...customSelectStyle
 };
@@ -32,7 +31,6 @@ class Step3 extends React.Component {
       desgin: false,
       code: false,
       develop: false
-
     };
   }
   sendState() {
@@ -60,45 +58,6 @@ class Step3 extends React.Component {
             }}
           />
         </GridItem>
-
-        <GridItem xs={12} sm={7}>
-          <CustomInput
-            labelText="calle"
-            id="streetname"
-            formControlProps={{
-              fullWidth: true
-            }}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={7}>
-          <CustomInput
-            labelText="calle"
-            id="streetname"
-            formControlProps={{
-              fullWidth: true
-            }}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={7}>
-          <CustomInput
-            labelText="calle"
-            id="streetname"
-            formControlProps={{
-              fullWidth: true
-            }}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={7}>
-          <CustomInput
-            labelText="calle"
-            id="streetname"
-            formControlProps={{
-              fullWidth: true
-            }}
-          />
-        </GridItem>
-
-
         <GridItem xs={12} sm={3}>
           <CustomInput
             labelText="Street No."
@@ -165,9 +124,6 @@ class Step3 extends React.Component {
             </Select>
           </FormControl>
         </GridItem>
-
-
-
       </GridContainer>
     );
   }
