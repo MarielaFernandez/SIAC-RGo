@@ -260,13 +260,33 @@ export default function Calendar() {
 
   return (   
       <div>
+
+      <GridContainer justify="center">
+        <GridItem xs={12} sm={12}>
+            <Wizard
+            validate
+            steps={[
+            { stepName: "Docente Curso", stepComponent: Step1, stepId: "Cursos" },
+            { stepName: "Docente Administrativo", stepComponent: Step2, stepId: "Grupos" },
+            { stepName: "Docente Proyecto", stepComponent: Step3, stepId: "Horarios" }
+          ]}
+          title="Administración"
+          subtitle="Seleccione una opción acorde a su designación."
+          finishButtonClick={e => alert(e)}
+        />
+        </GridItem>
+      </GridContainer>
+
        {alert}
       
       <GridContainer justify="center">
         <GridItem xs={2} sm={2} md={2}>
               <FormControl component="fieldset">
                 <FormLabel component="legend">Seleccione una Actividad</FormLabel>
-                
+
+    <GridItem xs={10} sm={10} md={9}>
+      
+
       <Button color="rose" round onClick={() => setModal(true)}>
       Fecha Contrato
       </Button>
@@ -329,9 +349,10 @@ export default function Calendar() {
       </FormControl>
       </DialogContent>
       </Dialog>
-      </FormControl>
+      </GridItem></FormControl>
       </GridItem>
-      </GridContainer>
+      //</GridContainer>
+
       </div>
   );  
 
