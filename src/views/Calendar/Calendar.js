@@ -266,7 +266,7 @@ export default function Calendar() {
                 
       <Button color="rose" round onClick={() => setModal(true)}>
       Fecha Contrato
-    </Button>
+      </Button>
       <Dialog 
       classes={{
         root: classes.center,
