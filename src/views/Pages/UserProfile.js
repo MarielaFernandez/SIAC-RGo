@@ -34,12 +34,6 @@ import ApolloClient, { gql } from "apollo-boost";
 import { ApolloProvider, Query } from "react-apollo";
 
 
-const client = new ApolloClient({
-  uri: "https://rickandmortyapi.com/graphql"
-});
-
-
-
 const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
@@ -48,16 +42,13 @@ export default function UserProfile() {
   const classes = useStyles();
 
 
-  const CharactersQuery = () => {
+  const UsersQuery = () => {
     return (
       <Query
         query={gql`
           {
-            characters {
-              results {
-                id
-                name
-              }
+            users {              
+              name
             }
           }
         `}
@@ -89,17 +80,17 @@ export default function UserProfile() {
               name: "simpleSelect",
               id: "simple-select"
             }}
-          > {data.characters.results.map(character => {
+          > {data.users.map(user => {
             return <MenuItem
 
-              key={character.id}
+              key={user.name}
               classes={{
 
                   root: classes.selectMenuItem,
                   selected: classes.selectMenuItemSelected
               }}
-              value={character.id}
-            > { character.name } </MenuItem>
+              value={user.name}
+            > { user.name } </MenuItem>
           })}
           </Select>
           </FormControl>
@@ -199,7 +190,7 @@ export default function UserProfile() {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
 
-                  <CharactersQuery />
+                  <UsersQuery />
 
 
 
