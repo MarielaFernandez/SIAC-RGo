@@ -262,7 +262,7 @@ export default function Calendar() {
       <div>
 
       <GridContainer justify="center">
-        <GridItem xs={12} sm={12}>
+        <GridItem xs={0} sm={0} md={12}>
             <Wizard
             validate
             steps={[

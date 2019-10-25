@@ -1,30 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Calendar as BigCalendar, momentLocalizer  } from "react-big-calendar";
 // @material-ui/icons
 import Face from "@material-ui/icons/Face";
 import RecordVoiceOver from "@material-ui/icons/RecordVoiceOver";
 import Email from "@material-ui/icons/Email";
 import Accordion from "components/Accordion/Accordion.js";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import moment from "moment";
-import { events as calendarEvents } from "variables/general.js";
-import SweetAlert from "react-bootstrap-sweetalert";
+import FormControl from "@material-ui/core/FormControl";
+import { purple, red, green } from '@material-ui/core/colors';
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
-
+import Switch from '@material-ui/core/Switch';
+import { events as calendarEvents } from "variables/general.js";
 
 // core components
-//import GridContainer from "components/Grid/GridContainer.js";
-//import GridItem from "components/Grid/GridItem.js";
-import PictureUpload from "components/CustomUpload/PictureUpload.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
+import PictureUpload from "components/CustomUpload/PictureUpload.js";
+import CustomInput from "components/CustomInput/CustomInput.js";
 
 const style = {
   infoText: {
@@ -113,28 +108,25 @@ class Step1 extends React.Component {
   }
 
 
-  
+
 
   render() {
+    const { classes } = this.props;
+
+
     const [events, setEvents] = React.useState(calendarEvents);
     const [alert, setAlert] = React.useState(null);
-    const [modal, setModal] = React.useState(false);
-    const [simpleSelect, setSimpleSelect] = React.useState("");
-    const localizer = momentLocalizer(moment);
-    const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
-    //const [selectedDate, handleDateChange] = useState(new Date());Date TIme Picker con error
-    const selectedEvent = event => {
-    window.alert(event.title);
-    }; 
+
+
 
     const [state, setState] = React.useState({
       opcion : "red"
     });
-    const minTime = new Date();
-    minTime.setHours(8,0,0);
-    const maxTime = new Date();
-    maxTime.setHours(20,0,0);
-    
+
+    const handleChange = () => event => {
+      setState({ ...state, opcion: event.target.value });
+    };
+
     const addNewEvent = (e, slotInfo) => {
       var newEvents = events;
       newEvents.push({
@@ -158,31 +150,59 @@ class Step1 extends React.Component {
       };
     };
 
-    const addNewEventAlert = slotInfo => {
-      setAlert(
-        <SweetAlert
-          select
-          showCancel
-          style={{ display: "block", marginTop: "-100px" }}
-          title="Actividad"
-          onConfirm={e => addNewEvent(e, slotInfo)}
-          onCancel={() => hideAlert()}
-          confirmBtnCssClass={classes.button + " " + classes.success}
-          cancelBtnCssClass={classes.button + " " + classes.danger}
-        />
-      );
-    };
-
     const hideAlert = () => {
       setAlert(null);
     };
 
-    
-    
-    const { classes } = this.props;
+    const GreenSwitch = withStyles({
+      switchBase: {
+        color: green[300],
+        '&$checked': {
+          color: green[500],
+        },
+        '&$checked + $track': {
+          backgroundColor: green[500],
+        },
+      },
+      checked: {},
+      track: {},
+    })(Switch);
+
+    const RedSwitch = withStyles({
+      switchBase: {
+        color: red[300],
+        '&$checked': {
+          color: red[500],
+        },
+        '&$checked + $track': {
+          backgroundColor: red[500],
+        },
+      },
+      checked: {},
+      track: {},
+    })(Switch);
+
+    const PurpleSwitch = withStyles({
+      switchBase: {
+        color: purple[300],
+        '&$checked': {
+          color: purple[500],
+        },
+        '&$checked + $track': {
+          backgroundColor: purple[500],
+        },
+      },
+      checked: {},
+      track: {},
+    })(Switch);
+
 
 
     return (
+
+      {alert}
+
+
       <GridContainer justify="center">
         <GridItem xs={12} sm={18} md={9}>
           <h4 className={classes.infoText}>
@@ -190,33 +210,63 @@ class Step1 extends React.Component {
           </h4>
         </GridItem>
         
-        <Card>
-            <CardBody calendar>
-              <BigCalendar
-                views={['week', 'agenda']}                              
-                // startAccessor="start"
-                // endAccessor="end"                
-                selectable
-                resizable
-                localizer={localizer}
-                events={events}
-                defaultView="week"
-                // scrollToTime={new Date(2019, 1, 1, 6)}
-                date={new Date(2019, 8, 29, 6)}
-                // length ={200}
-                defaultDate={new Date()}
-                onSelectEvent={event => selectedEvent(event)}
-                onSelectSlot={slotInfo => addNewEventAlert(slotInfo)}
-                //onEventResize={this.resizeEvent}
-                step = {30}
-                min = {minTime}
-                max = {maxTime}
-                eventPropGetter={eventColors}                 
-                // views={{ agenda: true, week: MyWeek }}                
-                culture = {'es'}                
-              />
-            </CardBody>
-          </Card>
+
+        <GridItem xs={2} sm={2} md={2}>
+          <FormControl component="fieldset">
+
+         
+
+          <Accordion
+          active={0}
+          collapses={[
+          {
+          title: "Docente Curso",
+          content:
+          <div>
+          <FormControlLabel
+                control={<PurpleSwitch color = "primary" checked={state.opcion ==="red"} onChange={handleChange()} value="red" />}
+                label="Horas Contacto"
+          />
+
+          <FormControlLabel
+                control={<RedSwitch color = "secondary" checked={state.opcion ==="green"} onChange={handleChange()} value="green" />}
+                label="Horas Atención"
+          />
+
+          <FormControlLabel
+                control={
+                  <GreenSwitch color = "default" checked={state.opcion ==="yellow"} onChange={handleChange()} value="yellow" />
+                }
+                label="Horas Preparación"
+                
+          />
+          </div>           
+          },
+          {
+          title: "Docente Administrativo",
+          content:
+          <FormControlLabel
+                control={<PurpleSwitch color = "primary" checked={state.opcion ==="red"} onChange={handleChange()} value="red" />}
+                label="Horas Contacto"
+          />
+          },
+          {
+          title: "Docente Proyecto",
+          content:
+          <FormControlLabel
+                control={
+                  <GreenSwitch color = "default" checked={state.opcion ==="yellow"} onChange={handleChange()} value="yellow" />
+                }
+                label="Horas Preparación"
+                
+        />
+        }
+        ]}
+        />
+
+
+          </FormControl> 
+        </GridItem>
 
       </GridContainer>
     );
@@ -228,3 +278,4 @@ Step1.propTypes = {
 };
 
 export default withStyles(style)(Step1);
+
