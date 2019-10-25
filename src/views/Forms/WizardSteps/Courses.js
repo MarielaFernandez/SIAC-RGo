@@ -36,15 +36,19 @@ import { dataTable } from "variables/general.js";
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 
-const styles = {
-  cardIconTitle: {
-    ...cardTitle,
-    marginTop: "15px",
-    marginBottom: "0px"
-  }
-};
+//import stylesButton from "assets/jss/material-dashboard-pro-react/views/buttonsStyle.js";
 
-const useStyles = makeStyles(styles);
+
+
+
+
+
+
+
+
+const useStyles = makeStyles();
+
+
 
 export default function Courses() {
 
@@ -59,10 +63,12 @@ export default function Courses() {
   const [selectedEnabled, setSelectedEnabled] = React.useState("b");
   const [selectedValue, setSelectedValue] = React.useState(null);
 
+    const [sigla, setSigla] = React.useState("");
+
   const inputAlert = () => {
     setAlert(
       <SweetAlert
-  
+
         showCancel
         style={{ display: "block", marginTop: "-280px" }}
         title="Editar Funcionario"
@@ -78,6 +84,7 @@ export default function Courses() {
 >
 <GridContainer>
   <GridItem xs={12} sm={12} md={12}>
+
 
         <form>
         <CustomInput
@@ -155,20 +162,126 @@ export default function Courses() {
 
         </form>
 
-  </GridItem>
-  <GridItem xs={12} sm={12} md={6}>
-
-  </GridItem>
-  <GridItem xs={12} sm={12} md={12}>
 
   </GridItem>
   <GridItem xs={12} sm={12} md={12}>
 
   </GridItem>
 </GridContainer>
+
 </SweetAlert>
     );
   };
+
+  
+  const inputAlertAgregarCurso = () => {
+    setAlert(
+      <SweetAlert
+
+        showCancel
+        style={{ display: "block", marginTop: "-280px" }}
+        title="Agregar Curso"
+        onConfirm={e => {
+          inputConfirmAlertNext(e);
+        }}
+        onCancel={() => hideAlert()}
+        confirmBtnCssClass={classes.button + " " + classes.info}
+        cancelBtnCssClass={classes.button + " " + classes.danger}
+>
+<GridContainer>
+  <GridItem xs={12} sm={12} md={12}>
+
+
+        <form>
+        <CustomInput
+            labelText="Sigla"
+            id="id_Sigla"
+            formControlProps={{
+              fullWidth: true
+            }}
+            value={sigla}
+
+            inputProps={{
+              onChange: modificarCedula,
+              name: "sigla",
+              autoComplete: "off",
+              value: sigla
+
+            }}
+          />
+           <CustomInput
+            labelText="e-mail"
+            id="mail_Employee"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              defaultValue: post.firstname,
+              autoComplete: "off"
+            }}
+          />
+          <CustomInput
+            labelText="nombre"
+            id="name_Employee"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              type: "email",
+              value: nombre
+            }}
+          />
+          <CustomInput
+            labelText={"apellido"}
+            id="lastName_Employee"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+
+              autoComplete: "off",
+              value: apellido
+            }}
+          />
+
+          <div className={classes.checkboxAndRadio}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  tabIndex={-1}
+                  onClick={() => handleChange()}
+                  checkedIcon={<Check className={classes.checkedIcon} />}
+                  icon={<Check className={classes.uncheckedIcon} />}
+                  classes={{
+                    checked: classes.checked,
+                    root: classes.checkRoot
+                  }}
+                />
+              }
+              classes={{
+                label: classes.label,
+                root: classes.labelRoot
+              }}
+              label="Activar Funcionario"
+            />
+          </div>
+
+
+        </form>
+
+
+  </GridItem>
+  <GridItem xs={12} sm={12} md={12}>
+
+  </GridItem>
+</GridContainer>
+
+
+
+</SweetAlert>
+    );
+  };
+
   const modificarCedula = event   => {
       console.log('Acá')
       setCedula(event.target.value);
@@ -296,11 +409,20 @@ export default function Courses() {
     })
   );
   const classes = useStyles();
+
   return (
     <div>
     {alert}
     <GridContainer>
     <Card>
+
+    <div class="d-flex justify-content-center">
+    <Button color="rose"   onClick={inputAlertAgregarCurso} className={classes.marginRight}  >
+    Agregar Nuevo curso
+    </Button>
+    </div>
+
+
 
       <CardBody>
       <CustomInput

@@ -76,12 +76,10 @@ export default function Groups() {
       <SweetAlert
 
         showCancel
-        style={{ display: "inline", marginTop: "-400px", width:900, scrollbarPadding:"true" }}
+        style={{  marginTop: "-400px", width:200 }}
         control
-        control={
-          <Scroll color = "default"/>
-        }
-        //title="Input something"
+
+        title="Input something"
         onConfirm={e => {
           inputConfirmAlertNext(e);
         }}
@@ -90,23 +88,17 @@ export default function Groups() {
         cancelBtnCssClass={classes.button + " " + classes.danger}
         >
 
+        hablar de texto de relleno, seguro que os viene a la cabeza uno que comienza por “Lorem ipsum dolor sit amet”. Acerca de él, la wikipedia nos dice lo siguiente:
 
-        <GridContainer justify="center">
-          <GridItem xs={12} sm={12}>
+        es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final. El texto en sí no tiene sentido, sino que deriva de la lengua latina a cuyas palabras se les han eliminado sílabas o letras.
+        Dado que este es el texto de relleno más usado, veremos cuatro sitios que nos proveen de él de diferentes maneras. Sin embargo, veremos también otros cuatro que nos dan otros textos diferentes, también con el mismo objetivo: rellenar para poder dar forma a nuestro diseño, ya sea web, documento, etc.
 
-              <Wizard
-                validate
-                steps={[
-                  { stepName: "Step1", stepComponent: Step1, stepId: "Step1" },
-                  { stepName: "Step2", stepComponent: Step2, stepId: "Step2" },
-                  { stepName: "Step3", stepComponent: Step3, stepId: "Step3" }
-                ]}
-                title="Administración"
-                subtitle="This information will let us know more about you."
-                finishButtonClick={e => alert(e)}
-              />
-              </GridItem>
-            </GridContainer>
+        <h2>Lorem ipsum</h2>
+        Lorem ipsum
+
+        Esta página contiene, además del generador de texto, una pequeña introducción donde se nos cuenta el origen e historia de este texto de rellleno. En cuanto al generador, nos permite indicar el número de párrafos, palabras, bytes o listas (de cuatro o cinco puntos) que queremos que tenga nuestro relleno.
+        Por cierto, incluye una página que contiene varios banners en los tamaños más usados actualmente en la web. Aunque no son imágenes que podamos personalizar como en los servicios que vimos en el post sobre imágenes de relleno, pueden servirnos en algún momento. Además, se pueden descargar todos de un solo golpe dentro de un zip.
+
       </SweetAlert>
     );
   };
