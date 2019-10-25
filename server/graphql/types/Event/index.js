@@ -3,7 +3,9 @@ export default `
     _id: String!
     name: String!
     startDate: String!
-    endDate: String!    
+    endDate: String!
+    classroom : Int,
+    worker : Int    
   }
 
   type Query {
