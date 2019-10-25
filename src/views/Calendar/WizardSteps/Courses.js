@@ -4,25 +4,29 @@ import ReactTable from "react-table";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+
+import axios from 'axios';
+
 // @material-ui/icons
 import Assignment from "@material-ui/icons/Assignment";
 import Dvr from "@material-ui/icons/Dvr";
 import Favorite from "@material-ui/icons/Favorite";
 import Close from "@material-ui/icons/Close";
 
-import Wizard from "components/Wizard/Wizard.js";
-import Cursos from "./Courses.js";
-import Grupos from "./Groups.js";
-// import Step2 from "./WizardSteps/Step2.js";
-// import Step3 from "./WizardSteps/Step3.js";
-import { withStyles } from '@material-ui/core/styles';
-
-import Switch from '@material-ui/core/Switch';
+import MailOutline from "@material-ui/icons/MailOutline";
+import Check from "@material-ui/icons/Check";
+import Clear from "@material-ui/icons/Clear";
+import Contacts from "@material-ui/icons/Contacts";
+import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
+import CustomInput from "components/CustomInput/CustomInput.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardIcon from "components/Card/CardIcon.js";
@@ -37,70 +41,163 @@ const styles = {
     ...cardTitle,
     marginTop: "15px",
     marginBottom: "0px"
-
   }
 };
 
 const useStyles = makeStyles(styles);
 
-export default function Groups() {
+export default function Courses() {
 
   const [alert, setAlert] = React.useState(null);
   const [inputValue, setInputValue] = React.useState(null);
 
-  const Scroll = withStyles({
-    switchBase: {
-        overflow: "auto"
-      },
-  })(Switch);
-
-
-  // Swal.fire({
-  //   imageUrl: 'https://placeholder.pics/svg/300x1500',
-  //   imageHeight: 1500,
-  //   imageAlt: 'A tall image'
-  // });
-
-//overflow: "scroll"
+  const [post, setPost] = React.useState([]);
+  const [cedula, setCedula] = React.useState("");
+  const [nombre, setNombre] = React.useState("");
+  const [apellido, setApellido] = React.useState("");
+  const [checked, setChecked] = React.useState([24, 22]);
+  const [selectedEnabled, setSelectedEnabled] = React.useState("b");
+  const [selectedValue, setSelectedValue] = React.useState(null);
 
   const inputAlert = () => {
-
-
     setAlert(
-
-
       <SweetAlert
-
-
-
+  
         showCancel
+        style={{ display: "block", marginTop: "-280px" }}
+        title="Editar Funcionario"
         onConfirm={e => {
           inputConfirmAlertNext(e);
         }}
         onCancel={() => hideAlert()}
         confirmBtnCssClass={classes.button + " " + classes.info}
         cancelBtnCssClass={classes.button + " " + classes.danger}
-        >
 
-        <GridContainer justify="center" spacing={5}>
-          <GridItem xs={12} sm={12}>
 
-              <Wizard
-                validate
-                steps={[
-                  { stepName: "Cursos", stepComponent: Cursos, stepId: "Cursos" },
-                  { stepName: "Grupos", stepComponent: Grupos, stepId: "Grupos" },
-                  { stepName: "Horarios", stepComponent: Cursos, stepId: "Horarios" }
-                ]}
-                title="Administración"
-                subtitle="This information will let us know more about you."
-                finishButtonClick={e => alert(e)}
-              />
-              </GridItem>
-            </GridContainer>
-      </SweetAlert>
+
+>
+<GridContainer>
+  <GridItem xs={12} sm={12} md={12}>
+
+        <form>
+        <CustomInput
+            labelText="Cédula"
+            id="id_Employee"
+            formControlProps={{
+              fullWidth: true
+            }}
+            value={cedula}
+            inputProps={{
+              onChange: modificarCedula,
+              name: "cedula",
+              autoComplete: "off",
+              value: cedula
+
+            }}
+          />
+           <CustomInput
+            labelText="e-mail"
+            id="mail_Employee"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              defaultValue: post.firstname,
+              autoComplete: "off"
+            }}
+          />
+          <CustomInput
+            labelText="nombre"
+            id="name_Employee"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              type: "email",
+              value: nombre
+            }}
+          />
+          <CustomInput
+            labelText={"apellido"}
+            id="lastName_Employee"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+
+              autoComplete: "off",
+              value: apellido
+            }}
+          />
+
+          <div className={classes.checkboxAndRadio}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  tabIndex={-1}
+                  onClick={() => handleChange()}
+                  checkedIcon={<Check className={classes.checkedIcon} />}
+                  icon={<Check className={classes.uncheckedIcon} />}
+                  classes={{
+                    checked: classes.checked,
+                    root: classes.checkRoot
+                  }}
+                />
+              }
+              classes={{
+                label: classes.label,
+                root: classes.labelRoot
+              }}
+              label="Activar Funcionario"
+            />
+          </div>
+
+
+        </form>
+
+  </GridItem>
+  <GridItem xs={12} sm={12} md={6}>
+
+  </GridItem>
+  <GridItem xs={12} sm={12} md={12}>
+
+  </GridItem>
+  <GridItem xs={12} sm={12} md={12}>
+
+  </GridItem>
+</GridContainer>
+</SweetAlert>
     );
   };
+  const modificarCedula = event   => {
+      console.log('Acá')
+      setCedula(event.target.value);
+  }
+  const handleChange = event => {
+    setSelectedValue(event.target.value);
+  };
+  const handleChangeEnabled = event => {
+    setSelectedEnabled(event.target.value);
+  };
+
+
+  const loadPost = (post) => {
+    setPost( post
+    );
+  };
+  const getPosts= (cedula) => {
+    console.log(cedula);
+    axios.get('https://apis.gometa.org/cedulas/' + cedula
+    ).then(response=>{
+        console.log(response.data.results[0]);
+        setNombre(response.data.results[0].firstname);
+        setApellido(response.data.results[0].lastname);
+
+      //this.setState({ posts: response.data.results});
+
+
+  });
+  }
 
   const inputConfirmAlertNext = e => {
     setAlert(e);
@@ -206,6 +303,13 @@ export default function Groups() {
     <Card>
 
       <CardBody>
+      <CustomInput
+        labelText="Buscar"
+        id="Buscar"
+        formControlProps={{
+          fullWidth: true
+        }}
+      />
             <ReactTable
               data={data}
               filterable

@@ -9,16 +9,6 @@ import Assignment from "@material-ui/icons/Assignment";
 import Dvr from "@material-ui/icons/Dvr";
 import Favorite from "@material-ui/icons/Favorite";
 import Close from "@material-ui/icons/Close";
-
-import Wizard from "components/Wizard/Wizard.js";
-import Cursos from "./Courses.js";
-import Grupos from "./Groups.js";
-// import Step2 from "./WizardSteps/Step2.js";
-// import Step3 from "./WizardSteps/Step3.js";
-import { withStyles } from '@material-ui/core/styles';
-
-import Switch from '@material-ui/core/Switch';
-
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -27,7 +17,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardHeader from "components/Card/CardHeader.js";
-import SweetAlert from "react-bootstrap-sweetalert";
+
 import { dataTable } from "variables/general.js";
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
@@ -37,93 +27,12 @@ const styles = {
     ...cardTitle,
     marginTop: "15px",
     marginBottom: "0px"
-
   }
 };
 
 const useStyles = makeStyles(styles);
 
-export default function Groups() {
-
-  const [alert, setAlert] = React.useState(null);
-  const [inputValue, setInputValue] = React.useState(null);
-
-  const Scroll = withStyles({
-    switchBase: {
-        overflow: "auto"
-      },
-  })(Switch);
-
-
-  // Swal.fire({
-  //   imageUrl: 'https://placeholder.pics/svg/300x1500',
-  //   imageHeight: 1500,
-  //   imageAlt: 'A tall image'
-  // });
-
-//overflow: "scroll"
-
-  const inputAlert = () => {
-
-
-    setAlert(
-
-
-      <SweetAlert
-
-
-
-        showCancel
-        onConfirm={e => {
-          inputConfirmAlertNext(e);
-        }}
-        onCancel={() => hideAlert()}
-        confirmBtnCssClass={classes.button + " " + classes.info}
-        cancelBtnCssClass={classes.button + " " + classes.danger}
-        >
-
-        <GridContainer justify="center" spacing={5}>
-          <GridItem xs={12} sm={12}>
-
-              <Wizard
-                validate
-                steps={[
-                  { stepName: "Cursos", stepComponent: Cursos, stepId: "Cursos" },
-                  { stepName: "Grupos", stepComponent: Grupos, stepId: "Grupos" },
-                  { stepName: "Horarios", stepComponent: Cursos, stepId: "Horarios" }
-                ]}
-                title="Administración"
-                subtitle="This information will let us know more about you."
-                finishButtonClick={e => alert(e)}
-              />
-              </GridItem>
-            </GridContainer>
-      </SweetAlert>
-    );
-  };
-
-  const inputConfirmAlertNext = e => {
-    setAlert(e);
-    setTimeout(() => {
-      setAlert(
-        <SweetAlert
-          style={{ display: "block", marginTop: "-100px" }}
-          onConfirm={() => hideAlert()}
-          onCancel={() => hideAlert()}
-          confirmBtnCssClass={classes.button + " " + classes.info}
-          title={
-            <p>
-              You entered: <b>{e}</b>
-            </p>
-          }
-        />
-      );
-    }, 200);
-  };
-  const hideAlert = () => {
-    setAlert(null);
-  };
-
+export default function ReactTables() {
   const [data, setData] = React.useState(
     dataTable.dataRows.map((prop, key) => {
       return {
@@ -140,7 +49,20 @@ export default function Groups() {
               justIcon
               round
               simple
-              onClick={inputAlert}
+              onClick={() => {
+                let obj = data.find(o => o.id === key);
+                alert(
+                  "You've clicked LIKE button on \n{ \nName: " +
+                    obj.name +
+                    ", \nposition: " +
+                    obj.position +
+                    ", \noffice: " +
+                    obj.office +
+                    ", \nage: " +
+                    obj.age +
+                    "\n}."
+                );
+              }}
               color="info"
               className="like"
             >
@@ -200,12 +122,16 @@ export default function Groups() {
   );
   const classes = useStyles();
   return (
-    <div>
-    {alert}
     <GridContainer>
-    <Card>
-
-      <CardBody>
+      <GridItem xs={12}>
+        <Card>
+          <CardHeader color="primary" icon>
+            <CardIcon color="primary">
+              <Assignment />
+            </CardIcon>
+            <h4 className={classes.cardIconTitle}>React Table</h4>
+          </CardHeader>
+          <CardBody>
             <ReactTable
               data={data}
               filterable
@@ -238,11 +164,9 @@ export default function Groups() {
               showPaginationBottom={false}
               className="-striped -highlight"
             />
-            </CardBody>
-            </Card>
-
-              </GridContainer>
-              </div>
-
+          </CardBody>
+        </Card>
+      </GridItem>
+    </GridContainer>
   );
 }

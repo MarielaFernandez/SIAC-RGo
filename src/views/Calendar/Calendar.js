@@ -33,6 +33,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 
 
 // @material-ui/core components
+import { events as calendarEvents } from "variables/general.js";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -55,7 +56,14 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 import styles from "assets/jss/material-dashboard-pro-react/components/buttonStyle.js";
 
-import { events as calendarEvents } from "variables/general.js";
+import Wizard from "components/Wizard/Wizard.js";
+
+import Step1 from "./WizardSteps/Step1.js";
+import Step2 from "./WizardSteps/Step2.js";
+import Step3 from "./WizardSteps/Step3.js";
+
+
+
 
 import Accordion from "components/Accordion/Accordion.js";
 
@@ -93,6 +101,8 @@ export default function Calendar() {
       paddingLeft: "0"
     }
   };
+  
+  
 
   const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
   //const [selectedDate, handleDateChange] = useState(new Date());Date TIme Picker con error
@@ -233,21 +243,54 @@ export default function Calendar() {
     };
   };
   
-  
+  const successAlert = () => {
+    setAlert(
+      <SweetAlert
+        //success
+        style={{ display: "block", marginTop: "-315px" }}
+        title="Fechas contrato"
+        onConfirm={() => hideAlert()}
+        onCancel={() => hideAlert()}
+        confirmBtnCssClass={
+          classes.button + " " + classes.success
+        }              
+      >
+        </SweetAlert>)}
+
 
   return (   
       <div>
+
+      <GridContainer justify="center">
+        <GridItem xs={12} sm={12}>
+            <Wizard
+            validate
+            steps={[
+            { stepName: "Docente Curso", stepComponent: Step1, stepId: "Cursos" },
+            { stepName: "Docente Administrativo", stepComponent: Step2, stepId: "Grupos" },
+            { stepName: "Docente Proyecto", stepComponent: Step3, stepId: "Horarios" }
+          ]}
+          title="Administración"
+          subtitle="Seleccione una opción acorde a su designación."
+          finishButtonClick={e => alert(e)}
+        />
+        </GridItem>
+      </GridContainer>
+
        {alert}
       
       <GridContainer justify="center">
         <GridItem xs={2} sm={2} md={2}>
               <FormControl component="fieldset">
                 <FormLabel component="legend">Seleccione una Actividad</FormLabel>
-                
+
+    <GridItem xs={10} sm={10} md={9}>
+      
+
       <Button color="rose" round onClick={() => setModal(true)}>
       Fecha Contrato
-    </Button>
-      <Dialog
+      </Button>
+      <Dialog 
       classes={{
         root: classes.center,
         paper: classes.modal
@@ -285,26 +328,49 @@ export default function Calendar() {
      
         
       <InputLabel className={classes.label}>
+      Fecha inicio de contrato
       </InputLabel>
-      <br />
+      
+      <FormControl fullWidth>
+        <Datetime
+          timeFormat={false}
+          inputProps={{ placeholder: "Fecha contrato" }}
+        />
+      </FormControl>
+      <InputLabel className={classes.label}>
+      Fecha fin de contrato
+      </InputLabel>
+      
       <FormControl fullWidth>
         <Datetime
           timeFormat={false}
           inputProps={{ placeholder: "Fecha Inicio Contrato" }}
         />
       </FormControl>
-  
       </DialogContent>
-     
-      <DialogActions
-        className={classes.modalFooter + " " + classes.modalFooterCenter}
-      >
-        <Button onClick={() => setModal(false)}>Cancelar</Button>
-        <Button onClick={() => setModal(false)} color="success">
-         Aceptar
-        </Button>
-      </DialogActions>
-    </Dialog>
+      </Dialog>
+      </GridItem></FormControl>
+      </GridItem>
+      //</GridContainer>
+
+      </div>
+  );  
+
+
+
+  
+
+
+  return (   
+      <div>
+  <GridContainer justify="center">
+
+    <GridItem xs={2} sm={2} md={2}>
+          <FormControl component="fieldset">
+
+
+    {alert}
+   
 
     <Accordion
     active={0}
@@ -351,14 +417,30 @@ export default function Calendar() {
                     
       />
     }
-  ]}
-  />
+   ]}
+   />
+    
 
+    </FormControl> 
+    </GridItem>
 
-                      
-              </FormControl>
+    <GridItem xs={10} sm={10} md={9}>
+    <GridContainer justify="center">
+      <GridItem xs={12} sm={12}>
+        <Wizard
+          validate
+          steps={[
+            { stepName: "Docente Curso", stepComponent: Step1, stepId: "Cursos" },
+            { stepName: "Docente Administrativo", stepComponent: Step2, stepId: "Grupos" },
+            { stepName: "Docente Proyecto", stepComponent: Step3, stepId: "Horarios" }
+          ]}
+          title="Administración"
+          subtitle="Seleccione una opción acorde a su designación."
+          finishButtonClick={e => alert(e)}
+        />
       </GridItem>
-        <GridItem xs={10} sm={10} md={9}>
+    </GridContainer>
+
           <Card>
             <CardBody calendar>
               <BigCalendar
@@ -390,5 +472,4 @@ export default function Calendar() {
       </GridContainer>
         
       </div> 
-  );
-}
+  )};

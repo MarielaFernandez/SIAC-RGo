@@ -61,9 +61,9 @@ export default function Buttons() {
               <h4 className={classes.cardTitle}>Buttons with Label</h4>
             </div>
             <div className={classes.cardContentRight}>
-              <Button className={classes.marginRight}>
+              //<Button className={classes.marginRight}>
                 <KeyboardArrowLeft className={classes.icons} /> Left
-              </Button>
+              //</Button>
               <Button className={classes.marginRight}>
                 Right <KeyboardArrowRight className={classes.icons} />
               </Button>
