@@ -9,11 +9,53 @@ import styles from "assets/jss/material-dashboard-pro-react/customCheckboxRadioS
 const useStyles = makeStyles(styles);
 
 export default function SwitchExample() {
-  const [checkedA, setCheckedA] = React.useState(true);
-  const [checkedB, setCheckedB] = React.useState(false);
+  const [checkedA, setCheckedA] = React.useState(null);
+  const [checkedB, setCheckedB] = React.useState(null);
   const classes = useStyles();
   return (
     <div>
+      <div>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={checkedB}
+              onChange={event => setCheckedB(event.target.checked)}
+              value="checkedB"
+              classes={{
+                switchBase: classes.switchBase,
+                checked: classes.switchChecked,
+                thumb: classes.switchIcon,
+                track: classes.switchBar
+              }}
+            />
+          }
+          classes={{
+            label: classes.label
+          }}
+          label="Horas atención estudiantes"
+        />
+      </div>
+      <div>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={checkedB}
+              onChange={event => setCheckedB(event.target.checked)}
+              value="checkedB"
+              classes={{
+                switchBase: classes.switchBase,
+                checked: classes.switchChecked,
+                thumb: classes.switchIcon,
+                track: classes.switchBar
+              }}
+            />
+          }
+          classes={{
+            label: classes.label
+          }}
+          label="Horas contacto"
+        />
+      </div>
       <div>
         <FormControlLabel
           control={
@@ -32,49 +74,7 @@ export default function SwitchExample() {
           classes={{
             label: classes.label
           }}
-          label="Horas Atención Estudiante"
-        />
-      </div>
-      <div>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={checkedB}
-              onChange={event => setCheckedB(event.target.checked)}
-              value="checkedB"
-              classes={{
-                switchBase: classes.switchBase,
-                checked: classes.switchChecked,
-                thumb: classes.switchIcon,
-                track: classes.switchBar
-              }}
-            />
-          }
-          classes={{
-            label: classes.label
-          }}
-          label="Toggle is off"
-        />
-      </div>
-      <div>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={checkedB}
-              onChange={event => setCheckedB(event.target.checked)}
-              value="checkedB"
-              classes={{
-                switchBase: classes.switchBase,
-                checked: classes.switchChecked,
-                thumb: classes.switchIcon,
-                track: classes.switchBar
-              }}
-            />
-          }
-          classes={{
-            label: classes.label
-          }}
-          label="Toggle is off"
+          label="Horas preparación"
         />
       </div>
     </div>
