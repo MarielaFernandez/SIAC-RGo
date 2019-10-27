@@ -3,6 +3,9 @@ import React from "react";
 // react components used to create a calendar with events on it
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 // dependency plugin for react-big-calendar
+
+require('moment/locale/es.js');
+
 import moment from "moment";
 // react component used to create alerts
 import SweetAlert from "react-bootstrap-sweetalert";

@@ -1,13 +1,21 @@
+import * as startOfDay from "date-fns";
 import React from "react";
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import SweetAlert from "react-bootstrap-sweetalert";
 
-
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import InputLabel from "@material-ui/core/InputLabel";
 // core components
 import styles from "assets/jss/material-dashboard-pro-react/customCheckboxRadioSwitch.js";
 import Heading from "components/Heading/Heading.js";
@@ -15,6 +23,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+
 
 import { events as calendarEvents } from "variables/general.js";
 
@@ -28,7 +37,10 @@ export default function DoCurso() {
   const [checkedC, setCheckedC] = React.useState(null);
   const classes = useStyles();
 
-
+  const [selectedDate, setSelectedDate] = React.useState(new Date('2019-01-01T21:11:54'));
+  const handleDateChange = date => {
+    setSelectedDate(date);
+  };
   
   const [events, setEvents] = React.useState(calendarEvents);
   const [alert, setAlert] = React.useState(null);
@@ -146,6 +158,43 @@ export default function DoCurso() {
           label="Horas preparación de lecciones"
         />
       </div>
+
+      <br/>
+
+      
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <Grid container justify="space-around">
+        <InputLabel className={classes.label}>
+         Fecha inicio de contrato
+        </InputLabel>
+          <KeyboardDatePicker
+          margin="normal"
+          id="date-picker-dialog"
+          label="Elija una fecha"
+          format="dd/MM/yyyy"
+          value={selectedDate}
+          onChange={handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
+        <InputLabel className={classes.label}>
+        Fecha final de contrato
+        </InputLabel>
+        <KeyboardDatePicker
+          margin="normal"
+          id="date-picker-dialog"
+          label="Elija una fecha"
+          format="dd/MM/yyyy"
+          value={selectedDate}
+          onChange={handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
+      </Grid>    
+    </MuiPickersUtilsProvider>
+
     
 
 <GridContainer justify="center">
