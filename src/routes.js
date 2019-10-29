@@ -60,7 +60,7 @@ var dashRoutes = [
   }
   ,
   {
-    path: "/calendar",
+    path: "/calendar1",
     name: "Mantenimiento de cursos",
     rtlName: "التقويم",
     icon: DateRange,
@@ -69,7 +69,7 @@ var dashRoutes = [
   }
   ,
   {
-    path: "/calendar",
+    path: "/calendar2",
     name: "Registro de Usuarios",
     rtlName: "التقويم",
     icon: DateRange,
