@@ -85,9 +85,9 @@ export default function DoCurso() {
   };
 
   const minTime = new Date();
-  minTime.setHours(8,0,0);
+  minTime.setHours(7,0,0);
   const maxTime = new Date();
-  maxTime.setHours(20,0,0);
+  maxTime.setHours(22,0,0);
 
 
 
