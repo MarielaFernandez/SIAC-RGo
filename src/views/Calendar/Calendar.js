@@ -80,9 +80,9 @@ export default function Calendar() {
   };
 
   const minTime = new Date();
-  minTime.setHours(7,0,0);
+  minTime.setHours(8,0,0);
   const maxTime = new Date();
-  maxTime.setHours(22,0,0);
+  maxTime.setHours(20,0,0);
 
   return (
     <div>
@@ -95,8 +95,8 @@ export default function Calendar() {
         { stepName: "Docente Administrativo", stepComponent: Step2, stepId: "Step2" },
         { stepName: "Docente Proyecto", stepComponent: Step3, stepId: "Step3" }
       ]}
-      title="Declaración jurada de horarios"
-      subtitle=""
+      title="Administración"
+      subtitle="Seleccione una opción acorde a su designación."
       finishButtonClick={e => alert(e)}
       />
      </GridItem>
