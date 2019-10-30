@@ -125,9 +125,9 @@ var dashRoutes = [
     icon: Image,
     state: "pageCollapse",
     views: [
-      
-      
-      
+
+
+
       {
         path: "/login-page",
         name: "Login Page",
@@ -137,11 +137,11 @@ var dashRoutes = [
         component: LoginPage,
         layout: "/auth"
       },
-      
-      
+
+
     ]
   },
-  
-  
+
+
 ];
 export default dashRoutes;
