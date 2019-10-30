@@ -139,17 +139,6 @@ var dashRoutes = [
       },
       
       
-      
-      {
-        path: "/user-page",
-        name: "User Profile",
-        rtlName: "ملف تعريفي للمستخدم",
-        mini: "PU",
-        rtlMini: "شع",
-        component: UserProfile,
-        layout: "/admin"
-      },
-      
     ]
   },
   
