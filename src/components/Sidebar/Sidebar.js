@@ -404,16 +404,7 @@ class Sidebar extends React.Component {
                       classes.itemLink + " " + classes.userCollapseLinks
                     }
                   >
-                    <span className={collapseItemMini}>
-                      {rtlActive ? "هوع" : ""}
-                    </span>
-                    <ListItemText
-                      primary={
-                        rtlActive ? "تعديل الملف الشخصي" : "Editar perfil"
-                      }
-                      disableTypography={true}
-                      className={collapseItemText}
-                    />
+                  
                   </NavLink>
                 </ListItem>
                 <ListItem className={classes.collapseItem}>
