@@ -362,7 +362,7 @@ class Sidebar extends React.Component {
               onClick={() => this.openCollapse("openAvatar")}
             >
               <ListItemText
-                primary={rtlActive ? "تانيا أندرو" : "Tania Andrew"}
+                primary={rtlActive ? "تانيا أندرو" : "Usuario"}
                 secondary={
                   <b
                     className={
@@ -388,10 +388,10 @@ class Sidebar extends React.Component {
                     }
                   >
                     <span className={collapseItemMini}>
-                      {rtlActive ? "مع" : "MP"}
+                      {rtlActive ? "مع" : ""}
                     </span>
                     <ListItemText
-                      primary={rtlActive ? "ملفي" : "My Profile"}
+                      primary={rtlActive ? "ملفي" : "Mi perfil"}
                       disableTypography={true}
                       className={collapseItemText}
                     />
@@ -405,11 +405,11 @@ class Sidebar extends React.Component {
                     }
                   >
                     <span className={collapseItemMini}>
-                      {rtlActive ? "هوع" : "EP"}
+                      {rtlActive ? "هوع" : ""}
                     </span>
                     <ListItemText
                       primary={
-                        rtlActive ? "تعديل الملف الشخصي" : "Edit Profile"
+                        rtlActive ? "تعديل الملف الشخصي" : "Editar perfil"
                       }
                       disableTypography={true}
                       className={collapseItemText}
@@ -424,10 +424,10 @@ class Sidebar extends React.Component {
                     }
                   >
                     <span className={collapseItemMini}>
-                      {rtlActive ? "و" : "S"}
+                      {rtlActive ? "و" : ""}
                     </span>
                     <ListItemText
-                      primary={rtlActive ? "إعدادات" : "Settings"}
+                      primary={rtlActive ? "إعدادات" : "Configuraciones"}
                       disableTypography={true}
                       className={collapseItemText}
                     />

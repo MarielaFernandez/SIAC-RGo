@@ -43,7 +43,7 @@ import WidgetsIcon from "@material-ui/icons/Widgets";
 var dashRoutes = [
   {
     path: "/dashboard",
-    name: "Dashboard",
+    name: "Panel Principal",
     rtlName: "لوحة القيادة",
     icon: DashboardIcon,
     component: Dashboard,
@@ -144,7 +144,7 @@ var dashRoutes = [
         path: "/user-page",
         name: "User Profile",
         rtlName: "ملف تعريفي للمستخدم",
-        mini: "UP",
+        mini: "PU",
         rtlMini: "شع",
         component: UserProfile,
         layout: "/admin"
