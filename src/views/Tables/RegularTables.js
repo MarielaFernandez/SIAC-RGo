@@ -2,6 +2,8 @@ import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
+import InputLabel from "@material-ui/core/InputLabel";
+
 // material-ui icons
 import Assignment from "@material-ui/icons/Assignment";
 import Person from "@material-ui/icons/Person";
@@ -17,16 +19,18 @@ import WarningIcon from '@material-ui/icons/Warning';
 import clsx from 'clsx';
 import MailOutline from "@material-ui/icons/MailOutline";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
-import { Query} from "react-apollo";
-import { gql } from "apollo-boost";
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 import axios from 'axios';
 import CustomInput from "components/CustomInput/CustomInput.js";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Check from "@material-ui/icons/Check";
+import FormControl from "@material-ui/core/FormControl";
+
 
 import Checkbox from "@material-ui/core/Checkbox";
 
@@ -45,7 +49,8 @@ import SweetAlert from "react-bootstrap-sweetalert";
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 
-
+import ApolloClient, { gql } from "apollo-boost";
+import { ApolloProvider, Query } from "react-apollo";
 
 const styles = {
   customCardContentClass: {
@@ -71,31 +76,7 @@ const useStyles = makeStyles(styles);
 
 
 
-const CharactersQuery = () => {
-  return (
-    <Query
-      query={gql`
-        {
-          characters {
-            results {
-              id
-              name
-            }
-          }
-        }
-      `}
-    >
-      {({ loading, error, data }) => {
-        if (loading) return <p>Loading...</p>;
-        if (error) return <p>Error!</p>;
 
-        return data.characters.results.map(character => {
-          return <p key={character.id}>{character.name}</p>;
-        });
-      }}
-    </Query>
-  );
-};
 
 
 
@@ -170,17 +151,84 @@ export default function RegularTables() {
   const [selectedEnabled, setSelectedEnabled] = React.useState("b");
   const [selectedValue, setSelectedValue] = React.useState(null);
   const [open, setOpen] = React.useState(false);
- 
+  const [simpleSelect, setSimpleSelect] = React.useState("");
 
 
   const classes = useStyles();
+
+  const UsersQuery = () => {
+    return (
+      <Query
+        query={gql`
+          {
+            users {              
+              _id,
+              name,
+              email
+            }
+          }
+        `}
+      >
+        {({ loading, error, data }) => {
+          if (loading) return <p>Loading...</p>;
+          if (error) return <p>Error, sin conexion!</p>;
+  
+          return <FormControl
+          
+            fullWidth
+            className={classes.selectFormControl}
+          >
+          <InputLabel
+            htmlFor="simple-select"
+            className={classes.selectLabel}
+          >
+            Elija la provincia
+          </InputLabel>
+          <Select
+            MenuProps={{
+              className: classes.selectMenu
+            }}
+            classes={{
+              select: classes.select
+            }}
+            
+            inputProps={{
+              name: "simpleSelect",
+              id: "simple-select"
+            }}
+          > {data.users.map(user => {
+            console.log(user.email);
+            return <MenuItem
+
+           
+  
+              key={user.email}
+              classes={{
+  
+                  root: classes.selectMenuItem,
+                  selected: classes.selectMenuItemSelected
+              }}
+              value={user.email}
+            > { user.email } </MenuItem>
+          })}
+          </Select>
+          </FormControl>
+        }}
+      </Query>
+    );
+  };
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-
+   
     setOpen(false);
+  };
+
+
+  const handleSimple = event => {
+    setSimpleSelect(event.target.value);
   };
 
   const handleClick = () => {
@@ -268,6 +316,7 @@ export default function RegularTables() {
           </CardHeader>
           <CardBody>
             <form>
+          
             <CustomInput
                 labelText="Cédula"
                 id="id_Employee"
@@ -293,7 +342,7 @@ export default function RegularTables() {
               
                <Button color="info" onClick={() => getPosts(cedula)}>Buscar</Button>
               
-
+               
                <CustomInput
                 labelText="e-mail"
                 id="mail_Employee"
@@ -335,6 +384,7 @@ export default function RegularTables() {
                 }}
               />
               <div>
+              
               Selección de sexo
                <div className={classes.checkboxAndRadio}>
                 <FormControlLabel
@@ -386,7 +436,7 @@ export default function RegularTables() {
 
 
              Activación
-
+             
               <div className={classes.checkboxAndRadio}>
                
                 <FormControlLabel
@@ -513,7 +563,7 @@ const hideAlert = () => {
             <h4 className={classes.cardIconTitle}>Lista de Funcionarios</h4>
           </CardHeader>
           <CardBody className={classes.customCardContentClass}>
-          
+          <UsersQuery /> 
             <Table
               hover
               tableHead={[" Cédula", "Nombre", "Apellido", "E-mail", "Estado", "Acciones"]}
