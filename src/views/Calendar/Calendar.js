@@ -174,6 +174,8 @@ export default function Calendar() {
       subtitle="Seleccione una opción acorde a su designación."
       finishButtonClick={e => alert(e)}
       />
+
+      
      </GridItem>
     </GridContainer>
     

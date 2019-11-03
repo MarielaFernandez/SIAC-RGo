@@ -95,6 +95,49 @@ export default function DoCurso() {
 
   return (
     <div>
+
+  <h4>Paso 1: Ingrese la fecha de inicio y final de su contrato.</h4>
+  <br/>
+
+
+  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <Grid container justify="space-around">
+        <InputLabel className={classes.label}>
+         Fecha inicio de contrato
+        </InputLabel>
+          <KeyboardDatePicker
+          margin="normal"
+          id="date-picker-dialog"
+          label="Elija una fecha"
+          format="dd/MM/yyyy"
+          value={selectedDate}
+          onChange={handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
+        <InputLabel className={classes.label}>
+        Fecha final de contrato
+        </InputLabel>
+        <KeyboardDatePicker
+          margin="normal"
+          id="date-picker-dialog"
+          label="Elija una fecha"
+          format="dd/MM/yyyy"
+          value={selectedDate}
+          onChange={handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
+      </Grid>    
+    </MuiPickersUtilsProvider>
+
+
+  <br/>
+  <h4>Paso 2: Utilice los switch para seguidamente seleccionar el horario que corresponda al switch seleccionado.</h4>
+  <br/>
+
       <div>
         <FormControlLabel
           control={
@@ -106,7 +149,7 @@ export default function DoCurso() {
                 switchBase: classes.switchBase,
                 checked: classes.switchChecked,
                 thumb: classes.switchIcon,
-                track: classes.switchBar
+                track: classes.switchBar,
               }}
             />
           }
@@ -161,40 +204,6 @@ export default function DoCurso() {
 
       <br/>
 
-      
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid container justify="space-around">
-        <InputLabel className={classes.label}>
-         Fecha inicio de contrato
-        </InputLabel>
-          <KeyboardDatePicker
-          margin="normal"
-          id="date-picker-dialog"
-          label="Elija una fecha"
-          format="dd/MM/yyyy"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
-        />
-        <InputLabel className={classes.label}>
-        Fecha final de contrato
-        </InputLabel>
-        <KeyboardDatePicker
-          margin="normal"
-          id="date-picker-dialog"
-          label="Elija una fecha"
-          format="dd/MM/yyyy"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
-        />
-      </Grid>    
-    </MuiPickersUtilsProvider>
-
     
 
 <GridContainer justify="center">
@@ -212,7 +221,7 @@ export default function DoCurso() {
             events={events}
             defaultView="week"
             //scrollToTime={new Date(2019, 1, 1, 6)}
-            date={new Date(2019, 8, 29, 6)}
+            //date={new Date(2019, 8, 29, 6)}
             // length ={200}
             defaultDate={new Date()}
             onSelectEvent={event => selectedEvent(event)}
