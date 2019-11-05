@@ -44,7 +44,7 @@ export default function LoginPage() {
               </CardHeader>
               <CardBody>
                 <CustomInput
-                  labelText="First Name.."
+                  labelText="Nombre"
                   id="firstname"
                   formControlProps={{
                     fullWidth: true
@@ -58,7 +58,7 @@ export default function LoginPage() {
                   }}
                 />
                 <CustomInput
-                  labelText="Email..."
+                  labelText="Correo electrónico"
                   id="email"
                   formControlProps={{
                     fullWidth: true
@@ -72,7 +72,7 @@ export default function LoginPage() {
                   }}
                 />
                 <CustomInput
-                  labelText="Password"
+                  labelText="Contraseña"
                   id="password"
                   formControlProps={{
                     fullWidth: true
@@ -92,7 +92,7 @@ export default function LoginPage() {
               </CardBody>
               <CardFooter className={classes.justifyContentCenter}>
                 <Button color="rose" simple size="lg" block>
-                  Let{"'"}s Go
+                  ENTRAR
                 </Button>
               </CardFooter>
             </Card>

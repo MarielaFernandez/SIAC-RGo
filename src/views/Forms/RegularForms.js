@@ -225,6 +225,11 @@ const useStyles2 = makeStyles(theme => ({
         }
     
   }
+
+  const [simpleSelect, setSimpleSelect] = React.useState("");
+  const [simpleSelect1, setSimpleSelect1] = React.useState("");
+  const [simpleSelect2, setSimpleSelect2] = React.useState("");
+  const [simpleSelect3, setSimpleSelect3] = React.useState("");
   
 
   const handleToggle = value => {
