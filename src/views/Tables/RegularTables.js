@@ -156,6 +156,64 @@ export default function RegularTables() {
 
   const classes = useStyles();
 
+  const userList = [
+    {
+      color: "success",
+      data: [
+        "1",
+        "Nury",
+        "Leitón",
+        "lajefa@ucr.ac.cr",
+        "Activo",buttons
+       
+        
+      ]
+
+    
+      
+    } ,
+   
+    ["2", "Juan", "Gamboa", "juan.gamboa@ucr.ac.cr", "Activo",buttons],
+    {
+      color: "info",
+      data: [
+        "3",
+        "Yendry",
+        "Lezcano",
+        "yen.dry@ucr.ac.cr",
+        "Activo",buttons
+      ]
+    },
+    [
+      "4",
+      "Rolando",
+      "Vargas",
+      "rolo.varg@ucr.ac.cr",
+      "Activo",buttons
+    ],
+    {
+      color: "danger",
+      data: [
+        "5",
+        "Gabriela",
+        "Loaiza",
+        "gaby.loai@ucr.ac.cr",
+        "Activo",buttons
+      ]
+    },
+    ["6", "Jorge", "Segura", "george@ucr.ac.cr", "Activo",buttons],
+    {
+      color: "warning",
+      data: [
+        "7",
+        "Randall",
+        "Jiménez",
+        "rajim@ucr.ac.cr",
+        "Activo",buttons
+      ]
+    }
+  ];
+
   const UsersQuery = () => {
     return (
       <Query
@@ -172,47 +230,20 @@ export default function RegularTables() {
         {({ loading, error, data }) => {
           if (loading) return <p>Loading...</p>;
           if (error) return <p>Error, sin conexion!</p>;
+          data.users.map(user => {
+            userList.push({color: "info", data : [ "1", user.name , user._id , user.email , "Activo"]})            
+          });
+          console.log(userList);
+          return <Table
+              hover
+              tableHead={[" Id", "Nombre", "Email"]}
   
-          return <FormControl
-          
-            fullWidth
-            className={classes.selectFormControl}
-          >
-          <InputLabel
-            htmlFor="simple-select"
-            className={classes.selectLabel}
-          >
-            Elija la provincia
-          </InputLabel>
-          <Select
-            MenuProps={{
-              className: classes.selectMenu
-            }}
-            classes={{
-              select: classes.select
-            }}
             
-            inputProps={{
-              name: "simpleSelect",
-              id: "simple-select"
-            }}
-          > {data.users.map(user => {
-            console.log(user.email);
-            return <MenuItem
-
-           
-  
-              key={user.email}
-              classes={{
-  
-                  root: classes.selectMenuItem,
-                  selected: classes.selectMenuItemSelected
-              }}
-              value={user.email}
-            > { user.email } </MenuItem>
-          })}
-          </Select>
-          </FormControl>
+              tableData = {userList}
+            
+              
+              
+            />          
         }}
       </Query>
     );
@@ -563,73 +594,7 @@ const hideAlert = () => {
             <h4 className={classes.cardIconTitle}>Lista de Funcionarios</h4>
           </CardHeader>
           <CardBody className={classes.customCardContentClass}>
-          <UsersQuery /> 
-            <Table
-              hover
-              tableHead={[" Cédula", "Nombre", "Apellido", "E-mail", "Estado", "Acciones"]}
-  
-            
-              tableData={[
-                {
-                  color: "success",
-                  data: [
-                    "1",
-                    "Nury",
-                    "Leitón",
-                    "lajefa@ucr.ac.cr",
-                    "Activo",buttons
-                   
-                    
-                  ]
-
-                
-                  
-                } ,
-               
-                ["2", "Juan", "Gamboa", "juan.gamboa@ucr.ac.cr", "Activo",buttons],
-                {
-                  color: "info",
-                  data: [
-                    "3",
-                    "Yendry",
-                    "Lezcano",
-                    "yen.dry@ucr.ac.cr",
-                    "Activo",buttons
-                  ]
-                },
-                [
-                  "4",
-                  "Rolando",
-                  "Vargas",
-                  "rolo.varg@ucr.ac.cr",
-                  "Activo",buttons
-                ],
-                {
-                  color: "danger",
-                  data: [
-                    "5",
-                    "Gabriela",
-                    "Loaiza",
-                    "gaby.loai@ucr.ac.cr",
-                    "Activo",buttons
-                  ]
-                },
-                ["6", "Jorge", "Segura", "george@ucr.ac.cr", "Activo",buttons],
-                {
-                  color: "warning",
-                  data: [
-                    "7",
-                    "Randall",
-                    "Jiménez",
-                    "rajim@ucr.ac.cr",
-                    "Activo",buttons
-                  ]
-                }
-              ]}
-            
-              
-              
-            />
+          <UsersQuery />             
           </CardBody>
           <Button color="info"  onClick={inputAlert} >Agregar</Button>
 
