@@ -11,16 +11,16 @@ import Checkbox from "@material-ui/core/Checkbox";
 import axios from 'axios';
 
 // @material-ui/icons
-import Assignment from "@material-ui/icons/Assignment";
+//import Assignment from "@material-ui/icons/Assignment";
 import Dvr from "@material-ui/icons/Dvr";
 import Favorite from "@material-ui/icons/Favorite";
 import Close from "@material-ui/icons/Close";
 
-import MailOutline from "@material-ui/icons/MailOutline";
+//import MailOutline from "@material-ui/icons/MailOutline";
 import Check from "@material-ui/icons/Check";
-import Clear from "@material-ui/icons/Clear";
-import Contacts from "@material-ui/icons/Contacts";
-import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
+//import Clear from "@material-ui/icons/Clear";
+//import Contacts from "@material-ui/icons/Contacts";
+//import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
@@ -30,24 +30,57 @@ import Button from "components/CustomButtons/Button.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import CardIcon from "components/Card/CardIcon.js";
-import CardHeader from "components/Card/CardHeader.js";
+//import CardIcon from "components/Card/CardIcon.js";
+//import CardHeader from "components/Card/CardHeader.js";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { dataTable } from "variables/general.js";
+
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
+//import FormLabel from "@material-ui/core/FormLabel";
+import InputLabel from "@material-ui/core/InputLabel";
+
+
+import DialogContentText from '@material-ui/core/DialogContentText';
+
+import ReactDOM from "react-dom";
+import ApolloClient, { gql } from "apollo-boost";
+import { ApolloProvider, Query } from "react-apollo";
+
+import Modal from 'react-bootstrap/Modal'
 
 import styles from "assets/jss/material-dashboard-pro-react/views/sweetAlertStyle.js";
 
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 
+
+import TextField from '@material-ui/core/TextField';
+
+// material-ui components
+
+import Slide from "@material-ui/core/Slide";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
+// @material-ui/icons
+
+// core components
+
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
+
+
+
+
+
+
+
 //import stylesButton from "assets/jss/material-dashboard-pro-react/views/buttonsStyle.js";
-
-
-
-
-
-
-
 
 
 const useStyles = makeStyles(styles);
@@ -56,9 +89,10 @@ const useStyles = makeStyles(styles);
 
 export default function Courses() {
   const classes = useStyles();
+  //const [modal, setModal] = React.useState(false);
 
   const [alert, setAlert] = React.useState(null);
-  const [inputValue, setInputValue] = React.useState(null);
+  //const [inputValue, setInputValue] = React.useState(null);
 
   const [post, setPost] = React.useState([]);
   const [cedula, setCedula] = React.useState("");
@@ -71,8 +105,67 @@ export default function Courses() {
   const [sigla, setSigla] = React.useState("");
   const [nombrecurso, setNombrecurso] = React.useState("");
   const [tipocurso, setTipocurso] = React.useState("");
-  const [creditos, setcreditos] = React.useState("");
+  const [creditos, setCreditos] = React.useState("");
   const [periodo, setPeriodo] = React.useState("");
+  const [anio, setAnio] = React.useState("");
+  const [requisitoscorrequisitos, setRequisitoscorrequisitos] = React.useState("");
+
+
+
+  const [simpleSelect, setSimpleSelect] = React.useState("");
+  const [simpleSelect1, setSimpleSelect1] = React.useState("");
+  const [simpleSelect2, setSimpleSelect2] = React.useState("");
+  const [simpleSelect3, setSimpleSelect3] = React.useState("");
+    const [show, setShow] = React.useState(false);
+
+
+    const [open, setOpen] = React.useState(false);
+
+const handleClickOpen = () => {
+  setOpen(true);
+
+};
+
+const handleClose = () => {
+  setOpen(false);
+  setSimpleSelect("");
+  setSigla("");
+
+};
+
+  const handleSimple = event => {
+    setSimpleSelect(event.target.value);
+  };
+
+  const handleSigla = event => {
+    setSigla(event.target.value);
+
+
+  };
+
+  const handleNombrecurso = event => {
+    setNombrecurso(event.target.value);
+
+    console.log(nombrecurso);
+  };
+  const handleCreditos = event => {
+    setCreditos(event.target.value);
+  };
+
+  const handleSimple1 = event => {
+    setSimpleSelect1(event.target.value);
+
+  };
+  const handleSimple2 = event => {
+    setSimpleSelect2(event.target.value);
+  };
+  const handleSimple3 = event => {
+    setSimpleSelect3(event.target.value);
+  };
+
+
+
+
 
 
   const inputAlert = () => {
@@ -88,9 +181,6 @@ export default function Courses() {
       onCancel={() => hideAlert()}
       confirmBtnCssClass={classes.button + " " + classes.info}
       cancelBtnCssClass={classes.button + " " + classes.danger}
-
-
-
       >
       <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
@@ -168,14 +258,7 @@ export default function Courses() {
       label="Activar Funcionario"
       />
       </div>
-
-
       </form>
-
-
-
-
-
       </GridItem>
       </GridContainer>
 
@@ -184,149 +267,215 @@ export default function Courses() {
   };
 
 
-  const inputAlertAgregarCurso = () => {
-    setAlert(
-      <SweetAlert
-      showCancel
-      style={{ display: "block", width:"500px",height:"350px", overflow: "scroll" }}
-      title="Agregar Curso"
-      onConfirm={e => {
-        inputConfirmAlertNext(e);
-      }}
-      onCancel={() => hideAlert()}
-      confirmBtnCssClass={classes.button + " " + classes.info}
-      cancelBtnCssClass={classes.button + " " + classes.danger}
-      >
+  const UsersQuery = () => {
+    return (
+      <div>
+     <Query
+       query={gql`
+         {
+           users {
+             name
+           }
+         }
+       `}
+     >
+       {({ loading, error, data }) => {
+         if (loading) return <p>Loading...</p>;
+         if (error) return <p>Error!</p>;
 
-      <GridContainer
+         return<div className={classes.container}>
+         <GridItem xs={12} sm={12} md={6}>
+           <div>
+         <FormControl
+           fullWidth
+           className={classes.selectFormControl}
+         >
 
-      >
-      <GridItem>
+           <InputLabel
+             htmlFor="simple-select"
+             className={classes.selectLabel}
+           >
+             Requisitos/Correquisitos
+           </InputLabel>
+
+         <Select
+           MenuProps={{
+             className: classes.selectMenu
+           }}
+           classes={{
+             select: classes.select
+           }}
+           value={simpleSelect}
+           onChange={handleSimple}
+           inputProps={{
+             name: "simpleSelect",
+             id: "simple-select"
+           }}
+
+         >
+         {console.log("simpleSelect ES= "+simpleSelect)}
+
+         {data.users.map(user => {
+
+           return<MenuItem
+             key={user.name}
+             classes={{
+
+                 root: classes.selectMenuItem,
+                 selected: classes.selectMenuItemSelected
+             }}
+             value={user.name}
+           >
+            { user.name }
+           </MenuItem>
+         })}
+         </Select>
+        </FormControl>
+        </div>
 
 
-      <form>
-      <CustomInput
-      labelText="Sigla"
-      id="id_Sigla"
-      formControlProps={{
-        fullWidth: true
-      }}
-      value={sigla}
 
-      inputProps={{
+          <TextField
 
-        autoComplete: "off",
-        value: sigla
+           margin="dense"
+           id="name"
+           label="Sigla"
+           type="Text"
+           fullWidth
+           onChange={handleSigla}
+           value={sigla}
+         />
+         {console.log("sigla es  "+ sigla)}
 
-      }}
-      />
-      <CustomInput
-      labelText="Nombre del Curso"
-      id="nombrecurso"
-      formControlProps={{
-        fullWidth: true
-      }}
-      inputProps={{
-        value: nombrecurso,
-        autoComplete: "off"
-      }}
-      />
-      <CustomInput
-      labelText="Tipo de Curso"
-      id="tipocurso"
-      formControlProps={{
-        fullWidth: true
-      }}
-      inputProps={{
-        value:tipocurso,
-        autoComplete: "off"
+         <TextField
 
-      }}
-      />
-      <CustomInput
-      labelText="Creditos"
-      id="creditos"
-      formControlProps={{
-        fullWidth: true
-      }}
-      inputProps={{
-        value:creditos,
-        autoComplete: "off"
-
-      }}
-      />
-      <CustomInput
-      labelText="Periodo"
-      id="periodo"
-      formControlProps={{
-        fullWidth: true
-      }}
-      inputProps={{
-        value:periodo,
-        autoComplete: "off"
-
-      }}
-      />
-      <CustomInput
-      labelText="Periodo"
-      id="periodo"
-      formControlProps={{
-        fullWidth: true
-      }}
-      inputProps={{
-        value:periodo,
-        autoComplete: "off"
-
-      }}
-      />
-      <CustomInput
-      labelText="Periodo"
-      id="periodo"
-      formControlProps={{
-        fullWidth: true
-      }}
-      inputProps={{
-        value:periodo,
-        autoComplete: "off"
-
-      }}
-      />
-
-      <div className={classes.checkboxAndRadio}>
-      <FormControlLabel
-      control={
-        <Checkbox
-        tabIndex={-1}
-        onClick={() => handleChange()}
-        checkedIcon={<Check className={classes.checkedIcon} />}
-        icon={<Check className={classes.uncheckedIcon} />}
-        classes={{
-          checked: classes.checked,
-          root: classes.checkRoot
-        }}
+          margin="dense"
+          id="name"
+          label="Nombre del Curso"
+          type="Text"
+          fullWidth
+          onChange={handleNombrecurso}
+          value={nombrecurso}
         />
-      }
-      classes={{
-        label: classes.label,
-        root: classes.labelRoot
-      }}
-      label="Activar Funcionario"
-      />
-      </div>
+        {console.log("nombre es "+ nombrecurso)}
 
+        <FormControl
+          fullWidth
+          className={classes.selectFormControl}
+        >
 
-      </form>
+        <InputLabel
+          htmlFor="simple-select"
+          className={classes.selectLabel}
+        >
+          Tipo de Curso
+        </InputLabel>
 
+      <Select
+        MenuProps={{
+          className: classes.selectMenu
+        }}
+        classes={{
+          select: classes.select
+        }}
+        value={simpleSelect1}
+        onChange={handleSimple1}
+        inputProps={{
+          name: "simpleSelect",
+          id: "simple-select"
+        }}
 
+      >
+      {console.log("simpleSelect1 ES= "+simpleSelect1)}
+        <MenuItem
+          disabled
+          classes={{
+            root: classes.selectMenuItem
+          }}
+        >
+          Grado académico
+        </MenuItem>
+        <MenuItem
+          classes={{
+            root: classes.selectMenuItem,
+            selected: classes.selectMenuItemSelected
+          }}
+          value="1"
+        >
+          Bachillerato
+        </MenuItem>
+        <MenuItem
+          classes={{
+            root: classes.selectMenuItem,
+            selected: classes.selectMenuItemSelected
+          }}
+          value="2"
+        >
+          Licenciatura
+        </MenuItem>
 
-      </GridItem>
-      </GridContainer>
+        <MenuItem
+          classes={{
+            root: classes.selectMenuItem,
+            selected: classes.selectMenuItemSelected
+          }}
+          value="3"
+        >
+          Maestría
+        </MenuItem>
 
+        <MenuItem
+          classes={{
+            root: classes.selectMenuItem,
+            selected: classes.selectMenuItemSelected
+          }}
+          value="4"
+        >
+          Doctorado
+        </MenuItem>
+      })}
+      </Select>
+      </FormControl>
 
+        <TextField
 
-      </SweetAlert>
+         margin="dense"
+         id="name"
+         label="Creditos"
+         type="Text"
+         fullWidth
+         onChange={handleCreditos}
+         value={creditos}
+       />
+     {console.log("Creditos ES= "+ creditos)}
+         </GridItem>
+       </div>
+       }}
+     </Query>
+       </div>
     );
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const inputAlertEditarCurso = () => {
   setAlert(
     <SweetAlert
@@ -340,66 +489,6 @@ const inputAlertEditarCurso = () => {
     confirmBtnCssClass={classes.button + " " + classes.info}
     cancelBtnCssClass={classes.button + " " + classes.danger}
     >
-
-    <GridContainer
-
-    >
-    <GridItem>
-
-
-    <form style={{width:"850px",height:"100px", overflow : "scroll" }}>
-    <CustomInput
-    labelText="Sigla"
-    id="id_Sigla"
-    formControlProps={{
-      fullWidth: true
-    }}
-    value={sigla}
-
-    inputProps={{
-
-      autoComplete: "off",
-      value: sigla
-
-    }}
-    />
-    <CustomInput
-    labelText="Sigla"
-    id="id_Sigla"
-    formControlProps={{
-      fullWidth: true
-    }}
-    value={sigla}
-
-    inputProps={{
-
-      autoComplete: "off",
-      value: sigla
-
-    }}
-    />
-    <CustomInput
-    labelText="Sigla"
-    id="id_Sigla"
-    formControlProps={{
-      fullWidth: true
-    }}
-    value={sigla}
-
-    inputProps={{
-
-      autoComplete: "off",
-      value: sigla
-
-    }}
-    />
-
-    </form>
-
-    </GridItem>
-    </GridContainer>
-
-
 
     </SweetAlert>
   );
@@ -417,7 +506,6 @@ const inputAlertEditarCurso = () => {
     setSelectedEnabled(event.target.value);
   };
 
-
   const loadPost = (post) => {
     setPost( post
     );
@@ -431,8 +519,6 @@ const inputAlertEditarCurso = () => {
     setApellido(response.data.results[0].lastname);
 
     //this.setState({ posts: response.data.results});
-
-
   });
 }
 
@@ -521,26 +607,241 @@ const [data, setData] = React.useState(
 );
 
 
+
+
+
 return (
   <div>
   {alert}
   <GridContainer>
   <Card>
-
-
-
   <GridContainer style={{justifyContent: 'center'}}>
 
-
   {/* // flex-end// */}
-    <Button     onClick={inputAlertAgregarCurso} className={classes.info}    >
-    Agregar Nuevo curso
+
+
+    <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      Open form dialog
     </Button>
+
+
+
+        <div>
+
+             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+               <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+               <DialogContent>
+                 <DialogContentText>
+                   To subscribe to this website, please enter your email address here. We will send updates
+                   occasionally.
+                 </DialogContentText>
+
+                     <UsersQuery />
+
+               </DialogContent>
+               <DialogActions>
+                 <Button onClick={handleClose} color="primary">
+                   Cancel
+                 </Button>
+                 <Button onClick={handleClose} color="primary">
+                   Subscribe
+                 </Button>
+               </DialogActions>
+             </Dialog>
+           </div>
+
+
     </GridContainer>
 
+    <div>
+   <Query
+     query={gql`
+       {
+         users {
+           name
+         }
+       }
+     `}
+   >
+     {({ loading, error, data }) => {
+       if (loading) return <p>Loading...</p>;
+       if (error) return <p>Error!</p>;
+
+       return<div className={classes.container}>
+       <GridItem xs={12} sm={12} md={6}>
+         <div>
+       <FormControl
+         fullWidth
+         className={classes.selectFormControl}
+       >
+
+         <InputLabel
+           htmlFor="simple-select"
+           className={classes.selectLabel}
+         >
+           Requisitos/Correquisitos
+         </InputLabel>
+
+       <Select
+         MenuProps={{
+           className: classes.selectMenu
+         }}
+         classes={{
+           select: classes.select
+         }}
+         value={simpleSelect}
+         onChange={handleSimple}
+         inputProps={{
+           name: "simpleSelect",
+           id: "simple-select"
+         }}
+
+       >
+       {console.log("simpleSelect ES= "+simpleSelect)}
+
+       {data.users.map(user => {
+
+         return<MenuItem
+           key={user.name}
+           classes={{
+
+               root: classes.selectMenuItem,
+               selected: classes.selectMenuItemSelected
+           }}
+           value={user.name}
+         >
+          { user.name }
+         </MenuItem>
+       })}
+       </Select>
+      </FormControl>
+      </div>
+
+
+
+        <TextField
+
+         margin="dense"
+         id="name"
+         label="Sigla"
+         type="Text"
+         fullWidth
+         onChange={handleSigla}
+         value={sigla}
+       />
+       {console.log("sigla es  "+ sigla)}
+
+       <TextField
+
+        margin="dense"
+        id="name"
+        label="Nombre del Curso"
+        type="Text"
+        fullWidth
+        onChange={handleNombrecurso}
+        value={nombrecurso}
+      />
+      {console.log("nombre es "+ nombrecurso)}
+
+      <FormControl
+        fullWidth
+        className={classes.selectFormControl}
+      >
+
+      <InputLabel
+        htmlFor="simple-select"
+        className={classes.selectLabel}
+      >
+        Tipo de Curso
+      </InputLabel>
+
+    <Select
+      MenuProps={{
+        className: classes.selectMenu
+      }}
+      classes={{
+        select: classes.select
+      }}
+      value={simpleSelect1}
+      onChange={handleSimple1}
+      inputProps={{
+        name: "simpleSelect",
+        id: "simple-select"
+      }}
+
+    >
+    {console.log("simpleSelect1 ES= "+simpleSelect1)}
+      <MenuItem
+        disabled
+        classes={{
+          root: classes.selectMenuItem
+        }}
+      >
+        Grado académico
+      </MenuItem>
+      <MenuItem
+        classes={{
+          root: classes.selectMenuItem,
+          selected: classes.selectMenuItemSelected
+        }}
+        value="1"
+      >
+        Bachillerato
+      </MenuItem>
+      <MenuItem
+        classes={{
+          root: classes.selectMenuItem,
+          selected: classes.selectMenuItemSelected
+        }}
+        value="2"
+      >
+        Licenciatura
+      </MenuItem>
+
+      <MenuItem
+        classes={{
+          root: classes.selectMenuItem,
+          selected: classes.selectMenuItemSelected
+        }}
+        value="3"
+      >
+        Maestría
+      </MenuItem>
+
+      <MenuItem
+        classes={{
+          root: classes.selectMenuItem,
+          selected: classes.selectMenuItemSelected
+        }}
+        value="4"
+      >
+        Doctorado
+      </MenuItem>
+    })}
+    </Select>
+    </FormControl>
+
+      <TextField
+
+       margin="dense"
+       id="name"
+       label="Creditos"
+       type="Text"
+       fullWidth
+       onChange={handleCreditos}
+       value={creditos}
+     />
+   {console.log("Creditos ES= "+ creditos)}
+       </GridItem>
+     </div>
+     }}
+   </Query>
+     </div>
+
+
+
+
     <CardBody>
-
-
     <CustomInput
     labelText="Buscar"
     id="Buscar"
@@ -582,7 +883,6 @@ return (
     />
     </CardBody>
     </Card>
-
     </GridContainer>
     </div>
 
