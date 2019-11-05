@@ -154,10 +154,10 @@ export default function Calendar() {
     };
   };
 
-  const minTime = new Date();
-  minTime.setHours(8,0,0);
-  const maxTime = new Date();
-  maxTime.setHours(20,0,0);
+  //const minTime = new Date();
+  //minTime.setHours(8,0,0);
+  //const maxTime = new Date();
+  //maxTime.setHours(20,0,0);
 
   return (
     <div>
