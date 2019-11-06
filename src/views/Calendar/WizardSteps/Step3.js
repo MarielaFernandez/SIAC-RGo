@@ -140,14 +140,14 @@ export default function DoCurso() {
         <FormControlLabel
           control={
             <Switch
-              checked={checkedB}
+              checked={checkedB} 
               onChange={event => setCheckedB(event.target.checked)}
               value="checkedB"
               classes={{
                 switchBase: classes.switchBase,
                 checked: classes.switchChecked,
                 thumb: classes.switchIcon,
-                track: classes.switchBar
+                track: classes.switchBar,
               }}
             />
           }
