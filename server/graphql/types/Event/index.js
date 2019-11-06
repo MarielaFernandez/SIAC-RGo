@@ -1,11 +1,11 @@
 export default `
   type Event {
     _id: String!
-    name: String!
-    startDate: String!
-    endDate: String!
-    classroom : Int,
-    worker : Int    
+    title: String!
+    start: String!
+    end: String!
+    allDay: String!  
+    color: String!   
   }
 
   type Query {
@@ -20,14 +20,20 @@ export default `
   }
 
   input CreateEventInput {
-    name: String!
-    startDate: String!
-    endDate: String!
+  
+    title: String!
+    start: String!
+    end: String!
+    allDay: String!  
+    color: String!
   }
   
   input UpdateEventInput {
-    name: String
-    startDate: String
-    endDate: String
+    _id: String!
+    title: String!
+    start: String!
+    end: String!
+    allDay: String!  
+    color: String!
   } 
 `;

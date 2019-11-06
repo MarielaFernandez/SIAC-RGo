@@ -1,9 +1,14 @@
 export default `
   type User {
     _id: String!
+    document: String!
     name: String!
+    lastName: String!
+    sex: String!
     email: String!
     age: Int!
+    rol: String!
+    status: String!
     posts: [Post!]!
     comments: [Comment!]!
   }
@@ -20,9 +25,15 @@ export default `
   }
 
   input CreateUserInput {
+ 
+    document: String!
     name: String!
+    lastName: String!
+    sex: String!
     email: String!
     age: Int!
+    rol: String!
+    status: String!
   }
   
   input UpdateUserInput {

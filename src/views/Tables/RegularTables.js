@@ -157,61 +157,6 @@ export default function RegularTables() {
   const classes = useStyles();
 
   const userList = [
-    {
-      color: "success",
-      data: [
-        "1",
-        "Nury",
-        "Leitón",
-        "lajefa@ucr.ac.cr",
-        "Activo",buttons
-       
-        
-      ]
-
-    
-      
-    } ,
-   
-    ["2", "Juan", "Gamboa", "juan.gamboa@ucr.ac.cr", "Activo",buttons],
-    {
-      color: "info",
-      data: [
-        "3",
-        "Yendry",
-        "Lezcano",
-        "yen.dry@ucr.ac.cr",
-        "Activo",buttons
-      ]
-    },
-    [
-      "4",
-      "Rolando",
-      "Vargas",
-      "rolo.varg@ucr.ac.cr",
-      "Activo",buttons
-    ],
-    {
-      color: "danger",
-      data: [
-        "5",
-        "Gabriela",
-        "Loaiza",
-        "gaby.loai@ucr.ac.cr",
-        "Activo",buttons
-      ]
-    },
-    ["6", "Jorge", "Segura", "george@ucr.ac.cr", "Activo",buttons],
-    {
-      color: "warning",
-      data: [
-        "7",
-        "Randall",
-        "Jiménez",
-        "rajim@ucr.ac.cr",
-        "Activo",buttons
-      ]
-    }
   ];
 
   const UsersQuery = () => {
@@ -221,8 +166,14 @@ export default function RegularTables() {
           {
             users {              
               _id,
+              document,
               name,
-              email
+              lastName, 
+              sex,
+              email,
+              age, 
+              rol, 
+              status
             }
           }
         `}
@@ -231,17 +182,16 @@ export default function RegularTables() {
           if (loading) return <p>Loading...</p>;
           if (error) return <p>Error, sin conexion!</p>;
           data.users.map(user => {
-            userList.push({color: "info", data : [ "1", user.name , user._id , user.email , "Activo"]})            
+            userList.push({color: "info", data : [ user.document,  user.name ,
+              user.lastName, user.sex, user.email , user.age, user.rol, user.status]})            
           });
-          console.log(userList);
+          //console.log(userList);
           return <Table
               hover
-              tableHead={[" Id", "Nombre", "Email"]}
-  
+              tableHead={[" Cedula", "Nombre", "Apellido", "Sexo", "Email","Edad", "Rol", "Estado"]}
             
               tableData = {userList}
             
-              
               
             />          
         }}

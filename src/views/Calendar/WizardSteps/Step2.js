@@ -23,15 +23,91 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-
+import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import MenuItem from "@material-ui/core/MenuItem";
 
 import { events as calendarEvents } from "variables/general.js";
+
+import ApolloClient, { gql } from "apollo-boost";
+import { ApolloProvider, Query } from "react-apollo";
+
 
 const localizer = momentLocalizer(moment);
 
 const useStyles = makeStyles(styles);
 
 export default function DoCurso() {
+
+
+    const EventsQuery = () => {
+      return (
+        <Query
+          query={gql`
+            {
+              events {              
+                name
+              }
+            }
+          `}
+        >
+          {({ loading, error, data }) => {
+            if (loading) return <p>Loading...</p>;
+            if (error) return <p>Error!</p>;
+  
+            return <FormControl
+              fullWidth
+              className={classes.selectFormControl}
+            >
+            <InputLabel
+              htmlFor="simple-select"
+              className={classes.selectLabel}
+            >
+              Elija un evento
+            </InputLabel>
+            <Select
+              MenuProps={{
+                className: classes.selectMenu
+              }}
+              classes={{
+                select: classes.select
+              }}
+              value={simpleSelect}
+              onChange={handleSimple}
+              inputProps={{
+                name: "simpleSelect",
+                id: "simple-select"
+              }}
+            > {data.events.map(event => {
+              return <MenuItem
+  
+                key={event.name}
+                classes={{
+  
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected
+                }}
+                value={event.name}
+              > { event.name } </MenuItem>
+            })}
+            </Select>
+            </FormControl>
+          }}
+        </Query>
+      );
+    };
+  
+  
+    const [simpleSelect, setSimpleSelect] = React.useState("");
+  
+    const handleSimple = event => {
+      setSimpleSelect(event.target.value);
+    };
+  
+
+
+
   const [checkedA, setCheckedA] = React.useState(null);
   const [checkedB, setCheckedB] = React.useState(null);
   const [checkedC, setCheckedC] = React.useState(null);
@@ -96,31 +172,9 @@ export default function DoCurso() {
   return (
     <div>
       
-      <div>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={checkedB}
-              onChange={event => setCheckedB(event.target.checked)}
-              value="checkedB"
-              classes={{
-                switchBase: classes.switchBase,
-                checked: classes.switchChecked,
-                thumb: classes.switchIcon,
-                track: classes.switchBar
-              }}
-            />
-          }
-          classes={{
-            label: classes.label
-          }}
-          label="Horas contacto"
-        />
-      </div>
-
+      <h4>Paso 1: Ingrese la fecha de inicio y final de su contrato.</h4>
       <br/>
 
-      
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Grid container justify="space-around">
         <InputLabel className={classes.label}>
@@ -154,6 +208,33 @@ export default function DoCurso() {
       </Grid>    
     </MuiPickersUtilsProvider>
 
+      <br/>
+      <h4>Paso 2: Habilite o encienda el switch para seleccionar en el horario.</h4>
+      <br/>
+      <div>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={checkedB}
+              onChange={event => setCheckedB(event.target.checked)}
+              value="checkedB"
+              classes={{
+                switchBase: classes.switchBase,
+                checked: classes.switchChecked,
+                thumb: classes.switchIcon,
+                track: classes.switchBar
+              }}
+            />
+          }
+          classes={{
+            label: classes.label
+          }}
+          label="Horas contacto"
+        />
+      </div>
+
+      <br/>
+
     
 
 <GridContainer justify="center">
@@ -161,6 +242,7 @@ export default function DoCurso() {
       <Card>
         <CardBody calendar>
           <BigCalendar
+            localizer={localizer}
             views={['week', 'agenda']}                              
             // startAccessor="start"
             // endAccessor="end"                
@@ -169,8 +251,8 @@ export default function DoCurso() {
             localizer={localizer}
             events={events}
             defaultView="week"
-            // scrollToTime={new Date(2019, 1, 1, 6)}
-            date={new Date(2019, 8, 29, 6)}
+            //scrollToTime={new Date(2019, 1, 1, 6)}
+            //date={new Date(2019, 8, 29, 6)}
             // length ={200}
             defaultDate={new Date()}
             onSelectEvent={event => selectedEvent(event)}
@@ -179,14 +261,24 @@ export default function DoCurso() {
             step = {30}
             min = {minTime}
             max = {maxTime}
-            eventPropGetter={eventColors}                 
-            // views={{ agenda: true, week: MyWeek }}                
-            culture = {'es'}                
+            eventPropGetter={eventColors}                
+            // views={{ agenda: true, week: MyWeek }}
+            messages={{
+              next: "sig",
+              previous: "ant",
+              today: "Hoy",
+              month: "Mes",
+              week: "Semana",
+              day: "Día"
+            }}              
+            culture = {'es'}               
           />
         </CardBody>
       </Card>
     </GridItem>
   </GridContainer>
+
+  <EventsQuery />
 
   </div>
   );

@@ -7,28 +7,30 @@ ObjectID.prototype.valueOf = function() {
   return this.toString();
 };
 
-const EventSchema = new Schema({
- title: {
+const CourseSchema = new Schema({
+  initials: {
     type: String,
     unique: true,
     required: true
   },
-  start: {
-    type: String,    
-    required: true
-  },
-  end: {
+  name: {
     type: String,
     required: true
   },
-  allDay: {
+  type: {
     type: String,
     required: true
   },
-  color: {
+  credits: {
     type: String,
     required: true
-  }
+  },
+  period: {
+    type: String,
+    unique: true,
+    required: true
+  },
+  
 });
 
-export default mongoose.model("Event", EventSchema);
+export default mongoose.model("Course", CourseSchema);

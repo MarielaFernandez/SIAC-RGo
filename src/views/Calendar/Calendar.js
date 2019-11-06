@@ -30,8 +30,7 @@ import styles from "assets/jss/material-dashboard-pro-react/components/buttonSty
 import { events as calendarEvents } from "variables/general.js";
 
 
-import ApolloClient, { gql } from "apollo-boost";
-import { ApolloProvider, Query } from "react-apollo";
+
 
 const localizer = momentLocalizer(moment);
 
@@ -46,69 +45,12 @@ import Step3 from "./WizardSteps/Step3.js";
 
 export default function Calendar() {
 
-  const EventsQuery = () => {
-    return (
-      <Query
-        query={gql`
-          {
-            events {              
-              name
-            }
-          }
-        `}
-      >
-        {({ loading, error, data }) => {
-          if (loading) return <p>Loading...</p>;
-          if (error) return <p>Error!</p>;
-
-          return <FormControl
-            fullWidth
-            className={classes.selectFormControl}
-          >
-          <InputLabel
-            htmlFor="simple-select"
-            className={classes.selectLabel}
-          >
-            Elija un evento
-          </InputLabel>
-          <Select
-            MenuProps={{
-              className: classes.selectMenu
-            }}
-            classes={{
-              select: classes.select
-            }}
-            value={simpleSelect}
-            onChange={handleSimple}
-            inputProps={{
-              name: "simpleSelect",
-              id: "simple-select"
-            }}
-          > {data.events.map(event => {
-            return <MenuItem
-
-              key={event.name}
-              classes={{
-
-                  root: classes.selectMenuItem,
-                  selected: classes.selectMenuItemSelected
-              }}
-              value={event.name}
-            > { event.name } </MenuItem>
-          })}
-          </Select>
-          </FormControl>
-        }}
-      </Query>
-    );
-  };
+  
 
 
   const [simpleSelect, setSimpleSelect] = React.useState("");
 
-  const handleSimple = event => {
-    setSimpleSelect(event.target.value);
-  };
+  
 
 
   const classes = useStyles();
@@ -154,10 +96,10 @@ export default function Calendar() {
     };
   };
 
-  const minTime = new Date();
-  minTime.setHours(8,0,0);
-  const maxTime = new Date();
-  maxTime.setHours(20,0,0);
+  //const minTime = new Date();
+  //minTime.setHours(8,0,0);
+  //const maxTime = new Date();
+  //maxTime.setHours(20,0,0);
 
   return (
     <div>
@@ -180,7 +122,7 @@ export default function Calendar() {
     </GridContainer>
     
     
-    <EventsQuery />
+    
 
     </div>
   );
