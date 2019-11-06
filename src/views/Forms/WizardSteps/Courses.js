@@ -116,10 +116,10 @@ export default function Courses() {
   const [simpleSelect1, setSimpleSelect1] = React.useState("");
   const [simpleSelect2, setSimpleSelect2] = React.useState("");
   const [simpleSelect3, setSimpleSelect3] = React.useState("");
-    const [show, setShow] = React.useState(false);
+  const [show, setShow] = React.useState(false);
 
 
-    const [open, setOpen] = React.useState(false);
+const [open, setOpen] = React.useState(false);
 
 const handleClickOpen = () => {
   setOpen(true);
@@ -130,8 +130,11 @@ const handleClose = () => {
   setOpen(false);
   setSimpleSelect("");
   setSigla("");
-
+  setNombrecurso("");
+  setSimpleSelect1("");
+  setCreditos("")
 };
+
 
   const handleSimple = event => {
     setSimpleSelect(event.target.value);
@@ -139,14 +142,10 @@ const handleClose = () => {
 
   const handleSigla = event => {
     setSigla(event.target.value);
-
-
   };
 
   const handleNombrecurso = event => {
     setNombrecurso(event.target.value);
-
-    console.log(nombrecurso);
   };
   const handleCreditos = event => {
     setCreditos(event.target.value);
@@ -154,8 +153,10 @@ const handleClose = () => {
 
   const handleSimple1 = event => {
     setSimpleSelect1(event.target.value);
-
   };
+
+
+
   const handleSimple2 = event => {
     setSimpleSelect2(event.target.value);
   };
@@ -269,7 +270,6 @@ const handleClose = () => {
 
   const UsersQuery = () => {
     return (
-      <div>
      <Query
        query={gql`
          {
@@ -284,6 +284,7 @@ const handleClose = () => {
          if (error) return <p>Error!</p>;
 
          return<div className={classes.container}>
+
          <GridItem xs={12} sm={12} md={6}>
            <div>
          <FormControl
@@ -307,13 +308,15 @@ const handleClose = () => {
            }}
            value={simpleSelect}
            onChange={handleSimple}
+
+
            inputProps={{
              name: "simpleSelect",
              id: "simple-select"
            }}
 
          >
-         {console.log("simpleSelect ES= "+simpleSelect)}
+         {console.log("Correquisitos= "+simpleSelect)}
 
          {data.users.map(user => {
 
@@ -331,128 +334,12 @@ const handleClose = () => {
          })}
          </Select>
         </FormControl>
+
         </div>
-
-
-
-          <TextField
-
-           margin="dense"
-           id="name"
-           label="Sigla"
-           type="Text"
-           fullWidth
-           onChange={handleSigla}
-           value={sigla}
-         />
-         {console.log("sigla es  "+ sigla)}
-
-         <TextField
-
-          margin="dense"
-          id="name"
-          label="Nombre del Curso"
-          type="Text"
-          fullWidth
-          onChange={handleNombrecurso}
-          value={nombrecurso}
-        />
-        {console.log("nombre es "+ nombrecurso)}
-
-        <FormControl
-          fullWidth
-          className={classes.selectFormControl}
-        >
-
-        <InputLabel
-          htmlFor="simple-select"
-          className={classes.selectLabel}
-        >
-          Tipo de Curso
-        </InputLabel>
-
-      <Select
-        MenuProps={{
-          className: classes.selectMenu
-        }}
-        classes={{
-          select: classes.select
-        }}
-        value={simpleSelect1}
-        onChange={handleSimple1}
-        inputProps={{
-          name: "simpleSelect",
-          id: "simple-select"
-        }}
-
-      >
-      {console.log("simpleSelect1 ES= "+simpleSelect1)}
-        <MenuItem
-          disabled
-          classes={{
-            root: classes.selectMenuItem
-          }}
-        >
-          Grado académico
-        </MenuItem>
-        <MenuItem
-          classes={{
-            root: classes.selectMenuItem,
-            selected: classes.selectMenuItemSelected
-          }}
-          value="1"
-        >
-          Bachillerato
-        </MenuItem>
-        <MenuItem
-          classes={{
-            root: classes.selectMenuItem,
-            selected: classes.selectMenuItemSelected
-          }}
-          value="2"
-        >
-          Licenciatura
-        </MenuItem>
-
-        <MenuItem
-          classes={{
-            root: classes.selectMenuItem,
-            selected: classes.selectMenuItemSelected
-          }}
-          value="3"
-        >
-          Maestría
-        </MenuItem>
-
-        <MenuItem
-          classes={{
-            root: classes.selectMenuItem,
-            selected: classes.selectMenuItemSelected
-          }}
-          value="4"
-        >
-          Doctorado
-        </MenuItem>
-      })}
-      </Select>
-      </FormControl>
-
-        <TextField
-
-         margin="dense"
-         id="name"
-         label="Creditos"
-         type="Text"
-         fullWidth
-         onChange={handleCreditos}
-         value={creditos}
-       />
-     {console.log("Creditos ES= "+ creditos)}
-         </GridItem>
+        </GridItem>
        </div>
        }}
      </Query>
-       </div>
     );
   };
 
@@ -626,17 +513,139 @@ return (
 
 
 
+
+
         <div>
 
              <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-               <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+               <DialogTitle id="form-dialog-title">Agegar Curso</DialogTitle>
                <DialogContent>
                  <DialogContentText>
-                   To subscribe to this website, please enter your email address here. We will send updates
-                   occasionally.
+                   Formulario de ingreso de cursos
                  </DialogContentText>
 
+                 <GridItem xs={12} sm={12} md={6}>
+                 <TextField
+                  margin="dense"
+                  id="name"
+                  label="Sigla"
+                  type="Text"
+                  fullWidth
+                  onChange={handleSigla}
+                  value={sigla}
+                />
+                {console.log("sigla es  "+ sigla)}
+
+                <TextField
+                 margin="dense"
+                 id="name"
+                 label="Nombre del Curso"
+                 type="Text"
+                 fullWidth
+                 onChange={handleNombrecurso}
+                 value={nombrecurso}
+
+               />
+               {console.log("nombre es "+ nombrecurso)}
+               </GridItem>
+
+
+                      <GridItem xs={12} sm={12} md={6}>
+                         <FormControl
+                           fullWidth
+                           className={classes.selectFormControl}
+                         >
+
+                         <InputLabel
+                           htmlFor="simple-select"
+                           className={classes.selectLabel}
+                         >
+                           Tipo de Curso
+                         </InputLabel>
+
+                       <Select
+                         MenuProps={{
+                           className: classes.selectMenu
+                         }}
+                         classes={{
+                           select: classes.select
+                         }}
+                         value={simpleSelect1}
+                         onChange={handleSimple1}
+                         inputProps={{
+                           name: "simpleSelect",
+                           id: "simple-select"
+                         }}
+
+                       >
+
+                         <MenuItem
+                           disabled
+                           classes={{
+                             root: classes.selectMenuItem
+                           }}
+                         >
+                           Grado académico
+                         </MenuItem>
+                         <MenuItem
+                           classes={{
+                             root: classes.selectMenuItem,
+                             selected: classes.selectMenuItemSelected
+                           }}
+                           value="1"
+                         >
+                           Bachillerato
+                         </MenuItem>
+                         <MenuItem
+                           classes={{
+                             root: classes.selectMenuItem,
+                             selected: classes.selectMenuItemSelected
+                           }}
+                           value="2"
+                         >
+                           Licenciatura
+                         </MenuItem>
+
+                         <MenuItem
+                           classes={{
+                             root: classes.selectMenuItem,
+                             selected: classes.selectMenuItemSelected
+                           }}
+                           value="3"
+                         >
+                           Maestría
+                         </MenuItem>
+
+                         <MenuItem
+                           classes={{
+                             root: classes.selectMenuItem,
+                             selected: classes.selectMenuItemSelected
+                           }}
+                           value="4"
+                         >
+                           Doctorado
+                         </MenuItem>
+                       })}
+                          {console.log("TIPO DE CURSO ES= "+simpleSelect1)}
+                       </Select>
+                       </FormControl>
+                       </GridItem>
+
                      <UsersQuery />
+
+
+                <GridItem xs={12} sm={12} md={6}>
+                   <TextField
+                    margin="dense"
+                    id="name"
+                    label="Creditos"
+                    type="Text"
+                    fullWidth
+                    onChange={handleCreditos}
+                    value={creditos}
+                  />
+                {console.log("Creditos ES= "+ creditos)}
+                </GridItem>
 
                </DialogContent>
                <DialogActions>
@@ -649,195 +658,7 @@ return (
                </DialogActions>
              </Dialog>
            </div>
-
-
     </GridContainer>
-
-    <div>
-   <Query
-     query={gql`
-       {
-         users {
-           name
-         }
-       }
-     `}
-   >
-     {({ loading, error, data }) => {
-       if (loading) return <p>Loading...</p>;
-       if (error) return <p>Error!</p>;
-
-       return<div className={classes.container}>
-       <GridItem xs={12} sm={12} md={6}>
-         <div>
-       <FormControl
-         fullWidth
-         className={classes.selectFormControl}
-       >
-
-         <InputLabel
-           htmlFor="simple-select"
-           className={classes.selectLabel}
-         >
-           Requisitos/Correquisitos
-         </InputLabel>
-
-       <Select
-         MenuProps={{
-           className: classes.selectMenu
-         }}
-         classes={{
-           select: classes.select
-         }}
-         value={simpleSelect}
-         onChange={handleSimple}
-         inputProps={{
-           name: "simpleSelect",
-           id: "simple-select"
-         }}
-
-       >
-       {console.log("simpleSelect ES= "+simpleSelect)}
-
-       {data.users.map(user => {
-
-         return<MenuItem
-           key={user.name}
-           classes={{
-
-               root: classes.selectMenuItem,
-               selected: classes.selectMenuItemSelected
-           }}
-           value={user.name}
-         >
-          { user.name }
-         </MenuItem>
-       })}
-       </Select>
-      </FormControl>
-      </div>
-
-
-
-        <TextField
-
-         margin="dense"
-         id="name"
-         label="Sigla"
-         type="Text"
-         fullWidth
-         onChange={handleSigla}
-         value={sigla}
-       />
-       {console.log("sigla es  "+ sigla)}
-
-       <TextField
-
-        margin="dense"
-        id="name"
-        label="Nombre del Curso"
-        type="Text"
-        fullWidth
-        onChange={handleNombrecurso}
-        value={nombrecurso}
-      />
-      {console.log("nombre es "+ nombrecurso)}
-
-      <FormControl
-        fullWidth
-        className={classes.selectFormControl}
-      >
-
-      <InputLabel
-        htmlFor="simple-select"
-        className={classes.selectLabel}
-      >
-        Tipo de Curso
-      </InputLabel>
-
-    <Select
-      MenuProps={{
-        className: classes.selectMenu
-      }}
-      classes={{
-        select: classes.select
-      }}
-      value={simpleSelect1}
-      onChange={handleSimple1}
-      inputProps={{
-        name: "simpleSelect",
-        id: "simple-select"
-      }}
-
-    >
-    {console.log("simpleSelect1 ES= "+simpleSelect1)}
-      <MenuItem
-        disabled
-        classes={{
-          root: classes.selectMenuItem
-        }}
-      >
-        Grado académico
-      </MenuItem>
-      <MenuItem
-        classes={{
-          root: classes.selectMenuItem,
-          selected: classes.selectMenuItemSelected
-        }}
-        value="1"
-      >
-        Bachillerato
-      </MenuItem>
-      <MenuItem
-        classes={{
-          root: classes.selectMenuItem,
-          selected: classes.selectMenuItemSelected
-        }}
-        value="2"
-      >
-        Licenciatura
-      </MenuItem>
-
-      <MenuItem
-        classes={{
-          root: classes.selectMenuItem,
-          selected: classes.selectMenuItemSelected
-        }}
-        value="3"
-      >
-        Maestría
-      </MenuItem>
-
-      <MenuItem
-        classes={{
-          root: classes.selectMenuItem,
-          selected: classes.selectMenuItemSelected
-        }}
-        value="4"
-      >
-        Doctorado
-      </MenuItem>
-    })}
-    </Select>
-    </FormControl>
-
-      <TextField
-
-       margin="dense"
-       id="name"
-       label="Creditos"
-       type="Text"
-       fullWidth
-       onChange={handleCreditos}
-       value={creditos}
-     />
-   {console.log("Creditos ES= "+ creditos)}
-       </GridItem>
-     </div>
-     }}
-   </Query>
-     </div>
-
 
 
 
