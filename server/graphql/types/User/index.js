@@ -3,9 +3,12 @@ export default `
     _id: String!
     document: String!
     name: String!
+    lastNname: String!
+    sex: String!
     email: String!
     age: Int!
     rol: String!
+    status: String!
     posts: [Post!]!
     comments: [Comment!]!
   }

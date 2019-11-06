@@ -16,9 +16,12 @@ export default {
         _id: u._id.toString(),
         document: u.document,
         name: u.name,
+        lastName: u.lastNname,
+        sex: u.sex,
         email: u.email,
         age: u.age,
         rol: u.rol,
+        status: u.status,
         posts: u.posts,
         comments: u.comments
       }));
@@ -29,9 +32,12 @@ export default {
       const newUser = await new User({
         document: user.document,
         name: user.name,
+        lastName: user.lastName,
+        sex: user.sex,
         email: user.email,
         age: user.age,
-        rol: user.rol
+        rol: user.rol,
+        status: user.status
       });
 
       return new Promise((resolve, reject) => {
