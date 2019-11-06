@@ -12,9 +12,11 @@ export default {
 
       return events.map(u => ({
         _id: u._id.toString(),
-        name: u.name,
-        startDate: u.startDate,
-        endDate: u.endDate                
+        title: u.title,
+        start: u.start,
+        end: u.end,
+        allDay: u.allDay,
+        color: u.color                
       }));
     }
   },
@@ -23,9 +25,11 @@ export default {
   Mutation: {
     createEvent: async (parent, { event }, context, info) => {
       const newEvent = await new Event({
-        name: event.name,
-        startDate: event.startDate,
-        endDate: event.endDate
+        title: event.title,
+        start: event.start,
+        end: event.end,
+        allDay : event.allDay,
+        color : event.color
       });
 
       return new Promise((resolve, reject) => {
