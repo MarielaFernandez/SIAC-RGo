@@ -201,97 +201,6 @@ var dashRoutes = [
   },
   {
     collapse: true,
-    name: "Components",
-    rtlName: "المكونات",
-    icon: Apps,
-    state: "componentsCollapse",
-    views: [
-      {
-        collapse: true,
-        name: "Multi Level Collapse",
-        rtlName: "انهيار متعدد المستويات",
-        mini: "MC",
-        rtlMini: "ر",
-        state: "multiCollapse",
-        views: [
-          {
-            path: "/buttons",
-            name: "Buttons",
-            rtlName: "وصفت",
-            mini: "B",
-            rtlMini: "ب",
-            component: Buttons,
-            layout: "/admin"
-          }
-        ]
-      },
-      {
-        path: "/buttons",
-        name: "Buttons",
-        rtlName: "وصفت",
-        mini: "B",
-        rtlMini: "ب",
-        component: Buttons,
-        layout: "/admin"
-      },
-      {
-        path: "/grid-system",
-        name: "Grid System",
-        rtlName: "نظام الشبكة",
-        mini: "GS",
-        rtlMini: "زو",
-        component: GridSystem,
-        layout: "/admin"
-      },
-      {
-        path: "/panels",
-        name: "Panels",
-        rtlName: "لوحات",
-        mini: "P",
-        rtlMini: "ع",
-        component: Panels,
-        layout: "/admin"
-      },
-      {
-        path: "/sweet-alert",
-        name: "Sweet Alert",
-        rtlName: "الحلو تنبيه",
-        mini: "SA",
-        rtlMini: "ومن",
-        component: SweetAlert,
-        layout: "/admin"
-      },
-      {
-        path: "/notifications",
-        name: "Notifications",
-        rtlName: "إخطارات",
-        mini: "N",
-        rtlMini: "ن",
-        component: Notifications,
-        layout: "/admin"
-      },
-      {
-        path: "/icons",
-        name: "Icons",
-        rtlName: "الرموز",
-        mini: "I",
-        rtlMini: "و",
-        component: Icons,
-        layout: "/admin"
-      },
-      {
-        path: "/typography",
-        name: "Typography",
-        rtlName: "طباعة",
-        mini: "T",
-        rtlMini: "ر",
-        component: Typography,
-        layout: "/admin"
-      }
-    ]
-  },
-  {
-    collapse: true,
     name: "Forms",
     rtlName: "إستمارات",
     icon: "content_paste",
@@ -324,24 +233,7 @@ var dashRoutes = [
         component: RegularTables,
         layout: "/admin"
       },
-      {
-        path: "/extended-tables",
-        name: "Extended Tables",
-        rtlName: "جداول ممتدة",
-        mini: "ET",
-        rtlMini: "هور",
-        component: ExtendedTables,
-        layout: "/admin"
-      },
-      {
-        path: "/react-tables",
-        name: "React Tables",
-        rtlName: "رد فعل الطاولة",
-        mini: "RT",
-        rtlMini: "در",
-        component: ReactTables,
-        layout: "/admin"
-      },
+      
       {
             
               path: "/GroupsTables",
