@@ -8,6 +8,11 @@ ObjectID.prototype.valueOf = function() {
 };
 
 const UserSchema = new Schema({
+  document: {
+    type: String,
+    unique: true,
+    required: true
+  },
   name: {
     type: String,
     required: true
@@ -21,6 +26,10 @@ const UserSchema = new Schema({
     type: Number,
     required: true
   },
+  rol: {
+    type: String,
+    required: true
+  },
   posts: [
     {
       type: Schema.Types.ObjectId,
@@ -29,7 +38,7 @@ const UserSchema = new Schema({
   ],
   comments: [
     {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId, 
       ref: "Comment"
     }
   ]
