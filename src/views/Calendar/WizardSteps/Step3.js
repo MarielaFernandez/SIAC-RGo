@@ -96,32 +96,9 @@ export default function DoCurso() {
   return (
     <div>
       
-      <div>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={checkedB}
-              onChange={event => setCheckedB(event.target.checked)}
-              value="checkedB"
-              classes={{
-                switchBase: classes.switchBase,
-                checked: classes.switchChecked,
-                thumb: classes.switchIcon,
-                track: classes.switchBar
-              }}
-            />
-          }
-          classes={{
-            label: classes.label
-          }}
-          label="Horas contacto"
-        />
-      </div>
-      
-
+      <h4>Paso 1: Ingrese la fecha de inicio y final de su contrato.</h4>
       <br/>
 
-      
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Grid container justify="space-around">
         <InputLabel className={classes.label}>
@@ -155,13 +132,42 @@ export default function DoCurso() {
       </Grid>    
     </MuiPickersUtilsProvider>
 
-    
+      <br/>
+      <h4>Paso 2: Utilice el switch para seguidamente seleccionar el horario que corresponda al switch seleccionado.</h4>
+      <br/>
+
+      <div>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={checkedB}
+              onChange={event => setCheckedB(event.target.checked)}
+              value="checkedB"
+              classes={{
+                switchBase: classes.switchBase,
+                checked: classes.switchChecked,
+                thumb: classes.switchIcon,
+                track: classes.switchBar
+              }}
+            />
+          }
+          classes={{
+            label: classes.label
+          }}
+          label="Horas contacto"
+        />
+      </div>
+      
+
+      <br/>
+
 
 <GridContainer justify="center">
   <GridItem xs={12} sm={12} md={12}>
       <Card>
         <CardBody calendar>
           <BigCalendar
+            localizer={localizer}
             views={['week', 'agenda']}                              
             // startAccessor="start"
             // endAccessor="end"                
@@ -170,8 +176,8 @@ export default function DoCurso() {
             localizer={localizer}
             events={events}
             defaultView="week"
-            // scrollToTime={new Date(2019, 1, 1, 6)}
-            date={new Date(2019, 8, 29, 6)}
+            //scrollToTime={new Date(2019, 1, 1, 6)}
+            //date={new Date(2019, 8, 29, 6)}
             // length ={200}
             defaultDate={new Date()}
             onSelectEvent={event => selectedEvent(event)}
@@ -180,9 +186,17 @@ export default function DoCurso() {
             step = {30}
             min = {minTime}
             max = {maxTime}
-            eventPropGetter={eventColors}                 
-            // views={{ agenda: true, week: MyWeek }}                
-            culture = {'es'}                
+            eventPropGetter={eventColors}                
+            // views={{ agenda: true, week: MyWeek }}
+            messages={{
+              next: "sig",
+              previous: "ant",
+              today: "Hoy",
+              month: "Mes",
+              week: "Semana",
+              day: "Día"
+            }}              
+            culture = {'es'}               
           />
         </CardBody>
       </Card>

@@ -133,7 +133,7 @@ export default function DoCurso() {
     </MuiPickersUtilsProvider>
 
       <br/>
-      <h4>Paso 2: Utilice los switch para seguidamente seleccionar el horario que corresponda al switch seleccionado.</h4>
+      <h4>Paso 2: Utilice el switch para seguidamente seleccionar el horario que corresponda al switch seleccionado.</h4>
       <br/>
       <div>
         <FormControlLabel
@@ -166,6 +166,7 @@ export default function DoCurso() {
       <Card>
         <CardBody calendar>
           <BigCalendar
+            localizer={localizer}
             views={['week', 'agenda']}                              
             // startAccessor="start"
             // endAccessor="end"                
@@ -174,8 +175,8 @@ export default function DoCurso() {
             localizer={localizer}
             events={events}
             defaultView="week"
-            // scrollToTime={new Date(2019, 1, 1, 6)}
-            date={new Date(2019, 8, 29, 6)}
+            //scrollToTime={new Date(2019, 1, 1, 6)}
+            //date={new Date(2019, 8, 29, 6)}
             // length ={200}
             defaultDate={new Date()}
             onSelectEvent={event => selectedEvent(event)}
@@ -184,9 +185,17 @@ export default function DoCurso() {
             step = {30}
             min = {minTime}
             max = {maxTime}
-            eventPropGetter={eventColors}                 
-            // views={{ agenda: true, week: MyWeek }}                
-            culture = {'es'}                
+            eventPropGetter={eventColors}                
+            // views={{ agenda: true, week: MyWeek }}
+            messages={{
+              next: "sig",
+              previous: "ant",
+              today: "Hoy",
+              month: "Mes",
+              week: "Semana",
+              day: "Día"
+            }}              
+            culture = {'es'}               
           />
         </CardBody>
       </Card>

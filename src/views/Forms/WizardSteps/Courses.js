@@ -48,7 +48,7 @@ import ReactDOM from "react-dom";
 import ApolloClient, { gql } from "apollo-boost";
 import { ApolloProvider, Query } from "react-apollo";
 
-//import Modal from 'react-bootstrap/Modal'
+
 
 import styles from "assets/jss/material-dashboard-pro-react/views/sweetAlertStyle.js";
 
