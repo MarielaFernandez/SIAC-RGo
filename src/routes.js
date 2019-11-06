@@ -298,33 +298,6 @@ var dashRoutes = [
     state: "formsCollapse",
     views: [
       {
-        path: "/regular-forms",
-        name: "Ingreso de Funcionarios",
-        rtlName: "أشكال عادية",
-        mini: "IF",
-        rtlMini: "صو",
-        component: RegularForms,
-        layout: "/admin"
-      },
-      {
-        path: "/extended-forms",
-        name: "Extended Forms",
-        rtlName: "نماذج موسعة",
-        mini: "EF",
-        rtlMini: "هوو",
-        component: ExtendedForms,
-        layout: "/admin"
-      },
-      {
-        path: "/validation-forms",
-        name: "Validation Forms",
-        rtlName: "نماذج التحقق من الصحة",
-        mini: "VF",
-        rtlMini: "تو",
-        component: ValidationForms,
-        layout: "/admin"
-      },
-      {
         path: "/wizard",
         name: "Wizard",
         rtlName: "ساحر",
@@ -391,57 +364,5 @@ var dashRoutes = [
             }
     ]
   },
-  {
-    collapse: true,
-    name: "Maps",
-    rtlName: "خرائط",
-    icon: Place,
-    state: "mapsCollapse",
-    views: [
-      {
-        path: "/google-maps",
-        name: "Google Maps",
-        rtlName: "خرائط جوجل",
-        mini: "GM",
-        rtlMini: "زم",
-        component: GoogleMaps,
-        layout: "/admin"
-      },
-      {
-        path: "/full-screen-maps",
-        name: "Full Screen Map",
-        rtlName: "خريطة كاملة الشاشة",
-        mini: "FSM",
-        rtlMini: "ووم",
-        component: FullScreenMap,
-        layout: "/admin"
-      },
-      {
-        path: "/vector-maps",
-        name: "Vector Map",
-        rtlName: "خريطة المتجه",
-        mini: "VM",
-        rtlMini: "تم",
-        component: VectorMap,
-        layout: "/admin"
-      }
-    ]
-  },
-  {
-    path: "/widgets",
-    name: "Widgets",
-    rtlName: "الحاجيات",
-    icon: WidgetsIcon,
-    component: Widgets,
-    layout: "/admin"
-  },
-  {
-    path: "/charts",
-    name: "Charts",
-    rtlName: "الرسوم البيانية",
-    icon: Timeline,
-    component: Charts,
-    layout: "/admin"
-  }
 ];
 export default dashRoutes;
