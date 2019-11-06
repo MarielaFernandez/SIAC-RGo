@@ -168,7 +168,12 @@ export default function RegularTables() {
               _id,
               document,
               name,
-              email
+              lastName, 
+              sex,
+              email,
+              age, 
+              rol, 
+              status
             }
           }
         `}
@@ -177,12 +182,13 @@ export default function RegularTables() {
           if (loading) return <p>Loading...</p>;
           if (error) return <p>Error, sin conexion!</p>;
           data.users.map(user => {
-            userList.push({color: "info", data : [ user.document, user.name , user.email , "Activo"]})            
+            userList.push({color: "info", data : [ user.document,  user.name ,
+              user.lastName, user.sex, user.email , user.age, user.rol, user.status]})            
           });
           //console.log(userList);
           return <Table
               hover
-              tableHead={[" Cedula", "Nombre", "Email"]}
+              tableHead={[" Cedula", "Nombre", "Apellido", "Sexo", "Email","Edad", "Rol", "Estado"]}
             
               tableData = {userList}
             

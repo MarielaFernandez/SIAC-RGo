@@ -3,7 +3,7 @@ export default `
     _id: String!
     document: String!
     name: String!
-    lastNname: String!
+    lastName: String!
     sex: String!
     email: String!
     age: Int!
@@ -25,11 +25,15 @@ export default `
   }
 
   input CreateUserInput {
+ 
     document: String!
     name: String!
+    lastName: String!
+    sex: String!
     email: String!
     age: Int!
     rol: String!
+    status: String!
   }
   
   input UpdateUserInput {

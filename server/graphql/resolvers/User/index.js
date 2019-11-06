@@ -16,7 +16,7 @@ export default {
         _id: u._id.toString(),
         document: u.document,
         name: u.name,
-        lastName: u.lastNname,
+        lastName: u.lastName,
         sex: u.sex,
         email: u.email,
         age: u.age,
