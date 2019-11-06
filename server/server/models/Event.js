@@ -8,16 +8,24 @@ ObjectID.prototype.valueOf = function() {
 };
 
 const EventSchema = new Schema({
-  name: {
+ title: {
     type: String,
     unique: true,
     required: true
   },
-  startDate: {
+  start: {
     type: String,    
     required: true
   },
-  endDate: {
+  end: {
+    type: String,
+    required: true
+  },
+  allDay: {
+    type: String,
+    required: true
+  },
+  color: {
     type: String,
     required: true
   }
