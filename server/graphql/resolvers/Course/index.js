@@ -13,8 +13,9 @@ export default {
       return courses.map(u => ({
         _id: u._id.toString(),
         name: u.name,
-        startDate: u.startDate,
-        endDate: u.endDate                
+        type: u.type,
+        credits: u.credits,
+        period: u.period                
       }));
     }
   },
@@ -23,9 +24,10 @@ export default {
   Mutation: {
     createCourse: async (parent, { course }, context, info) => {
       const newCourse = await new Course({
-        name: course.name,
-        startDate: course.startDate,
-        endDate: course.endDate
+        name: u.name,
+        type: u.type,
+        credits: u.credits,
+        period: u.period 
       });
 
       return new Promise((resolve, reject) => {
