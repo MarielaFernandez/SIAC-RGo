@@ -1,5 +1,12 @@
 import * as startOfDay from "date-fns";
 import React from "react";
+import {
+  Document,
+  Page,
+  Text,
+  View,
+  StyleSheet
+} from "@react-pdf/renderer";
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import { purple, red, green } from '@material-ui/core/colors';
@@ -41,6 +48,7 @@ const localizer = momentLocalizer(moment);
 
 const useStyles = makeStyles(styles);
 
+
 export default function DoCurso() {
 
   const EventList=[
@@ -70,7 +78,7 @@ export default function DoCurso() {
             EventList.push({title:event.title, start:event.start, end:event.end, allDay:event.allDay, color:event.color})
           })
 
-          return <BigCalendar
+          return<BigCalendar
             localizer={localizer}
             views={['week', 'agenda']}                              
             // startAccessor="start"
@@ -274,7 +282,7 @@ export default function DoCurso() {
 <GridContainer justify="center">
   <GridItem xs={12} sm={12} md={12}>
       <Card>
-        <CardBody calendar>
+        <CardBody>
         <EventsQuery />
         </CardBody>
       </Card>
