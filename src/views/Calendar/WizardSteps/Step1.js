@@ -115,7 +115,7 @@ export default function DoCurso() {
   };
 
   const [state, setState] = React.useState({ //switch
-    checkedA: null,
+    checkedA: true,
     checkedB: null,
     checkedC: null,
   });
