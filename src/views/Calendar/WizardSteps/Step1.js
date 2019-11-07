@@ -70,8 +70,7 @@ export default function DoCurso() {
             EventList.push({title:event.title, start:event.start, end:event.end, allDay:event.allDay, color:event.color})
           })
 
-          return 
-          <BigCalendar
+          return <BigCalendar
             localizer={localizer}
             views={['week', 'agenda']}                              
             // startAccessor="start"

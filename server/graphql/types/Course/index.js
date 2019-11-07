@@ -1,5 +1,6 @@
 export default `
   type Course {
+    _id: String!
     initial: String!
     name: String!
     type: String!
@@ -10,7 +11,7 @@ export default `
 
   type Query {
     course(_id: ID!): Course!
-    courses: [course!]!
+    courses: [Course!]!
   }
 
   type Mutation {
