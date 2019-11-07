@@ -112,16 +112,13 @@ export default function DoCurso() {
 
   const [state, setState] = React.useState({ //switch
     checkedA: true,
-    checkedB: true,
   });
 
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked });//switch
   };
 
-  //const [checkedA, setCheckedA] = React.useState(null);
-  //const [checkedB, setCheckedB] = React.useState(null);
-  //const [checkedC, setCheckedC] = React.useState(null);
+  
   const classes = useStyles();
 
   const [selectedDate, setSelectedDate] = React.useState(new Date('2019-01-01T21:11:54'));
@@ -232,7 +229,7 @@ export default function DoCurso() {
           <Switch
             checked={state.checkedB}
             onChange={handleChange('checkedB')}
-            value="checkedB"
+            value="checkedA"
             color="primary"
           />
         }

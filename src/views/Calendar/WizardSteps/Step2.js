@@ -106,11 +106,16 @@ export default function DoCurso() {
     };
   
 
+    const [state, setState] = React.useState({ //switch
+      checkedA: true,
+    });
+  
+    const handleChange = name => event => {
+      setState({ ...state, [name]: event.target.checked });//switch
+    };
 
 
-  const [checkedA, setCheckedA] = React.useState(null);
-  const [checkedB, setCheckedB] = React.useState(null);
-  const [checkedC, setCheckedC] = React.useState(null);
+  
   const classes = useStyles();
 
   const [selectedDate, setSelectedDate] = React.useState(new Date('2019-01-01T21:11:54'));
@@ -160,7 +165,8 @@ export default function DoCurso() {
     };
   };
 
-  const minTime = new Date();
+
+  const minTime = new Date(); //calendar
   minTime.setHours(7,0,0);
   const maxTime = new Date();
   maxTime.setHours(22,0,0);
@@ -212,25 +218,17 @@ export default function DoCurso() {
       <h4>Paso 2: Habilite o encienda el switch para seleccionar en el horario.</h4>
       <br/>
       <div>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={checkedB}
-              onChange={event => setCheckedB(event.target.checked)}
-              value="checkedB"
-              classes={{
-                switchBase: classes.switchBase,
-                checked: classes.switchChecked,
-                thumb: classes.switchIcon,
-                track: classes.switchBar
-              }}
-            />
-          }
-          classes={{
-            label: classes.label
-          }}
-          label="Horas contacto"
-        />
+      <FormControlLabel
+        control={
+          <Switch
+            checked={state.checkedB}
+            onChange={handleChange('checkedB')}
+            value="checkedA"
+            color="primary"
+          />
+        }
+        label="Horas contacto"
+      />
       </div>
 
       <br/>
