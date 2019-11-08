@@ -654,17 +654,21 @@ export default function Courses() {
 
                   <br />
                   <br />
-                  <GridItem xs={12}>
+
+
+                  <GridContainer justify="center">
+                  <GridItem xs={6} sm={6} md={6}>
                     <YearPicker
                       margin="dense"
                       fullWidth
                       onChange={handleChangepiker}
                     />
-
-
-
                     {console.log("anioo aqui es " + anio)}
                   </GridItem>
+                  </GridContainer>
+
+
+
 
                   <GridItem xs={12}>
                     <FormControl
