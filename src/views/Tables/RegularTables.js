@@ -51,6 +51,7 @@ import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 
 import ApolloClient, { gql } from "apollo-boost";
 import { ApolloProvider, Query } from "react-apollo";
+import { useMutation } from '@apollo/react-hooks';
 
 const styles = {
   customCardContentClass: {
@@ -198,6 +199,15 @@ export default function RegularTables() {
       </Query>
     );
   };
+
+  const createUser = gql`
+  mutation CreateUser($type: String!) {
+    mutation createUser(type: $type) {
+      id
+      type
+    }
+  }
+`;
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {

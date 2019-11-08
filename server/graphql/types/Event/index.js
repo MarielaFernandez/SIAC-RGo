@@ -17,6 +17,7 @@ export default `
     createEvent(event: CreateEventInput): Event!
     updateEvent(_id: String!, event: UpdateEventInput!): Event!
     deleteEvent(_id: String!): Event!
+    
   }
 
   input CreateEventInput {
@@ -26,6 +27,7 @@ export default `
     end: String!
     allDay: String!  
     color: String!
+
   }
   
   input UpdateEventInput {
