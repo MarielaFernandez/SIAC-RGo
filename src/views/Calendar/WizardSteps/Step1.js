@@ -39,8 +39,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { events as calendarEvents } from "variables/general.js";
 
 
-import ApolloClient, { gql } from "apollo-boost";
-import { ApolloProvider, Query } from "react-apollo";
+import ApolloClient, { gql } from "apollo-boost"; //Apollo
+import { ApolloProvider, Query } from "react-apollo"; //Apollo
 
 
 const localizer = momentLocalizer(moment);
@@ -78,7 +78,7 @@ export default function DoCurso() {
             EventList.push({title:event.title, start:event.start, end:event.end, allDay:event.allDay, color:event.color})
           })
 
-          return<BigCalendar
+          return <BigCalendar
             localizer={localizer}
             views={['week', 'agenda']}                              
             // startAccessor="start"
