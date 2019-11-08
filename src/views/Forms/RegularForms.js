@@ -31,7 +31,9 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
 import axios from 'axios';
-import SweetAlert from "react-bootstrap-sweetalert"
+import SweetAlert from "react-bootstrap-sweetalert";
+import ApolloClient, { gql } from "apollo-boost";
+import { useMutation } from '@apollo/react-hooks';
 
 
 import styles from "assets/jss/material-dashboard-pro-react/views/regularFormsStyle";
@@ -45,6 +47,10 @@ export default function RegularForms() {
   const [post, setPost] = React.useState([]);
   const [cedula, setCedula] = React.useState("");
   const [mails, setMails] = React.useState("");
+  const [sexo, setSexo] = React.useState("");
+  const [edad, setEdad] = React.useState("");
+  const [rol, setRol] = React.useState("");
+  const [estado, setEstado] = React.useState("");
   const [nombre, setNombre] = React.useState("");
   const [apellido, setApellido] = React.useState("");
   const [checked, setChecked] = React.useState([24, 22]);
@@ -96,6 +102,29 @@ export default function RegularForms() {
       alignItems: 'center',
     },
   }));
+
+
+  const user = {
+    cedula,
+    nombre,
+    apellido,
+    sexo,
+    mails,
+    edad,
+    rol,
+    estado
+  }
+
+  const createUser = gql`
+  mutation CreateUser($user: String!) {
+    mutation createUser(user: $user) {
+      document 
+      name
+    }
+  }
+`;
+
+
 
   function MySnackbarContentWrapper(props) {
     const classes = useStyles1();
@@ -294,7 +323,7 @@ const useStyles2 = makeStyles(theme => ({
                   onChange: modificarCedula,
                   name: "cedula",
                   autoComplete: "off",
-                  value: cedula
+                  value: user.cedula
                   
                   }
                 }
@@ -317,7 +346,7 @@ const useStyles2 = makeStyles(theme => ({
                   onChange: validMail,
                   name: "mails",
                   autoComplete: "off",
-                  value: mails 
+                  value: user.mails 
                  
                 }}
               />
@@ -329,7 +358,7 @@ const useStyles2 = makeStyles(theme => ({
                 }}
                 inputProps={{
                   type: "email",
-                  value: nombre
+                  value: user.nombre
                 }}
               />
               <CustomInput
@@ -342,7 +371,7 @@ const useStyles2 = makeStyles(theme => ({
                   
 
                   autoComplete: "off",
-                  value: apellido
+                  value: user.apellido
                 }}
               />
               <div>
@@ -390,6 +419,7 @@ const useStyles2 = makeStyles(theme => ({
                     root: classes.labelRoot
                   }}
                   label="Masculino"
+                
                 />
               </div>
              </div> 
