@@ -519,11 +519,12 @@ export default function Courses() {
               Agregar un nuevo Curso
             </Button>
 
-             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-               <DialogTitle id="form-dialog-title">Agregar Curso</DialogTitle>
-               <DialogContent>
-                 <DialogContentText>
-                   Formulario de ingreso de cursos
+            <div>
+              <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
+                <DialogTitle id="form-dialog-title">Agregar Curso</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    Formulario de ingreso de cursos
                  </DialogContentText>
 
                   <GridItem xs={12} >
