@@ -65,6 +65,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
+import YearPicker from "react-year-picker";
 // @material-ui/icons
 
 // core components
@@ -98,6 +99,7 @@ export default function Courses() {
   const [cedula, setCedula] = React.useState("");
   const [nombre, setNombre] = React.useState("");
   const [apellido, setApellido] = React.useState("");
+
   const [checked, setChecked] = React.useState([24, 22]);
   const [selectedEnabled, setSelectedEnabled] = React.useState("b");
   const [selectedValue, setSelectedValue] = React.useState(null);
@@ -119,21 +121,27 @@ export default function Courses() {
   const [show, setShow] = React.useState(false);
 
 
-const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
-const handleClickOpen = () => {
-  setOpen(true);
 
-};
+  const handleChangepiker = (date) => {
+    setAnio(date);
+    console.log(date);
+    console.log("anio es  " + anio);
+  }
 
-const handleClose = () => {
-  setOpen(false);
-  setSimpleSelect("");
-  setSigla("");
-  setNombrecurso("");
-  setSimpleSelect1("");
-  setCreditos("")
-};
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setSimpleSelect("");
+    setSigla("");
+    setNombrecurso("");
+    setSimpleSelect1("");
+    setCreditos("")
+  };
 
 
   const handleSimple = event => {
@@ -173,95 +181,95 @@ const handleClose = () => {
     setAlert(
       <SweetAlert
 
-      showCancel
-      style={{ display: "block", marginTop: "-280px" }}
-      title="Editar Funcionario"
-      onConfirm={e => {
-        inputConfirmAlertNext(e);
-      }}
-      onCancel={() => hideAlert()}
-      confirmBtnCssClass={classes.button + " " + classes.info}
-      cancelBtnCssClass={classes.button + " " + classes.danger}
-      >
-      <GridContainer>
-      <GridItem xs={12} sm={12} md={12}>
-
-
-      <form>
-      <CustomInput
-      labelText="Cédula"
-      id="id_Employee"
-      formControlProps={{
-        fullWidth: true
-      }}
-      value={cedula}
-      inputProps={{
-        onChange: modificarCedula,
-        name: "cedula",
-        autoComplete: "off",
-        value: cedula
-
-      }}
-      />
-      <CustomInput
-      labelText="e-mail"
-      id="mail_Employee"
-      formControlProps={{
-        fullWidth: true
-      }}
-      inputProps={{
-        defaultValue: post.firstname,
-        autoComplete: "off"
-      }}
-      />
-      <CustomInput
-      labelText="nombre"
-      id="name_Employee"
-      formControlProps={{
-        fullWidth: true
-      }}
-      inputProps={{
-        type: "email",
-        value: nombre
-      }}
-      />
-      <CustomInput
-      labelText={"apellido"}
-      id="lastName_Employee"
-      formControlProps={{
-        fullWidth: true
-      }}
-      inputProps={{
-
-        autoComplete: "off",
-        value: apellido
-      }}
-      />
-
-      <div className={classes.checkboxAndRadio}>
-      <FormControlLabel
-      control={
-        <Checkbox
-        tabIndex={-1}
-        onClick={() => handleChange()}
-        checkedIcon={<Check className={classes.checkedIcon} />}
-        icon={<Check className={classes.uncheckedIcon} />}
-        classes={{
-          checked: classes.checked,
-          root: classes.checkRoot
+        showCancel
+        style={{ display: "block", marginTop: "-280px" }}
+        title="Editar Funcionario"
+        onConfirm={e => {
+          inputConfirmAlertNext(e);
         }}
-        />
-      }
-      classes={{
-        label: classes.label,
-        root: classes.labelRoot
-      }}
-      label="Activar Funcionario"
-      />
-      </div>
-      </form>
-      </GridItem>
-      </GridContainer>
+        onCancel={() => hideAlert()}
+        confirmBtnCssClass={classes.button + " " + classes.info}
+        cancelBtnCssClass={classes.button + " " + classes.danger}
+      >
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+
+
+            <form>
+              <CustomInput
+                labelText="Cédula"
+                id="id_Employee"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                value={cedula}
+                inputProps={{
+                  onChange: modificarCedula,
+                  name: "cedula",
+                  autoComplete: "off",
+                  value: cedula
+
+                }}
+              />
+              <CustomInput
+                labelText="e-mail"
+                id="mail_Employee"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  defaultValue: post.firstname,
+                  autoComplete: "off"
+                }}
+              />
+              <CustomInput
+                labelText="nombre"
+                id="name_Employee"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  type: "email",
+                  value: nombre
+                }}
+              />
+              <CustomInput
+                labelText={"apellido"}
+                id="lastName_Employee"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+
+                  autoComplete: "off",
+                  value: apellido
+                }}
+              />
+
+              <div className={classes.checkboxAndRadio}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      tabIndex={-1}
+                      onClick={() => handleChange()}
+                      checkedIcon={<Check className={classes.checkedIcon} />}
+                      icon={<Check className={classes.uncheckedIcon} />}
+                      classes={{
+                        checked: classes.checked,
+                        root: classes.checkRoot
+                      }}
+                    />
+                  }
+                  classes={{
+                    label: classes.label,
+                    root: classes.labelRoot
+                  }}
+                  label="Activar Funcionario"
+                />
+              </div>
+            </form>
+          </GridItem>
+        </GridContainer>
 
       </SweetAlert>
     );
@@ -270,76 +278,76 @@ const handleClose = () => {
 
   const UsersQuery = () => {
     return (
-     <Query
-       query={gql`
+      <Query
+        query={gql`
          {
            users {
              name
            }
          }
        `}
-     >
-       {({ loading, error, data }) => {
-         if (loading) return <p>Loading...</p>;
-         if (error) return <p>Error!</p>;
+      >
+        {({ loading, error, data }) => {
+          if (loading) return <p>Loading...</p>;
+          if (error) return <p>Error!</p>;
 
-         return<div className={classes.container}>
+          return <div className={classes.container}>
 
-         <GridItem xs={12} sm={12} md={6}>
-           <div>
-         <FormControl
-           fullWidth
-           className={classes.selectFormControl}
-         >
+            <GridItem xs={12}>
+              <div>
+                <FormControl
+                  fullWidth
+                  className={classes.selectFormControl}
+                >
 
-           <InputLabel
-             htmlFor="simple-select"
-             className={classes.selectLabel}
-           >
-             Requisitos/Correquisitos
+                  <InputLabel
+                    htmlFor="simple-select"
+                    className={classes.selectLabel}
+                  >
+                    Requisitos/Correquisitos
            </InputLabel>
 
-         <Select
-           MenuProps={{
-             className: classes.selectMenu
-           }}
-           classes={{
-             select: classes.select
-           }}
-           value={simpleSelect}
-           onChange={handleSimple}
+                  <Select
+                    MenuProps={{
+                      className: classes.selectMenu
+                    }}
+                    classes={{
+                      select: classes.select
+                    }}
+                    value={simpleSelect}
+                    onChange={handleSimple}
 
 
-           inputProps={{
-             name: "simpleSelect",
-             id: "simple-select"
-           }}
+                    inputProps={{
+                      name: "simpleSelect",
+                      id: "simple-select"
+                    }}
 
-         >
-         {console.log("Correquisitos= "+simpleSelect)}
+                  >
+                    {console.log("Correquisitos= " + simpleSelect)}
 
-         {data.users.map(user => {
+                    {data.users.map(user => {
 
-           return<MenuItem
-             key={user.name}
-             classes={{
+                      return <MenuItem
+                        key={user.name}
+                        classes={{
 
-                 root: classes.selectMenuItem,
-                 selected: classes.selectMenuItemSelected
-             }}
-             value={user.name}
-           >
-            { user.name }
-           </MenuItem>
-         })}
-         </Select>
-        </FormControl>
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected
+                        }}
+                        value={user.name}
+                      >
+                        {user.name}
+                      </MenuItem>
+                    })}
+                  </Select>
+                </FormControl>
 
-        </div>
-        </GridItem>
-       </div>
-       }}
-     </Query>
+              </div>
+            </GridItem>
+          </div>
+        }}
+      </Query>
     );
   };
 
@@ -363,26 +371,26 @@ const handleClose = () => {
 
 
 
-const inputAlertEditarCurso = () => {
-  setAlert(
-    <SweetAlert
-    showCancel
-    style={{ display: "block",}}
-    title="Agregar Curso"
-    onConfirm={e => {
-      inputConfirmAlertNext(e);
-    }}
-    onCancel={() => hideAlert()}
-    confirmBtnCssClass={classes.button + " " + classes.info}
-    cancelBtnCssClass={classes.button + " " + classes.danger}
-    >
+  const inputAlertEditarCurso = () => {
+    setAlert(
+      <SweetAlert
+        showCancel
+        style={{ display: "block", }}
+        title="Agregar Curso"
+        onConfirm={e => {
+          inputConfirmAlertNext(e);
+        }}
+        onCancel={() => hideAlert()}
+        confirmBtnCssClass={classes.button + " " + classes.info}
+        cancelBtnCssClass={classes.button + " " + classes.danger}
+      >
 
-    </SweetAlert>
-  );
-};
+      </SweetAlert>
+    );
+  };
 
 
-  const modificarCedula = event   => {
+  const modificarCedula = event => {
     console.log('Acá')
     setCedula(event.target.value);
   }
@@ -394,128 +402,122 @@ const inputAlertEditarCurso = () => {
   };
 
   const loadPost = (post) => {
-    setPost( post
+    setPost(post
     );
   };
-  const getPosts= (cedula) => {
+  const getPosts = (cedula) => {
     console.log(cedula);
     axios.get('https://apis.gometa.org/cedulas/' + cedula
-  ).then(response=>{
-    console.log(response.data.results[0]);
-    setNombre(response.data.results[0].firstname);
-    setApellido(response.data.results[0].lastname);
+    ).then(response => {
+      console.log(response.data.results[0]);
+      setNombre(response.data.results[0].firstname);
+      setApellido(response.data.results[0].lastname);
 
-    //this.setState({ posts: response.data.results});
-  });
-}
+      //this.setState({ posts: response.data.results});
+    });
+  }
 
-const inputConfirmAlertNext = e => {
-  setAlert(e);
-  setTimeout(() => {
-    setAlert(
-      <SweetAlert
-      style={{ display: "block", marginTop: "-100px" }}
-      onConfirm={() => hideAlert()}
-      onCancel={() => hideAlert()}
-      confirmBtnCssClass={classes.button + " " + classes.info}
-      title={
-        <p>
-        You entered: <b>{e}</b>
-        </p>
-      }
-      />
-    );
-  }, 200);
-};
-const hideAlert = () => {
-  setAlert(null);
-};
+  const inputConfirmAlertNext = e => {
+    setAlert(e);
+    setTimeout(() => {
+      setAlert(
+        <SweetAlert
+          style={{ display: "block", marginTop: "-100px" }}
+          onConfirm={() => hideAlert()}
+          onCancel={() => hideAlert()}
+          confirmBtnCssClass={classes.button + " " + classes.info}
+          title={
+            <p>
+              You entered: <b>{e}</b>
+            </p>
+          }
+        />
+      );
+    }, 200);
+  };
+  const hideAlert = () => {
+    setAlert(null);
+  };
 
-const [data, setData] = React.useState(
-  dataTable.dataRows.map((prop, key) => {
-    return {
-      id: key,
-      name: prop[0],
-      position: prop[1],
-      office: prop[2],
-      age: prop[3],
-      actions: (
-        // we've added some custom button actions
-        <div className="actions-right">
-        {/* use this button to add a like kind of action */}
-        <Button
-        justIcon
-        round
-        simple
-        onClick={inputAlert}
-        color="info"
-        className="like"
-        >
-        <Favorite />
-        </Button>{" "}
-        {/* use this button to add a edit kind of action */}
-        <Button
-        justIcon
-        round
-        simple
-        onClick={inputAlertEditarCurso}
-        color="warning"
-        className="edit"
-        >
-        <Dvr />
-        </Button>{" "}
-        {/* use this button to remove the data row */}
-        <Button
-        justIcon
-        round
-        simple
-        onClick={() => {
-          var newData = data;
-          newData.find((o, i) => {
-            if (o.id === key) {
-              // here you should add some custom code so you can delete the data
-              // from this component and from your server as well
-              newData.splice(i, 1);
-              return true;
-            }
-            return false;
-          });
-          setData([...newData]);
-        }}
-        color="danger"
-        className="remove"
-        >
-        <Close />
-        </Button>{" "}
-        </div>
-      )
-    };
-  })
-);
-
-
-
-
-
-return (
-  <div>
-  {alert}
-  <GridContainer>
-  <Card>
-  <GridContainer style={{justifyContent: 'center'}}>
-
-  {/* // flex-end// */}
-
-
-    <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-      Open form dialog
-    </Button>
+  const [data, setData] = React.useState(
+    dataTable.dataRows.map((prop, key) => {
+      return {
+        id: key,
+        name: prop[0],
+        position: prop[1],
+        office: prop[2],
+        age: prop[3],
+        actions: (
+          // we've added some custom button actions
+          <div className="actions-right">
+            {/* use this button to add a like kind of action */}
+            <Button
+              justIcon
+              round
+              simple
+              onClick={inputAlert}
+              color="info"
+              className="like"
+            >
+              <Favorite />
+            </Button>{" "}
+            {/* use this button to add a edit kind of action */}
+            <Button
+              justIcon
+              round
+              simple
+              onClick={inputAlertEditarCurso}
+              color="warning"
+              className="edit"
+            >
+              <Dvr />
+            </Button>{" "}
+            {/* use this button to remove the data row */}
+            <Button
+              justIcon
+              round
+              simple
+              onClick={() => {
+                var newData = data;
+                newData.find((o, i) => {
+                  if (o.id === key) {
+                    // here you should add some custom code so you can delete the data
+                    // from this component and from your server as well
+                    newData.splice(i, 1);
+                    return true;
+                  }
+                  return false;
+                });
+                setData([...newData]);
+              }}
+              color="danger"
+              className="remove"
+            >
+              <Close />
+            </Button>{" "}
+          </div>
+        )
+      };
+    })
+  );
 
 
 
 
 
-        <div>
+  return (
+    <div>
+      {alert}
+      <GridContainer>
+        <Card>
+          <GridContainer style={{ justifyContent: 'center' }}>
+
+            {/* // flex-end//  style={{height: '700px', with:'250px'}} */}
+
+
+            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+              Agregar un nuevo Curso
+            </Button>
 
              <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                <DialogTitle id="form-dialog-title">Agregar Curso</DialogTitle>
@@ -524,188 +526,274 @@ return (
                    Formulario de ingreso de cursos
                  </DialogContentText>
 
-                 <GridItem xs={12} sm={12} md={6}>
-                 <TextField
-                  margin="dense"
-                  id="name"
-                  label="Sigla"
-                  type="Text"
-                  fullWidth
-                  onChange={handleSigla}
-                  value={sigla}
-                />
-                {console.log("sigla es  "+ sigla)}
+                  <GridItem xs={12} >
+                    <TextField
+                      margin="dense"
+                      id="name"
+                      label="Sigla"
+                      type="Text"
+                      fullWidth
+                      onChange={handleSigla}
+                      value={sigla}
+                    />
+                    {console.log("sigla es  " + sigla)}
 
-                <TextField
-                 margin="dense"
-                 id="name"
-                 label="Nombre del Curso"
-                 type="Text"
-                 fullWidth
-                 onChange={handleNombrecurso}
-                 value={nombrecurso}
+                    <TextField
+                      margin="dense"
+                      id="name"
+                      label="Nombre del Curso"
+                      type="Text"
+                      fullWidth
+                      onChange={handleNombrecurso}
+                      value={nombrecurso}
 
-               />
-               {console.log("nombre es "+ nombrecurso)}
-               </GridItem>
+                    />
+                    {console.log("nombre es " + nombrecurso)}
+                  </GridItem>
 
 
-                      <GridItem xs={12} sm={12} md={6}>
-                         <FormControl
-                           fullWidth
-                           className={classes.selectFormControl}
-                         >
+                  <GridItem xs={12} >
+                    <FormControl
+                      fullWidth
+                      className={classes.selectFormControl}
+                    >
 
-                         <InputLabel
-                           htmlFor="simple-select"
-                           className={classes.selectLabel}
-                         >
-                           Tipo de Curso
+                      <InputLabel
+                        htmlFor="simple-select"
+                        className={classes.selectLabel}
+                      >
+                        Tipo de Curso
                          </InputLabel>
 
-                       <Select
-                         MenuProps={{
-                           className: classes.selectMenu
-                         }}
-                         classes={{
-                           select: classes.select
-                         }}
-                         value={simpleSelect1}
-                         onChange={handleSimple1}
-                         inputProps={{
-                           name: "simpleSelect",
-                           id: "simple-select"
-                         }}
+                      <Select
+                        MenuProps={{
+                          className: classes.selectMenu
+                        }}
+                        classes={{
+                          select: classes.select
+                        }}
+                        value={simpleSelect1}
+                        onChange={handleSimple1}
+                        inputProps={{
+                          name: "simpleSelect",
+                          id: "simple-select"
+                        }}
 
-                       >
+                      >
 
-                         <MenuItem
-                           disabled
-                           classes={{
-                             root: classes.selectMenuItem
-                           }}
-                         >
-                           Grado académico
+                        <MenuItem
+                          disabled
+                          classes={{
+                            root: classes.selectMenuItem
+                          }}
+                        >
+                          Grado académico
                          </MenuItem>
-                         <MenuItem
-                           classes={{
-                             root: classes.selectMenuItem,
-                             selected: classes.selectMenuItemSelected
-                           }}
-                           value="1"
-                         >
-                           Bachillerato
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected
+                          }}
+                          value="1"
+                        >
+                          Bachillerato
                          </MenuItem>
-                         <MenuItem
-                           classes={{
-                             root: classes.selectMenuItem,
-                             selected: classes.selectMenuItemSelected
-                           }}
-                           value="2"
-                         >
-                           Licenciatura
-                         </MenuItem>
-
-                         <MenuItem
-                           classes={{
-                             root: classes.selectMenuItem,
-                             selected: classes.selectMenuItemSelected
-                           }}
-                           value="3"
-                         >
-                           Maestría
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected
+                          }}
+                          value="2"
+                        >
+                          Licenciatura
                          </MenuItem>
 
-                         <MenuItem
-                           classes={{
-                             root: classes.selectMenuItem,
-                             selected: classes.selectMenuItemSelected
-                           }}
-                           value="4"
-                         >
-                           Doctorado
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected
+                          }}
+                          value="3"
+                        >
+                          Maestría
                          </MenuItem>
-                       })}
-                          {console.log("TIPO DE CURSO ES= "+simpleSelect1)}
-                       </Select>
-                       </FormControl>
-                       </GridItem>
 
-                     <UsersQuery />
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected
+                          }}
+                          value="4"
+                        >
+                          Doctorado
+                         </MenuItem>
+                        })}
+                          {console.log("TIPO DE CURSO ES= " + simpleSelect1)}
+                      </Select>
+                    </FormControl>
+                  </GridItem>
+
+                  <UsersQuery />
 
 
-                <GridItem xs={12} sm={12} md={6}>
-                   <TextField
-                    margin="dense"
-                    id="name"
-                    label="Creditos"
-                    type="Text"
-                    fullWidth
-                    onChange={handleCreditos}
-                    value={creditos}
-                  />
-                {console.log("Creditos ES= "+ creditos)}
-                </GridItem>
+                  <GridItem xs={12}>
+                    <TextField
+                      margin="dense"
+                      id="name"
+                      label="Creditos"
+                      type="Text"
+                      fullWidth
+                      onChange={handleCreditos}
+                      value={creditos}
+                    />
+                    {console.log("Creditos ES= " + creditos)}
+                  </GridItem>
 
-               </DialogContent>
-               <DialogActions>
-                 <Button onClick={handleClose} color="primary">
-                   Cancel
+
+
+                  <br />
+                  <br />
+                  <GridItem xs={12}>
+                    <YearPicker
+                      margin="dense"
+                      fullWidth
+                      onChange={handleChangepiker}
+                    />
+
+
+
+                    {console.log("anioo aqui es " + anio)}
+                  </GridItem>
+
+                  <GridItem xs={12}>
+                    <FormControl
+                      fullWidth
+                      className={classes.selectFormControl}
+                    >
+
+                      <InputLabel
+                        htmlFor="simple-select"
+                        className={classes.selectLabel}
+                      >
+                        Periodo
+                   </InputLabel>
+
+                      <Select
+                        MenuProps={{
+                          className: classes.selectMenu
+                        }}
+                        classes={{
+                          select: classes.select
+                        }}
+                        value={simpleSelect2}
+                        onChange={handleSimple2}
+                        inputProps={{
+                          name: "simpleSelect",
+                          id: "simple-select"
+                        }}
+
+                      >
+
+                        <MenuItem
+                          disabled
+                          classes={{
+                            root: classes.selectMenuItem
+                          }}
+                        >
+                          Periodo
+                   </MenuItem>
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected
+                          }}
+                          value="1"
+                        >
+                          I
+                   </MenuItem>
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected
+                          }}
+                          value="2"
+                        >
+                          II
+                   </MenuItem>
+
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected
+                          }}
+                          value="3"
+                        >
+                          III
+                   </MenuItem>
+                        })}
+                    {console.log("TIPO DE CURSO ES= " + simpleSelect2)}
+                      </Select>
+                    </FormControl>
+                  </GridItem>
+
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose} color="primary">
+                    Cancel
                  </Button>
-                 <Button onClick={handleClose} color="primary">
-                   Subscribe
+                  <Button onClick={handleClose} color="primary">
+                    Subscribe
                  </Button>
-               </DialogActions>
-             </Dialog>
-           </div>
-    </GridContainer>
+                </DialogActions>
+              </Dialog>
+            </div>
+          </GridContainer>
 
 
 
-    <CardBody>
-    <CustomInput
-    labelText="Buscar"
-    id="Buscar"
-    formControlProps={{
-      fullWidth: true
-    }}
-    />
-    <ReactTable
-    data={data}
-    filterable
-    columns={[
-      {
-        Header: "Name",
-        accessor: "name"
-      },
-      {
-        Header: "Position",
-        accessor: "position"
-      },
-      {
-        Header: "Office",
-        accessor: "office"
-      },
-      {
-        Header: "Age",
-        accessor: "age"
-      },
-      {
-        Header: "Actions",
-        accessor: "actions",
-        sortable: false,
-        filterable: false
-      }
-    ]}
-    defaultPageSize={10}
-    showPaginationTop
-    showPaginationBottom={false}
-    className="-striped -highlight"
-    />
-    </CardBody>
-    </Card>
-    </GridContainer>
+          <CardBody>
+            <CustomInput
+              labelText="Buscar"
+              id="Buscar"
+              formControlProps={{
+                fullWidth: true
+              }}
+            />
+            <ReactTable
+              data={data}
+              filterable
+              columns={[
+                {
+                  Header: "Name",
+                  accessor: "name"
+                },
+                {
+                  Header: "Position",
+                  accessor: "position"
+                },
+                {
+                  Header: "Office",
+                  accessor: "office"
+                },
+                {
+                  Header: "Age",
+                  accessor: "age"
+                },
+                {
+                  Header: "Actions",
+                  accessor: "actions",
+                  sortable: false,
+                  filterable: false
+                }
+              ]}
+              defaultPageSize={10}
+              showPaginationTop
+              showPaginationBottom={false}
+              className="-striped -highlight"
+            />
+          </CardBody>
+        </Card>
+      </GridContainer>
     </div>
-
   );
 }

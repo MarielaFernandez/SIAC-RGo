@@ -29,6 +29,8 @@ import CardIcon from "components/Card/CardIcon.js";
 import CardHeader from "components/Card/CardHeader.js";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { dataTable } from "variables/general.js";
+import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 
@@ -204,6 +206,39 @@ export default function Groups() {
     {alert}
     <GridContainer>
     <Card>
+
+    <GridItem xs={12}>
+     <FormControl className={classes.formControl}>
+       <TextField
+        margin="dense"
+        id="name"
+        label="Creditos"
+        type="label"
+        fullWidth
+        disabled
+        //onChange={handleCreditos}
+       value={"if5200"}
+      />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <TextField
+         margin="dense"
+         id="name"
+         label="Creditos"
+         type="label"
+         fullWidth
+         disabled
+         //onChange={handleCreditos}
+        value={"if5200"}
+       />
+       </FormControl>
+
+
+
+
+    </GridItem>
+
+
 
       <CardBody>
             <ReactTable
