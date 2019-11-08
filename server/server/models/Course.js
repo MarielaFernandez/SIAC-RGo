@@ -10,7 +10,6 @@ ObjectID.prototype.valueOf = function() {
 const CourseSchema = new Schema({
   initials: {
     type: String,
-    unique: true,
     required: true
   },
   name: {
@@ -26,8 +25,7 @@ const CourseSchema = new Schema({
     required: true
   },
   period: {
-    type: String,
-    unique: true,
+    type: String,    
     required: true
   },
   

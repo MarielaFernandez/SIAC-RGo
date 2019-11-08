@@ -40,6 +40,10 @@ const useStyles = makeStyles(styles);
 
 export default function DoCurso() {
 
+  const EventList=[
+    
+  ];
+
 
     const EventsQuery = () => {
       return (
@@ -47,52 +51,55 @@ export default function DoCurso() {
           query={gql`
             {
               events {              
-                name
+                _id,
+              title,
+              start,
+              end,
+              allDay,
+              color
               }
             }
           `}
         >
           {({ loading, error, data }) => {
-            if (loading) return <p>Loading...</p>;
-            if (error) return <p>Error!</p>;
-  
-            return <FormControl
-              fullWidth
-              className={classes.selectFormControl}
-            >
-            <InputLabel
-              htmlFor="simple-select"
-              className={classes.selectLabel}
-            >
-              Elija un evento
-            </InputLabel>
-            <Select
-              MenuProps={{
-                className: classes.selectMenu
-              }}
-              classes={{
-                select: classes.select
-              }}
-              value={simpleSelect}
-              onChange={handleSimple}
-              inputProps={{
-                name: "simpleSelect",
-                id: "simple-select"
-              }}
-            > {data.events.map(event => {
-              return <MenuItem
-  
-                key={event.name}
-                classes={{
-  
-                    root: classes.selectMenuItem,
-                    selected: classes.selectMenuItemSelected
-                }}
-                value={event.name}
-              > { event.name } </MenuItem>
-            })}
-            </Select>
-            </FormControl>
+          if (loading) return <p>Loading...</p>;
+          if (error) return <p>Error!</p>;
+          data.events.map(event => {
+            EventList.push({title:event.title, start:event.start, end:event.end, allDay:event.allDay, color:event.color})
+          })
+
+            return <BigCalendar
+            localizer={localizer}
+            views={['week', 'agenda']}                              
+            // startAccessor="start"
+            // endAccessor="end"                
+            selectable
+            resizable
+            localizer={localizer}
+            events={EventList}
+            defaultView="week"
+            //scrollToTime={new Date(2019, 1, 1, 6)}
+            //date={new Date(2019, 8, 29, 6)}
+            // length ={200}
+            defaultDate={new Date()}
+            onSelectEvent={event => selectedEvent(event)}
+            onSelectSlot={slotInfo => addNewEventAlert(slotInfo)}
+            //onEventResize={this.resizeEvent}
+            step = {30}
+            min = {minTime}
+            max = {maxTime}
+            eventPropGetter={eventColors}                
+            // views={{ agenda: true, week: MyWeek }}
+            messages={{
+              next: "sig",
+              previous: "ant",
+              today: "Hoy",
+              month: "Mes",
+              week: "Semana",
+              day: "Día"
+            }}              
+            culture = {'es'}                
+          />
           }}
         </Query>
       );
@@ -106,11 +113,16 @@ export default function DoCurso() {
     };
   
 
+    const [state, setState] = React.useState({ //switch
+      checkedA: true,
+    });
+  
+    const handleChange = name => event => {
+      setState({ ...state, [name]: event.target.checked });//switch
+    };
 
 
-  const [checkedA, setCheckedA] = React.useState(null);
-  const [checkedB, setCheckedB] = React.useState(null);
-  const [checkedC, setCheckedC] = React.useState(null);
+  
   const classes = useStyles();
 
   const [selectedDate, setSelectedDate] = React.useState(new Date('2019-01-01T21:11:54'));
@@ -160,7 +172,8 @@ export default function DoCurso() {
     };
   };
 
-  const minTime = new Date();
+
+  const minTime = new Date(); //calendar
   minTime.setHours(7,0,0);
   const maxTime = new Date();
   maxTime.setHours(22,0,0);
@@ -212,25 +225,17 @@ export default function DoCurso() {
       <h4>Paso 2: Habilite o encienda el switch para seleccionar en el horario.</h4>
       <br/>
       <div>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={checkedB}
-              onChange={event => setCheckedB(event.target.checked)}
-              value="checkedB"
-              classes={{
-                switchBase: classes.switchBase,
-                checked: classes.switchChecked,
-                thumb: classes.switchIcon,
-                track: classes.switchBar
-              }}
-            />
-          }
-          classes={{
-            label: classes.label
-          }}
-          label="Horas contacto"
-        />
+      <FormControlLabel
+        control={
+          <Switch
+            checked={state.checkedB}
+            onChange={handleChange('checkedB')}
+            value="checkedA"
+            color="primary"
+          />
+        }
+        label="Horas contacto"
+      />
       </div>
 
       <br/>
@@ -240,45 +245,12 @@ export default function DoCurso() {
 <GridContainer justify="center">
   <GridItem xs={12} sm={12} md={12}>
       <Card>
-        <CardBody calendar>
-          <BigCalendar
-            localizer={localizer}
-            views={['week', 'agenda']}                              
-            // startAccessor="start"
-            // endAccessor="end"                
-            selectable
-            resizable
-            localizer={localizer}
-            events={events}
-            defaultView="week"
-            //scrollToTime={new Date(2019, 1, 1, 6)}
-            //date={new Date(2019, 8, 29, 6)}
-            // length ={200}
-            defaultDate={new Date()}
-            onSelectEvent={event => selectedEvent(event)}
-            onSelectSlot={slotInfo => addNewEventAlert(slotInfo)}
-            //onEventResize={this.resizeEvent}
-            step = {30}
-            min = {minTime}
-            max = {maxTime}
-            eventPropGetter={eventColors}                
-            // views={{ agenda: true, week: MyWeek }}
-            messages={{
-              next: "sig",
-              previous: "ant",
-              today: "Hoy",
-              month: "Mes",
-              week: "Semana",
-              day: "Día"
-            }}              
-            culture = {'es'}               
-          />
+        <CardBody>
+        <EventsQuery />
         </CardBody>
       </Card>
     </GridItem>
   </GridContainer>
-
-  <EventsQuery />
 
   </div>
   );

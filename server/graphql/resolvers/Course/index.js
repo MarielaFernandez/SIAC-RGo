@@ -1,4 +1,4 @@
-import Event from "../../../server/models/Course";
+import Course from "../../../server/models/Course";
 
 export default {
   Query: {
@@ -6,7 +6,7 @@ export default {
       return await Course.findOne({ _id }).exec();
     },
    courses: async (parent, args, context, info) => {
-      const coursess = await Course.find({})
+      const courses = await Course.find({})
         .populate()
         .exec();
 
