@@ -38,7 +38,7 @@ const localizer = momentLocalizer(moment);
 
 const useStyles = makeStyles(styles);
 
-export default function DoCurso() {
+export default function DoAdmin() {
 
   const EventList=[
     
