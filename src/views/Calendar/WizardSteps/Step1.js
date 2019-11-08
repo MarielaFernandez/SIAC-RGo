@@ -48,7 +48,7 @@ export default function DoCurso() {
       <Query
         query={gql`
           {
-            events {              
+            events {
               name
             }
           }
@@ -116,7 +116,7 @@ export default function DoCurso() {
   const handleDateChange = date => {
     setSelectedDate(date);
   };
-  
+
   const [events, setEvents] = React.useState(calendarEvents);
   const [alert, setAlert] = React.useState(null);
   const selectedEvent = event => {
@@ -204,7 +204,7 @@ export default function DoCurso() {
             'aria-label': 'change date',
           }}
         />
-      </Grid>    
+      </Grid>
     </MuiPickersUtilsProvider>
 
 
@@ -278,7 +278,7 @@ export default function DoCurso() {
 
       <br/>
 
-    
+
 
 <GridContainer justify="center">
   <GridItem xs={12} sm={12} md={12}>
@@ -286,9 +286,9 @@ export default function DoCurso() {
         <CardBody calendar>
           <BigCalendar
             localizer={localizer}
-            views={['week', 'agenda']}                              
+            views={['week', 'agenda']}
             // startAccessor="start"
-            // endAccessor="end"                
+            // endAccessor="end"
             selectable
             resizable
             localizer={localizer}
@@ -304,7 +304,7 @@ export default function DoCurso() {
             step = {30}
             min = {minTime}
             max = {maxTime}
-            eventPropGetter={eventColors}                
+            eventPropGetter={eventColors}
             // views={{ agenda: true, week: MyWeek }}
             messages={{
               next: "sig",
@@ -313,8 +313,8 @@ export default function DoCurso() {
               month: "Mes",
               week: "Semana",
               day: "Día"
-            }}              
-            culture = {'es'}                
+            }}
+            culture = {'es'}
           />
         </CardBody>
       </Card>
@@ -322,7 +322,7 @@ export default function DoCurso() {
   </GridContainer>
 
   <EventsQuery />
-      
+
   </div>
   );
 }
