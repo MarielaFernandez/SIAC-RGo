@@ -65,7 +65,7 @@ class Wizard extends React.Component {
     if (this.props.steps) {
       var validationState = true;
       if (key > this.state.currentStep) {
-        for (var i = this.state.currentStep; i < key; i++) {
+        for (var i = this.state.currentStep; i === key; i++) {
           if (this[this.props.steps[i].stepId].sendState !== undefined) {
             this.setState({
               allStates: {
