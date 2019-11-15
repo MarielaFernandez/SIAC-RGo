@@ -31,7 +31,7 @@ export default `
     lastName: String!
     sex: String!
     email: String!
-    age: Int!
+    age: String!
     rol: String!
     status: String!
   }

@@ -45,14 +45,14 @@ const useStyles = makeStyles(styles);
 export default function RegularForms() {
   
   const [post, setPost] = React.useState([]);
-  const [cedula, setCedula] = React.useState("");
-  const [mails, setMails] = React.useState("");
-  const [sexo, setSexo] = React.useState("");
-  const [edad, setEdad] = React.useState("");
-  const [rol, setRol] = React.useState("");
-  const [estado, setEstado] = React.useState("");
-  const [nombre, setNombre] = React.useState("");
-  const [apellido, setApellido] = React.useState("");
+  const [document, setDocument] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [sex, setSex] = React.useState("M");
+  const [age, setAge] = React.useState("30");
+  const [rol, setRol] = React.useState("a");
+  const [status, setStatus] = React.useState("Activo");
+  const [name, setName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
   const [checked, setChecked] = React.useState([24, 22]);
   const [selectedEnabled, setSelectedEnabled] = React.useState("b");
   const [selectedValue, setSelectedValue] = React.useState(null);
@@ -105,19 +105,19 @@ export default function RegularForms() {
 
 
   const user = {
-    cedula,
-    nombre,
-    apellido,
-    sexo,
-    mails,
-    edad,
+    document,
+    name,
+    lastName,
+    sex,
+    email,
+    age,
     rol,
-    estado
+    status    
   }
 
-  const createUser = gql`
-  mutation CreateUser($user: String!) {
-    mutation createUser(user: $user) {
+  const CREATE_USER = gql`
+  mutation CreateUser($user: CreateUserInput) {
+    createUser(user: $user) {
       document 
       name
     }
@@ -194,13 +194,13 @@ const useStyles2 = makeStyles(theme => ({
 
       if(reg.test(event.target.value) === false)
       {
-        console.log("Email is Not Correct");
+        //console.log("Email is Not Correct");
         handleClick();
-        setMails(event.target.value)
+        setEmail(event.target.value)
         return false;
       }
       else {
-        setMails(event.target.value)
+        setEmail(event.target.value)
         handleClose();
         console.log("Email is Correct");
       }
@@ -210,7 +210,7 @@ const useStyles2 = makeStyles(theme => ({
 
   const modificarCedula = event   => { 
   
-      setCedula(event.target.value);    
+      setDocument(event.target.value);    
   } 
 
   const getPosts= (cedula) => {
@@ -230,8 +230,8 @@ const useStyles2 = makeStyles(theme => ({
                 }else{
                 
                   console.log(response.data.results[0]);
-                  setNombre(response.data.results[0].firstname);
-                  setApellido(response.data.results[0].lastname);
+                  setName(response.data.results[0].firstname);
+                  setLastName(response.data.results[0].lastname);
 
                 //this.setState({ posts: response.data.results});
                 }
@@ -279,6 +279,8 @@ const useStyles2 = makeStyles(theme => ({
   };
 
   const classes = useStyles();
+  const [createUser, { userInput }] = useMutation(CREATE_USER);
+
   return (
     <div>
     {alert}
@@ -307,7 +309,14 @@ const useStyles2 = makeStyles(theme => ({
             <h4 className={classes.cardIconTitle}>Registro de Funcionarios</h4>
           </CardHeader>
           <CardBody>
-            <form>
+            <form 
+              onSubmit={e => {
+                e.preventDefault();
+                console.log(user);
+                createUser({ variables: { user } });
+                //user.value = '';
+                 
+              }}>
             <CustomInput
                 labelText="Cédula"
                 id="id_Employee"
@@ -315,7 +324,7 @@ const useStyles2 = makeStyles(theme => ({
                   fullWidth: true
                 }}   
                             
-                value={cedula} 
+                value={document} 
                
 
                 inputProps={{ 
@@ -323,7 +332,7 @@ const useStyles2 = makeStyles(theme => ({
                   onChange: modificarCedula,
                   name: "cedula",
                   autoComplete: "off",
-                  value: user.cedula
+                  value: user.document
                   
                   }
                 }
@@ -331,7 +340,7 @@ const useStyles2 = makeStyles(theme => ({
               />
               
               
-               <Button color="info" onClick={() => getPosts(cedula)}>Buscar</Button>
+               <Button color="info" onClick={() => getPosts(document)}>Buscar</Button>
               
 
                <CustomInput
@@ -344,9 +353,10 @@ const useStyles2 = makeStyles(theme => ({
                 
                 inputProps={{
                   onChange: validMail,
-                  name: "mails",
+                  name: "mail",
+                  type: "email",
                   autoComplete: "off",
-                  value: user.mails 
+                  value: user.mail 
                  
                 }}
               />
@@ -356,9 +366,8 @@ const useStyles2 = makeStyles(theme => ({
                 formControlProps={{
                   fullWidth: true
                 }}
-                inputProps={{
-                  type: "email",
-                  value: user.nombre
+                inputProps={{                  
+                  value: user.name
                 }}
               />
               <CustomInput
@@ -371,7 +380,7 @@ const useStyles2 = makeStyles(theme => ({
                   
 
                   autoComplete: "off",
-                  value: user.apellido
+                  value: user.lastName
                 }}
               />
               <div>
@@ -451,7 +460,7 @@ const useStyles2 = makeStyles(theme => ({
                 />
               </div>
               
-              <Button color="info" >Agregar</Button>
+              <Button  color="info" type = "submit" >Agregar</Button>
             </form>
           </CardBody>
         </Card>
