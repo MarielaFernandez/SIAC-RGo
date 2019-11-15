@@ -37,6 +37,14 @@ export default {
         email: user.email,
         age: user.age,
         rol: user.rol,
+        province:user.province,
+        canton:user.canton,
+        district:user.district,
+        neighborhood:user.neighborhood,
+        km:user.km,
+        appointment:user.appointment,
+        academic_degree:user.academic_degree,
+        phone_number:user.phone_number,
         status: user.status
       });
 

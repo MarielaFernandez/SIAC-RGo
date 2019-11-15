@@ -38,10 +38,43 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  province: {
+    type: String,
+    required: false
+  },
+  canton: {
+    type: String,
+    required: false
+  },
+  district: {
+    type: String,
+    required: false
+  },
+  neighborhood: {
+    type: String,
+    required: false
+  },
+  km: {
+    type: String,
+    required: false
+  },
+  appointment: {
+    type: String,
+    required: false
+  },
+  academic_degree: {
+    type: String,
+    required: false
+  },
+  phone_number: {
+    type: String,
+    required: false
+  },
   status: {
     type: String,
     required: true
   },
+
   posts: [
     {
       type: Schema.Types.ObjectId,

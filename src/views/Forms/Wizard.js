@@ -11,6 +11,7 @@ import Step3 from "./WizardSteps/Step3.js";
 
 import Cursos from "./WizardSteps/Courses.js";
 import Grupos from "./WizardSteps/Groups.js";
+import Horarios from "./WizardSteps/Schedules.js";
 
 export default function WizardView() {
   return (
@@ -21,7 +22,7 @@ export default function WizardView() {
           steps={[
             { stepName: "Cursos", stepComponent: Cursos, stepId: "Cursos" },
             { stepName: "Grupos", stepComponent: Grupos, stepId: "Grupos" },
-            { stepName: "Horarios", stepComponent: Cursos, stepId: "Horarios" }
+            { stepName: "Horarios", stepComponent: Horarios, stepId: "Horarios" }
           ]}
           title="Administración"
           subtitle="This information will let us know more about you."
