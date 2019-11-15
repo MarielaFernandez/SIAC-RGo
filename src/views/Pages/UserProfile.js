@@ -47,7 +47,7 @@ export default function UserProfile() {
       <Query
         query={gql`
           {
-            users {              
+            users {
               name
             }
           }
@@ -186,6 +186,17 @@ export default function UserProfile() {
                     }}
                   />
                 </GridItem>
+
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="Apellido"
+                    id="Apellido"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+
               </GridContainer>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
