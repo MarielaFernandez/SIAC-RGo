@@ -32,6 +32,26 @@ import { dataTable } from "variables/general.js";
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContentText from '@material-ui/core/DialogContentText';
+
+
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+
+//import FormLabel from "@material-ui/core/FormLabel";
+import InputLabel from "@material-ui/core/InputLabel";
+
+
+import ReactDOM from "react-dom";
+import ApolloClient, { gql } from "apollo-boost";
+import { ApolloProvider, Query } from "react-apollo";
+
+
+
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 
 const styles = {
@@ -49,12 +69,28 @@ export default function Groups() {
 
   const [alert, setAlert] = React.useState(null);
   const [inputValue, setInputValue] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
+
+  const [simpleSelect, setSimpleSelect] = React.useState("");
+
+  const handleSimple = event => {
+    setSimpleSelect(event.target.value);
+  };
 
   const Scroll = withStyles({
     switchBase: {
         overflow: "auto"
       },
   })(Switch);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+ 
+  };
 
 
   // Swal.fire({
@@ -200,26 +236,36 @@ export default function Groups() {
       };
     })
   );
+
   const classes = useStyles();
   return (
     <div>
     {alert}
-    <GridContainer>
+    
     <Card>
+    <GridContainer>
 
-    <GridItem xs={12}>
-     <FormControl className={classes.formControl}>
+    <GridItem  xs={12} sm={12} md={3}>
+     <FormControl className={classes.formControl} >
        <TextField
         margin="dense"
         id="name"
         label="Creditos"
         type="label"
         fullWidth
-        disabled
+        //disabled
         //onChange={handleCreditos}
        value={"if5200"}
       />
       </FormControl>
+      </GridItem>
+
+
+      <FormControl className={classes.formControl}>
+        <p />
+      </FormControl> 
+      
+      <GridItem  xs={12} sm={12} md={3}>
       <FormControl className={classes.formControl}>
         <TextField
          margin="dense"
@@ -227,16 +273,133 @@ export default function Groups() {
          label="Creditos"
          type="label"
          fullWidth
-         disabled
+         
          //onChange={handleCreditos}
         value={"if5200"}
        />
        </FormControl>
+       </GridItem>
+
+       <GridItem  xs={12} sm={12} md={3}>
+       <FormControl className={classes.formControl}>
+       <Query
+        query={gql`
+         {
+           users {
+             name
+           }
+         }
+       `}
+      >
+        {({ loading, error, data }) => {
+          if (loading) return <p>Loading...</p>;
+          if (error) return <p>Error!</p>;
+
+          return <div className={classes.container}>
+
+            <GridItem xs={12}>
+              <div>
+                <FormControl
+                  fullWidth
+                  className={classes.selectFormControl}
+                >
+
+                  <InputLabel
+                    htmlFor="simple-select"
+                    className={classes.selectLabel}
+                  >
+                    Requisitos/Correquisitos
+           </InputLabel>
+
+                  <Select
+                    MenuProps={{
+                      className: classes.selectMenu
+                    }}
+                    classes={{
+                      select: classes.select
+                    }}
+                    value={simpleSelect}
+                    onChange={handleSimple}
+
+
+                    inputProps={{
+                      name: "simpleSelect",
+                      id: "simple-select"
+                    }}
+
+                  >
+                    {console.log("Correquisitos= " + simpleSelect)}
+
+                    {data.users.map(user => {
+
+                      return <MenuItem
+                        key={user.name}
+                        classes={{
+
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected
+                        }}
+                        value={user.name}
+                      >
+                        {user.name}
+                      </MenuItem>
+                    })}
+                  </Select>
+                </FormControl>
+
+              </div>
+            </GridItem>
+          </div>
+        }}
+      </Query>
+      </FormControl>
+      </GridItem>
+
+
+      <GridItem  xs={12} sm={12} md={3}>
+      <FormControl className={classes.formControl}>
+      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        Asignar Grupo
+       </Button>
+       </FormControl>
+       </GridItem>
+
+
+
+      </GridContainer>
+
+
+   
+        <br/>
+            <GridContainer style={{ justifyContent: 'center' }}>
+            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+              Agregar un nuevo Grupo
+            </Button>
+
+            <div>
+              <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
+                <DialogTitle id="form-dialog-title">Agregar Curso</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    Formulario de ingreso de Grupos
+                 </DialogContentText>
 
 
 
 
-    </GridItem>
+                 
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose} color="primary">
+                    Cancel
+                 </Button>
+                  <Button onClick={handleClose} color="primary">
+                    Subscribe
+                 </Button>
+                </DialogActions>
+              </Dialog>
+            </div>
+            </GridContainer>
 
 
 
@@ -274,9 +437,10 @@ export default function Groups() {
               className="-striped -highlight"
             />
             </CardBody>
-            </Card>
+            
 
-              </GridContainer>
+              
+              </Card>
               </div>
 
   );
