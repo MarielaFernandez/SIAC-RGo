@@ -183,6 +183,8 @@ export default function UserProfile() {
     }
   }
 `;
+  
+const [updateUser, {id, userInput }] = useMutation(UPDATE_USER);
 
   return (
 
