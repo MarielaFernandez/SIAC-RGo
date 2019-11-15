@@ -27,6 +27,7 @@ import styles from "assets/jss/material-dashboard-pro-react/views/userProfileSty
 import Close from "@material-ui/icons/Close";
 import axios from 'axios';
 import avatar from "assets/img/faces/marc.jpg";
+import { useMutation } from '@apollo/react-hooks';
 
 
 import ReactDOM from "react-dom";
@@ -40,6 +41,10 @@ export default function UserProfile() {
 
 
   const classes = useStyles();
+
+
+
+
 
 
   const UsersQuery = () => {
@@ -104,6 +109,19 @@ export default function UserProfile() {
   const [number, setnumber] = React.useState("");
   const [number1, setnumber1] = React.useState("");
   const [number2, setnumber2] = React.useState("");
+  const [document, setdocument] = React.useState("");
+  const [name, setname] = React.useState("");
+  const [lastName, setlastName] = React.useState("");
+  const [email, setemail] = React.useState("");
+  const [province, setprovince] = React.useState("");
+  const [canton, setcanton] = React.useState("");
+  const [district, setdistrict] = React.useState("");
+  const [neighborhood, setneighborhood] = React.useState("");
+  const [km, setkm] = React.useState("");
+  const [appointment, setappointment] = React.useState("");
+  const [academic_degree, setnumber2academic_degree] = React.useState("");
+  const [phone_number, setphone_number] = React.useState("");
+  const [status, setstatus] = React.useState("");
   const [numberState, setnumberState] = React.useState("");
   const [numberState1, setnumberState1] = React.useState("");
   const [numberState2, setnumberState2] = React.useState("");
@@ -140,11 +158,48 @@ export default function UserProfile() {
   const handleSimple3 = event => {
     setSimpleSelect3(event.target.value);
   };
+
+  const user = {
+    document,
+    name,
+    lastName,
+    email,
+    province,
+    canton,
+    district,
+    neighborhood,
+    km,
+    appointment,
+    academic_degree,
+    phone_number,
+    status
+  }
+
+  const UPDATE_USER = gql`
+  mutation UpdateUser($id:string, $user: CreateUserInput) {
+    updateUser(_id:$id, user: $user) {
+      document
+      name
+    }
+  }
+`;
+
   return (
 
     <div>
 
+
+
               <GridContainer>
+
+              <form
+                onSubmit={e => {
+                  e.preventDefault();
+                  console.log(user);
+                  updateUser({ variables: { id , user } });
+                  //user.value = '';
+
+                }}>
 
 
               <GridItem xs={12} sm={12} md={8}>
@@ -172,8 +227,10 @@ export default function UserProfile() {
                               setnumberState("error");
                             }
                             setnumber(event.target.value);
-                          }
+                          },
+                          value: user.document
                         }}
+
                       />
                     </GridItem>
 
@@ -184,6 +241,11 @@ export default function UserProfile() {
                     formControlProps={{
                       fullWidth: true
                     }}
+                    inputProps={{
+
+                      value: user.name
+
+                    }}
                   />
                 </GridItem>
 
@@ -193,6 +255,11 @@ export default function UserProfile() {
                     id="Apellido"
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+
+                      value: user.lastname
+
                     }}
                   />
                 </GridItem>
@@ -268,6 +335,11 @@ export default function UserProfile() {
                     formControlProps={{
                       fullWidth: true
                     }}
+                    inputProps={{
+
+                      value: user.district
+
+                    }}
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
@@ -276,6 +348,11 @@ export default function UserProfile() {
                     id="Direccion"
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+
+                      value: user.neighborhood
+
                     }}
                   />
                 </GridItem>
@@ -299,6 +376,11 @@ export default function UserProfile() {
                       }
                       settypeEmail(event.target.value);
                     },
+
+
+                      value: user.email,
+
+
                     type: "email",
                     endAdornment:
                       typeEmailState === "error" ? (
@@ -330,6 +412,7 @@ export default function UserProfile() {
                         setnumber1(event.target.value);
                       },
                       type: "number",
+                      value:user.km,
                       endAdornment:
                         numberState1 === "error" ? (
                           <InputAdornment position="end">
@@ -495,7 +578,8 @@ export default function UserProfile() {
                           setnumberState2("error");
                         }
                         setnumber2(event.target.value);
-                      }
+                      },
+                      value:user.phone_number
                     }}
                   />
                 </GridItem>
@@ -505,6 +589,7 @@ export default function UserProfile() {
               <Button color="rose" className={classes.updateProfileButton}>
                 Actualizar perfil
               </Button>
+
               <Clearfix />
             </CardBody>
           </Card>
@@ -534,6 +619,8 @@ export default function UserProfile() {
           </GridItem>
           </Card>
         </GridItem>
+
+        </form>
       </GridContainer>
     </div>
   );

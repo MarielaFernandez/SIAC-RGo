@@ -25,7 +25,7 @@ export default `
   }
 
   input CreateUserInput {
- 
+
     document: String!
     name: String!
     lastName: String!
@@ -43,10 +43,23 @@ export default `
     phone_number : String
     status: String!
   }
-  
+
   input UpdateUserInput {
+    document: String
     name: String
+    lastName: String
+    sex: String
     email: String
-    age: Int
-  } 
+    age: String
+    rol: String
+    province : String
+    canton : String
+    district : String
+    neighborhood : String
+    km : String
+    appointment : String
+    academic_degree : String
+    phone_number : String
+    status: String
+  }
 `;
