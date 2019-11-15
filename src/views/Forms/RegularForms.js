@@ -3,7 +3,10 @@ import React, { Component } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 // @material-ui/icons
 import MailOutline from "@material-ui/icons/MailOutline";
@@ -58,6 +61,7 @@ export default function RegularForms() {
   const [selectedValue, setSelectedValue] = React.useState(null);
   const [alert,setAlert] = React.useState(null);
   const [open, setOpen] = React.useState(false);
+  
   const handleChange = event => {
     setSelectedValue(event.target.value);
      
@@ -186,6 +190,14 @@ const useStyles2 = makeStyles(theme => ({
   const loadPost = (post) => {
     setPost( post
     );
+  };
+
+  const handleSimple = event => {
+    setSimpleSelect(event.target.value);
+  };
+
+  const handleSimple2 = event => {
+    setSimpleSelect2(event.target.value);
   };
 
   const validMail = event => {                                    
@@ -383,82 +395,76 @@ const useStyles2 = makeStyles(theme => ({
                   value: user.lastName
                 }}
               />
-              <div>
-              Selección de sexo
-               <div className={classes.checkboxAndRadio}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      tabIndex={-1}   
-                      onClick={() => handleChange()}
-                      checkedIcon={<Check className={classes.checkedIcon} />}
-                      icon={<Check className={classes.uncheckedIcon} />}
-                      classes={{
-                        checked: classes.checked,
-                        root: classes.checkRoot
-                      }}
-                    />
-                  }
-                  classes={{
-                    label: classes.label,
-                    root: classes.labelRoot
-                  }}
-                  label="Femenino"
-                />
-              </div>
 
-           
-              <div className={classes.checkboxAndRadio}>
-               
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      tabIndex={-1}   
-                      onClick={() => handleChange()}
-                      checkedIcon={<Check className={classes.checkedIcon} />}
-                      icon={<Check className={classes.uncheckedIcon} />}
-                      classes={{
-                        checked: classes.checked,
-                        root: classes.checkRoot
-                      }}
-                    />
-                  }
-                  classes={{
-                    label: classes.label,
-                    root: classes.labelRoot
-                  }}
-                  label="Masculino"
-                
-                />
-              </div>
+              
+              <div>
+              
+              <GridItem xs={12}>
+                    <FormControl
+                      fullWidth
+                      className={classes.selectFormControl}
+                    >
+
+                      <InputLabel
+                        htmlFor="simple-select"
+                        className={classes.selectLabel}
+                      >
+                        Selección de sexo
+                   </InputLabel>
+
+                      <Select
+                        MenuProps={{
+                          className: classes.selectMenu
+                        }}
+                        classes={{
+                          select: classes.select
+                        }}
+                        value={simpleSelect2}
+                        onChange={handleSimple2}
+                        inputProps={{
+                          name: "simpleSelect",
+                          id: "simple-select"
+                        }}
+
+                      >
+
+                        <MenuItem
+                          disabled
+                          classes={{
+                            root: classes.selectMenuItem
+                          }}
+                        >
+                         Sexo
+                   </MenuItem>
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected
+                          }}
+                          value="1"
+                        >
+                          Femenino
+                   </MenuItem>
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected
+                          }}
+                          value="2"
+                        >
+                          Masculino
+                   </MenuItem>
+
+                       
+                        })}
+                    {console.log("TIPO DE CURSO ES= " + simpleSelect2)}
+                      </Select>
+                    </FormControl>
+                  </GridItem>
              </div> 
               
 
 
-             Activación
-
-              <div className={classes.checkboxAndRadio}>
-               
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      tabIndex={-1}
-                      onClick={() => handleChange()}
-                      checkedIcon={<Check className={classes.checkedIcon} />}
-                      icon={<Check className={classes.uncheckedIcon} />}
-                      classes={{
-                        checked: classes.checked,
-                        root: classes.checkRoot
-                      }}
-                    />
-                  }
-                  classes={{
-                    label: classes.label,
-                    root: classes.labelRoot
-                  }}
-                  label="Activar Funcionario"
-                />
-              </div>
               
               <Button  color="info" type = "submit" >Agregar</Button>
             </form>
