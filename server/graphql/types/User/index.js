@@ -8,6 +8,14 @@ export default `
     email: String!
     age: Int!
     rol: String!
+    province : String
+    canton : String
+    district : String
+    neighborhood : String
+    km : String
+    appointment : String
+    academic_degree : String
+    phone_number : String
     status: String!
     posts: [Post!]!
     comments: [Comment!]!

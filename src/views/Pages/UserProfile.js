@@ -39,36 +39,33 @@ import { ApolloProvider, Query } from "react-apollo";
 const useStyles = makeStyles(styles);
 
 
-
-  const UserQuery = gql`
-
-            query UserQuery($id: string) {
-              user(id:$id){
-              document
-              name
-              lastName
-              email
-              province
-              canton
-              district
-              neighborhood
-              km
-              appointment
-              academic_degree
-              phone_number
-
-            }
-          }
-        `;
-
-  const [getUser, {userInput}] = useQuery(UserQuery);
+  
 
 export default function UserProfile() {
 
 
   const classes = useStyles();
 
+  const UserQuery = gql`
+  query UserQuery($id: string) {
+    user(_id:$id){
+    document
+    name
+    lastName
+    email
+    province
+    canton
+    district
+    neighborhood
+    km
+    appointment
+    academic_degree
+    phone_number
+  }
+}
+`;
 
+const [getUser, {userId}] = useQuery(UserQuery);
 
 
 
@@ -209,7 +206,7 @@ export default function UserProfile() {
   }
 `;
 
-const [userId, setUserId]= React.useState("604520256");
+//const [userId, setUserId]= React.useState("604520256");
 
 //const [updateUser, {id, userInput }] = useMutation(UPDATE_USER);
 
