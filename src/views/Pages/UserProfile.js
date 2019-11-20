@@ -27,7 +27,8 @@ import styles from "assets/jss/material-dashboard-pro-react/views/userProfileSty
 import Close from "@material-ui/icons/Close";
 import axios from 'axios';
 import avatar from "assets/img/faces/marc.jpg";
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery} from '@apollo/react-hooks';
+
 
 
 import ReactDOM from "react-dom";
@@ -37,11 +38,35 @@ import { ApolloProvider, Query } from "react-apollo";
 
 const useStyles = makeStyles(styles);
 
+
+
+  const UserQuery = gql`
+
+            query UserQuery($id: string) {
+              user(id:$id){
+              document
+              name
+              lastName
+              email
+              province
+              canton
+              district
+              neighborhood
+              km
+              appointment
+              academic_degree
+              phone_number
+
+            }
+          }
+        `;
+
+  const [getUser, {userInput}] = useQuery(UserQuery);
+
 export default function UserProfile() {
 
 
   const classes = useStyles();
-
 
 
 
@@ -183,8 +208,10 @@ export default function UserProfile() {
     }
   }
 `;
-  
-const [updateUser, {id, userInput }] = useMutation(UPDATE_USER);
+
+const [userId, setUserId]= React.useState("604520256");
+
+//const [updateUser, {id, userInput }] = useMutation(UPDATE_USER);
 
   return (
 
@@ -198,7 +225,9 @@ const [updateUser, {id, userInput }] = useMutation(UPDATE_USER);
                 onSubmit={e => {
                   e.preventDefault();
                   console.log(user);
-                  updateUser({ variables: { id , user } });
+                //  updateUser({ variables: { id , user } });
+
+                getUser({variables: {userId}});
                   //user.value = '';
 
                 }}>
