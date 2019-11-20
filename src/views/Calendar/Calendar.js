@@ -45,56 +45,91 @@ import Step3 from "./WizardSteps/Step3.js";
 
 export default function Calendar() {
 
-  
-
-
-  const [simpleSelect, setSimpleSelect] = React.useState("");
-
-  
-
-
-  const classes = useStyles();
-  const [events, setEvents] = React.useState(calendarEvents);
-  const [alert, setAlert] = React.useState(null);
-  const selectedEvent = event => {
-    alert(event.title);
+  const handleChange = () => event => {
+    setState({ ...state, opcion: event.target.value });
   };
+
   const addNewEventAlert = slotInfo => {
     setAlert(
       <SweetAlert
         input
+        select
         showCancel
         style={{ display: "block", marginTop: "-100px" }}
         title="Input something"
+        title="Actividad"
         onConfirm={e => addNewEvent(e, slotInfo)}
         onCancel={() => hideAlert()}
         confirmBtnCssClass={classes.button + " " + classes.success}
-        cancelBtnCssClass={classes.button + " " + classes.danger}
       />
     );
   };
+
   const addNewEvent = (e, slotInfo) => {
     var newEvents = events;
     newEvents.push({
       title: e,
       start: slotInfo.start,
-      end: slotInfo.end
+
+      end: slotInfo.end,
+      color : state.opcion
+
     });
     setAlert(null);
     setEvents(newEvents);
-  };
+    }
+
   const hideAlert = () => {
     setAlert(null);
   };
-  const eventColors = event => {
+  
+  class MyWeek extends React.Component {
+    render() {      
+      let { date } = this.props
+      const { localizer } = this.props
+      let range = MyWeek.range(date)      
+  
+      return <TimeGrid {...this.props} range={range} eventOffset={15} />
+    }
+  }
+  
+  MyWeek.range = date => {
+    let start = date
+    let end = dates.add(start, 6, 'day')
+  
+    let current = start
+    let range = []
+  
+    while (dates.lte(current, end, 'day')) {
+      range.push(current)
+      current = dates.add(current, 1, 'day')
+    }
+  
+    return range
+  }
+  
+ 
+  
+  MyWeek.title = date => {
+    return `Mi declaración: ${date.toLocaleDateString()}`
+  }
+  
+  var eventColors = event => {
     var backgroundColor = "event-";
     event.color
       ? (backgroundColor = backgroundColor + event.color)
-      : (backgroundColor = backgroundColor + "default");
-    return {
-      className: backgroundColor
-    };
+      : (backgroundColor = backgroundColor + state.opcion);
+    
   };
+
+  const minTime = new Date(); //calendar
+  minTime.setHours(7,0,0);
+  const maxTime = new Date();
+  maxTime.setHours(22,0,0);
+
+
+
+
 
   
   return (

@@ -1,32 +1,44 @@
 import * as startOfDay from "date-fns";
+
 import React from "react";
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
+// dependency plugin for react-big-calendar
 import moment from "moment";
+import * as dates from 'date-arithmetic'
+import TimeGrid from 'react-big-calendar/lib/TimeGrid';
+import { purple, red, green } from '@material-ui/core/colors';
+// react component used to create alerts
+import { withStyles } from '@material-ui/core/styles';
 import SweetAlert from "react-bootstrap-sweetalert";
-
-// @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import Switch from "@material-ui/core/Switch";
+import Radio from "@material-ui/core/Radio";
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
+import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
+import Switch from '@material-ui/core/Switch';
+import InputAdornment from "@material-ui/core/InputAdornment";
+import GridItem from "components/Grid/GridItem.js";
+import GridContainer from "components/Grid/GridContainer.js";
+import Heading from "components/Heading/Heading.js";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import InputLabel from "@material-ui/core/InputLabel";
-// core components
-import styles from "assets/jss/material-dashboard-pro-react/customCheckboxRadioSwitch.js";
-import Heading from "components/Heading/Heading.js";
+import DateFnsUtils from '@date-io/date-fns';
+import Grid from '@material-ui/core/Grid';
+
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
+
+import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-import FormControl from "@material-ui/core/FormControl";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import MenuItem from "@material-ui/core/MenuItem";
+
+import styles from "assets/jss/material-dashboard-pro-react/components/buttonStyle.js";
 
 import { events as calendarEvents } from "variables/general.js";
 
@@ -37,6 +49,7 @@ import { ApolloProvider, Query } from "react-apollo";
 const localizer = momentLocalizer(moment);
 
 const useStyles = makeStyles(styles);
+
 
 export default function DoProyecto() {
 
@@ -106,72 +119,147 @@ export default function DoProyecto() {
     };
   
   
-    const [simpleSelect, setSimpleSelect] = React.useState("");
-  
-    const handleSimple = event => {
-      setSimpleSelect(event.target.value);
-    };
-  
-
-    const [state, setState] = React.useState({ //switch
-      checkedA: true,
-    });
-  
-    const handleChange = name => event => {
-      setState({ ...state, [name]: event.target.checked });//switch
-    };
-
-
-  
-  const classes = useStyles();
-
   const [selectedDate, setSelectedDate] = React.useState(new Date('2019-01-01T21:11:54'));
+  const [selectedEnabled, setSelectedEnabled] = React.useState("a");
   const handleDateChange = date => {
     setSelectedDate(date);
   };
   
+  const classes = useStyles();
+
+  const [state, setState] = React.useState({
+    opcion : "red"
+  });
+
   const [events, setEvents] = React.useState(calendarEvents);
   const [alert, setAlert] = React.useState(null);
+  const [simpleSelect, setSimpleSelect] = React.useState("");
   const selectedEvent = event => {
-    alert(event.title);
+    window.alert(event.title);
+  };  
+
+
+  const PurpleSwitch = withStyles({
+    switchBase: {
+      color: purple[300],
+      '&$checked': {
+        color: purple[500],
+      },
+      '&$checked + $track': {
+        backgroundColor: purple[500],
+      },
+    },
+    checked: {},
+    track: {},
+  })(Switch);
+
+    
+
+  const RedSwitch = withStyles({
+    switchBase: {
+      color: red[300],
+      '&$checked': {
+        color: red[500],
+      },
+      '&$checked + $track': {
+        backgroundColor: red[500],
+      },
+    },
+    checked: {},
+    track: {},
+  })(Switch);
+  
+  const GreenSwitch = withStyles({
+    switchBase: {
+      color: green[300],
+      '&$checked': {
+        color: green[500],
+      },
+      '&$checked + $track': {
+        backgroundColor: green[500],
+      },
+    },
+    checked: {},
+    track: {},
+  })(Switch);
+
+
+  const handleChange = () => event => {
+    setState({ ...state, opcion: event.target.value });
   };
+
   const addNewEventAlert = slotInfo => {
     setAlert(
       <SweetAlert
         input
+        select
         showCancel
         style={{ display: "block", marginTop: "-100px" }}
         title="Input something"
+        title="Actividad"
         onConfirm={e => addNewEvent(e, slotInfo)}
         onCancel={() => hideAlert()}
         confirmBtnCssClass={classes.button + " " + classes.success}
-        cancelBtnCssClass={classes.button + " " + classes.danger}
       />
     );
   };
+
   const addNewEvent = (e, slotInfo) => {
     var newEvents = events;
     newEvents.push({
       title: e,
       start: slotInfo.start,
-      end: slotInfo.end
+
+      end: slotInfo.end,
+      color : state.opcion
+
     });
     setAlert(null);
     setEvents(newEvents);
-  };
+    }
+
   const hideAlert = () => {
     setAlert(null);
   };
-  const eventColors = event => {
+  
+  class MyWeek extends React.Component {
+    render() {      
+      let { date } = this.props
+      const { localizer } = this.props
+      let range = MyWeek.range(date)      
+  
+      return <TimeGrid {...this.props} range={range} eventOffset={15} />
+    }
+  }
+  
+  MyWeek.range = date => {
+    let start = date
+    let end = dates.add(start, 6, 'day')
+  
+    let current = start
+    let range = []
+  
+    while (dates.lte(current, end, 'day')) {
+      range.push(current)
+      current = dates.add(current, 1, 'day')
+    }
+  
+    return range
+  }
+  
+ 
+  
+  MyWeek.title = date => {
+    return `Mi declaración: ${date.toLocaleDateString()}`
+  }
+  
+  var eventColors = event => {
     var backgroundColor = "event-";
     event.color
       ? (backgroundColor = backgroundColor + event.color)
-      : (backgroundColor = backgroundColor + "default");
-    return {
-      className: backgroundColor
-    };
+      : (backgroundColor = backgroundColor + state.opcion);
+    
   };
-
 
   const minTime = new Date(); //calendar
   minTime.setHours(7,0,0);
@@ -225,17 +313,25 @@ export default function DoProyecto() {
       <h4>Paso 2: Habilite o encienda el switch para seleccionar en el horario.</h4>
       <br/>
       <div>
-      <FormControlLabel
-        control={
-          <Switch
-            checked={state.checkedB}
-            onChange={handleChange('checkedB')}
-            value="checkedA"
-            color="primary"
-          />
-        }
-        label="Horas contacto"
-      />
+      <FormControl component="fieldset">
+                <FormLabel component="legend">Seleccione Actividad</FormLabel>
+                <FormGroup>
+                  <FormControlLabel
+                    control={<PurpleSwitch color = "primary" checked={state.opcion ==="red"} onChange={handleChange()} value="red" />}
+                    label="HC"
+                  />
+                  <FormControlLabel
+                    control={<RedSwitch color = "secondary" checked={state.opcion ==="green"} onChange={handleChange()} value="green" />}
+                    label="HA"
+                  />
+                  <FormControlLabel
+                    control={
+                      <GreenSwitch color = "default" checked={state.opcion ==="yellow"} onChange={handleChange()} value="yellow" />
+                    }
+                    label="HP"
+                  />
+                </FormGroup>      
+              </FormControl>
       </div>
 
       <br/>
