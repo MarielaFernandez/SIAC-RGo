@@ -50,9 +50,9 @@ export default function RegularForms() {
   const [post, setPost] = React.useState([]);
   const [document, setDocument] = React.useState("");
   const [email, setEmail] = React.useState("");
-  const [sex, setSex] = React.useState("M");
-  const [age, setAge] = React.useState("30");
-  const [rol, setRol] = React.useState("a");
+  const [sex, setSex] = React.useState("0");
+  const [age, setAge] = React.useState("0");
+  const [rol, setRol] = React.useState("Indef.");
   const [status, setStatus] = React.useState("Activo");
   const [name, setName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
@@ -395,11 +395,42 @@ const useStyles2 = makeStyles(theme => ({
                   value: user.lastName
                 }}
               />
+              
+
+              
 
               
               <div>
               
-              <GridItem xs={12}>
+             
+             </div> 
+             <GridItem xs={12} >
+                    <TextField
+                      margin="dense"
+                      id="name"
+                      label="Sigla"
+                      type="Text"
+                      fullWidth
+                      onChange={handleSigla}
+                      value={sigla}
+                    />
+                    {console.log("sigla es  " + sigla)}
+
+                    <TextField
+                      margin="dense"
+                      id="name"
+                      label="Nombre del Curso"
+                      type="Text"
+                      fullWidth
+                      onChange={handleNombrecurso}
+                      value={nombrecurso}
+
+                    />
+                    {console.log("nombre es " + nombrecurso)}
+                  </GridItem>
+
+
+                  <GridItem xs={12} >
                     <FormControl
                       fullWidth
                       className={classes.selectFormControl}
@@ -409,8 +440,8 @@ const useStyles2 = makeStyles(theme => ({
                         htmlFor="simple-select"
                         className={classes.selectLabel}
                       >
-                        Selección de sexo
-                   </InputLabel>
+                        Tipo de Curso
+                         </InputLabel>
 
                       <Select
                         MenuProps={{
@@ -419,8 +450,8 @@ const useStyles2 = makeStyles(theme => ({
                         classes={{
                           select: classes.select
                         }}
-                        value={simpleSelect2}
-                        onChange={handleSimple2}
+                        value={simpleSelect1}
+                        onChange={handleSimple1}
                         inputProps={{
                           name: "simpleSelect",
                           id: "simple-select"
@@ -434,8 +465,8 @@ const useStyles2 = makeStyles(theme => ({
                             root: classes.selectMenuItem
                           }}
                         >
-                         Sexo
-                   </MenuItem>
+                          Grado académico
+                         </MenuItem>
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
@@ -443,8 +474,8 @@ const useStyles2 = makeStyles(theme => ({
                           }}
                           value="1"
                         >
-                          Femenino
-                   </MenuItem>
+                          Bachillerato
+                         </MenuItem>
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
@@ -452,21 +483,39 @@ const useStyles2 = makeStyles(theme => ({
                           }}
                           value="2"
                         >
-                          Masculino
-                   </MenuItem>
+                          Licenciatura
+                         </MenuItem>
 
-                       
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected
+                          }}
+                          value="3"
+                        >
+                          Maestría
+                         </MenuItem>
+
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected
+                          }}
+                          value="4"
+                        >
+                          Doctorado
+                         </MenuItem>
                         })}
-                    {console.log("TIPO DE CURSO ES= " + simpleSelect2)}
+                          {console.log("TIPO DE CURSO ES= " + simpleSelect1)}
                       </Select>
                     </FormControl>
                   </GridItem>
-             </div> 
               
 
 
               
               <Button  color="info" type = "submit" >Agregar</Button>
+
             </form>
           </CardBody>
         </Card>

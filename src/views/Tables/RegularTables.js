@@ -184,12 +184,12 @@ export default function RegularTables() {
           if (error) return <p>Error, sin conexion!</p>;
           data.users.map(user => {
             userList.push({color: "info", data : [ user.document,  user.name ,
-              user.lastName, user.sex, user.email , user.age, user.rol, user.status]})            
+              user.lastName, user.sex, user.email , user.rol, user.status]})            
           });
           //console.log(userList);
           return <Table
               hover
-              tableHead={[" Cedula", "Nombre", "Apellido", "Sexo", "Email","Edad", "Rol", "Estado"]}
+              tableHead={[" Cedula", "Nombre", "Apellido", "Sexo", "Email", "Rol", "Estado"]}
             
               tableData = {userList}
             
